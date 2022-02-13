@@ -10,6 +10,21 @@ query {
 }
 `;
 
+export const GET_EMPRESAS = gql`
+query {
+  empresas{
+    id
+    razonSocial
+  }
+}
+`;
+
+export const LOGIN = gql`
+   mutation Login($email: String!, $password: String!){
+    login(email: $email, password: $password)
+   }
+`;
+
 export const ADD_BLOGPOST = gql`
   mutation AddBlogPost($text: String) {
     addBlogPost(text: $text) {
