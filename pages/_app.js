@@ -5,11 +5,12 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import AuthProvider from "../libs/AuthProvider";
+// import AuthProvider from "../libs/AuthProvider";
+import { AuthProvider } from '../libs/auth.js'
 
-const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
-});
+// const httpLink = createHttpLink({
+//   uri: "http://localhost:4000/graphql",
+// });
 
 // const authLink = setContext((_, { headers }) => {
 //   // get the authentication token from local storage if it exists
@@ -28,18 +29,18 @@ const httpLink = createHttpLink({
 //   }
 // });
 
-const client = new ApolloClient({
-  link: httpLink, //authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+// const client = new ApolloClient({
+//   link: httpLink, //authLink.concat(httpLink)
+//   cache: new InMemoryCache(),
+// });
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ApolloProvider client={client}>
+    // <ApolloProvider client={client}>
       <AuthProvider>
         <Component {...pageProps} />
       </AuthProvider>
-    </ApolloProvider>
+    // </ApolloProvider>
   );
 }
 

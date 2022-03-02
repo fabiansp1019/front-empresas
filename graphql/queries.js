@@ -10,11 +10,85 @@ query {
 }
 `;
 
+export const CREAREMPRESA = gql`
+mutation (
+  $nit: String!,
+  $digitoVerificacion: String!,
+  $razonSocial: String!,
+  $direccion: String!,
+  $ciudad: String!,
+  $body: String!
+  ){
+  createEmpresa(
+   nit: $nit,
+   digitoVerificacion: $digitoVerificacion,
+   razonSocial: $razonSocial,
+   direccion: $direccion,
+   ciudad: $ciudad,
+   body: $body
+ ){
+   id
+   nit
+   digitoVerificacion
+   razonSocial
+   direccion
+   ciudad
+   body
+ }
+ }
+`;
+
 export const GET_EMPRESAS = gql`
 query {
   empresas{
     id
+    nit
     razonSocial
+    direccion
+    ciudad
+    responsabilidad{
+      id
+      impuesto
+      responsabilidad
+      comentario
+    }
+    claves{
+      id
+      entidad
+      usuario
+      contrasenna
+      comentario
+    }
+  }
+}
+`;
+
+export const MODIFICAR_COMENTARIO_IMPUESTO = gql`
+mutation ModificarComentarioImpuesto($id: ID!, $comentario: String!){
+  modificarComentarioImpuesto(
+    id: $id,
+    comentario: $comentario
+  ){
+    id
+    impuesto
+    comentario
+  }
+}
+`;
+
+export const MODIFICAR_CONTRASENIAS = gql`
+mutation ActualizarClaves($id: ID!, $usuario: String!, $contrasenna: String!, $comentario: String!){
+  actualizarClaves(
+  	id: $id,
+    usuario: $usuario,
+    contrasenna: $contrasenna,
+    comentario: $comentario
+  ){
+    id
+    entidad
+    usuario
+    contrasenna
+    comentario
   }
 }
 `;
