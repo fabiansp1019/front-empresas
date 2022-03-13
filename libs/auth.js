@@ -72,6 +72,8 @@ function useProvideAuth() {
     if (result?.data?.login !== 'Invalid') {
       setAuthToken(result.data.login.split(" ")[0])
       setUser(result.data.login.split(" ")[1])
+    }else{
+      window.location.href('/private/empresas')
     }
   }
 

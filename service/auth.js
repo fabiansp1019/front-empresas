@@ -26,70 +26,70 @@ const TOKEN_KEY = 'authorization'
  * - https://platzi.com/cursos/nextjs-auth/
  */
 
-// export function useLogin({ onDone }) {
-//   const [isLoading, setIsLoading] = useState(false)
-//   const [message, setMessage] = useState('')
+export function useLogin({ onDone }) {
+  const [isLoading, setIsLoading] = useState(false)
+  const [message, setMessage] = useState('')
 
 
-//   const login = async (event) => {
-//     event.preventDefault()
-//     const username = event.currentTarget.username.value
-//     const password = event.currentTarget.pass.value
+  const login = async (event) => {
+    event.preventDefault()
+    const username = event.currentTarget.username.value
+    const password = event.currentTarget.pass.value
 
-//     try {
-//       setIsLoading(true)
-//       setMessage('')
-//       const response = await fetch(`${baseUrl}/api/login`, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           username,
-//           password,
-//         }),
-//       })
+    try {
+      setIsLoading(true)
+      setMessage('')
+      const response = await fetch(`${baseUrl}/api/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      })
 
-//       if (!response.ok) {
-//         throw new Error(
-//           `Failed authenticating with HTTP status ${response.status}`
-//         )
-//       }
+      if (!response.ok) {
+        throw new Error(
+          `Failed authenticating with HTTP status ${response.status}`
+        )
+      }
 
-//       const data = await response.json()
-//       if (data && typeof data.token === 'string') {
-//         await saveToken(data.token)
-//         onDone()
-//         return
-//       }
+      const data = await response.json()
+      if (data && typeof data.token === 'string') {
+        await saveToken(data.token)
+        onDone()
+        return
+      }
 
-//       throw new Error(`No token found in the response`)
-//     } catch (e) {
-//       console.log(e)
-//       setIsLoading(false)
-//       setMessage('Usuario o contraseña inválidos')
-//     }
-//   }
+      throw new Error(`No token found in the response`)
+    } catch (e) {
+      // console.log(e)
+      setIsLoading(false)
+      setMessage('Usuario o contraseña inválidos')
+    }
+  }
 
-//   return {
-//     isLoading,
-//     message,
-//     login,
-//   }
-// }
+  return {
+    isLoading,
+    message,
+    login,
+  }
+}
 
-// function saveToken(token) {
-//   return new Promise<string>((resolve) => {
-//     try {
-//       window.sessionStorage.setItem(TOKEN_KEY, token)
-//       resolve(token)
-//     } catch (e) {
-//       throw new Error(
-//         'El token no se guardó. ¿Estás en modo incógnito? – Asegúrate que SessionStorage esté habilitado para esta página'
-//       )
-//     }
-//   })
-// }
+function saveToken(token) {
+  return new Promise<string>((resolve) => {
+    try {
+      window.sessionStorage.setItem(TOKEN_KEY, token)
+      resolve(token)
+    } catch (e) {
+      throw new Error(
+        'El token no se guardó. ¿Estás en modo incógnito? – Asegúrate que SessionStorage esté habilitado para esta página'
+      )
+    }
+  })
+}
 
 export function retrieveToken() {
   const token = window.sessionStorage.getItem(TOKEN_KEY);
