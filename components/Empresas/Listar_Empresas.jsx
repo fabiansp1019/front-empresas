@@ -139,6 +139,7 @@ const Listar_Empresas = () => {
 
   const classes = useStyles();
 
+
   if (loading) {
     return "loading";
   }

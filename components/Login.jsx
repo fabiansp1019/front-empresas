@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import Layout from "./layout";
 import Grid from "@mui/material/Grid";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useMutation } from "@apollo/client";
-import { LOGIN } from "../graphql/queries";
 
 import { useAuth } from '../libs/auth'
 
@@ -17,25 +14,6 @@ const login = () => {
 
   const { signIn, isSignedIn } = useAuth()
 
-  // const [login] = useMutation(LOGIN, {
-  //   onCompleted: (data) => {
-  //     if (data.login) {
-  //       const token = data.login.split(" ")[0];
-  //       const mail = data.login.split(" ")[1];
-  //       // console.log(mail);
-  //       window.sessionStorage.setItem("authorization", token); // JSON.stringify(data.login)
-  //       window.sessionStorage.setItem("mail", mail);
-  //       window.location.href = "/";
-  //     }
-  //     // console.log(data)  .split(" ")[1]
-  //     if (data.login === "Invalid") {
-  //       console.log("error detectado");
-  //       throw new Error(`Failed authenticating with HTTP status ${data.login}`);
-  //     }
-
-  //     // window.localStorage.setItem("user", JSON.stringify(ress.data.info));
-  //   },
-  // });
 
   const onSubmit = (e) => {
 

@@ -108,7 +108,7 @@ export function removeToken() {
 export function useFetchCurrentUser() {
   const [status, setStatus] = useState('idle')
   const [user, setUser] = useState(null)
-console.log("inicio del fech")
+// console.log("inicio del fech")
   useEffect(() => {
     const validateAsync = async () => {
       try {
@@ -119,8 +119,7 @@ console.log("inicio del fech")
         if (!token) {
           throw new Error('Please log in first')
         }
-        console.log('toookennn' + token)
-        const response = await fetch(`http://localhost:4000/graphql`, {
+        const response = await fetch(process.env.NEXT_PUBLIC_DIRECCION_BACKEND, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -134,7 +133,7 @@ console.log("inicio del fech")
 
         const data = await response.json()
         // console.log(data)
-        if (data ) { // && typeof data.username === 'string'
+        if (data ) {
           setStatus('success')
           setUser({ data })
           return

@@ -37,6 +37,38 @@ mutation (
  }
  }
 `;
+export const CREAR_IMPUESTO = gql`
+  mutation(
+    $empresaId:ID!, $impuesto:String!, $comentario:String!
+  ){
+    createImpuesto(
+      empresaId:$empresaId,
+      impuesto:$impuesto,
+      responsabilidad:1,
+      comentario:$comentario
+    ){
+      impuesto
+      responsabilidad
+      comentario
+    }
+  }
+`;
+export const CREAR_CLAVE = gql`
+mutation($empresaId:ID!, $entidad:String!, $usuario:String!, $contrasenna:String!, $comentario:String!){
+  createClave(
+  	empresaId:$empresaId,
+    entidad:$entidad,
+    usuario:$usuario,
+    contrasenna:$contrasenna,
+    comentario:$comentario,
+  ){
+    entidad
+    usuario
+    contrasenna
+    comentario
+  }
+}
+`;
 
 export const GET_EMPRESAS = gql`
 query {

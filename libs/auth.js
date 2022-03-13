@@ -9,6 +9,7 @@ import {
 
 const authContext = createContext()
 
+
 export function AuthProvider({ children }) {
   const auth = useProvideAuth()
 
@@ -39,7 +40,7 @@ function useProvideAuth() {
 
   function createApolloClient() {
     const link = new HttpLink({
-      uri: 'http://localhost:4000/graphql',
+      uri: process.env.NEXT_PUBLIC_DIRECCION_BACKEND,
       headers: getAuthHeaders(),
     })
 
@@ -59,7 +60,7 @@ function useProvideAuth() {
     const LoginMutation = gql`
     mutation Login($email: String!, $password: String!){
         login(email: $email, password: $password)
-       }
+      }
     `
     const result = await client.mutate({
       mutation: LoginMutation,
