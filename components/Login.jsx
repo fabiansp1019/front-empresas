@@ -15,12 +15,12 @@ const login = () => {
   const { signIn, isSignedIn } = useAuth()
 
 
-  const onSubmit = (e) => {
+  const onSubmit = () => {
 
-    e.preventDefault()
-    signIn({ email, password })
-
-
+    signIn({ email, password });
+    if(!isSignedIn) {
+      document.getElementById("message").innerHTML = "debes loguearte";
+    }
   };
 
   return (
@@ -58,6 +58,7 @@ const login = () => {
                 <Button variant="outlined" onClick={onSubmit}>
                   Ingresar
                 </Button>
+                <div id="message"></div>
               </Grid>
             </Grid>
           </Box>
