@@ -11,6 +11,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { useRouter } from 'next/router'
 
 import { useQuery, useMutation } from "@apollo/client";
 import {
@@ -34,7 +35,7 @@ export const Claves = ({ id }) => {
   const [comentario, setComentario] = React.useState("");
 
   const [crearClave, { loading, error }] = useMutation(CREAR_CLAVE);
-
+  const router = useRouter();
   const guardarClave = () => {
     // console.log(id, nombreEntidad, usuario, contrasenna, comentario)
     if (
@@ -55,6 +56,7 @@ export const Claves = ({ id }) => {
           comentario: comentario,
         },
       });
+      router.push('/')
       if (loading) {
         return "loading";
       }
@@ -101,7 +103,7 @@ export const Claves = ({ id }) => {
 export const Impuestos = ({ id }) => {
   const [nombreImpuesto, setNombreImpuesto] = React.useState("");
   const [comentario, setComentario] = React.useState("");
-
+  const router = useRouter();
   const [crearImpuesto, { loading, error }] = useMutation(CREAR_IMPUESTO);
 
   const guardarImpuesto = () => {
@@ -115,6 +117,7 @@ export const Impuestos = ({ id }) => {
           comentario: comentario,
         },
       });
+      router.push('/')
       document.getElementById("impuesto").value = "";
       document.getElementById("comentario").value = "";
     }
@@ -142,6 +145,7 @@ const Agregar_Claves = () => {
   const [cambiar, setCambiar] = React.useState(false);
   const [id, setId] = React.useState("");
   const classes = useStyles();
+  
 
   const { loading, error, data } = useQuery(GET_EMPRESAS);
 

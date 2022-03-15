@@ -1,10 +1,10 @@
 import React from 'react'
-import BlogPosts from '../../components/BlogPosts'
 import Layout from '../../components/Layout'
 
 const About = ()=>{
-    return <Layout>about page
-        <BlogPosts />
+    return <Layout>
+        about page
+
     </Layout>
 }
 
