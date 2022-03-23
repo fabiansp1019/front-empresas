@@ -1,4 +1,5 @@
 import React, { useState, useContext, createContext } from 'react'
+import axios  from 'axios'
 import {
   ApolloProvider,
   ApolloClient,
@@ -41,7 +42,7 @@ function useProvideAuth() {
 
   function createApolloClient() {
     const link = new HttpLink({
-      uri: process.env.NEXT_PUBLIC_DIRECCION_BACKEND,
+      uri: process.env.NEXT_PUBLIC_DIRECCION_BACKEND + '/graphql',
       headers: getAuthHeaders(),
     })
 
@@ -57,22 +58,34 @@ function useProvideAuth() {
   }
 
   const signIn = async ({ email, password }) => {
-    const client = createApolloClient()
-    const LoginMutation = gql`
-    mutation Login($email: String!, $password: String!){
-        login(email: $email, password: $password)
+
+    const result = await axios({
+      method: 'post',
+      url: process.env.NEXT_PUBLIC_DIRECCION_BACKEND + '/login',
+      data: {
+        email,
+        password
       }
-    `
-    const result = await client.mutate({
-      mutation: LoginMutation,
-      variables: { email, password },
-    })
+    });
 
-    // console.log(result.data.login)
+    console.log(result)
 
-    if (result?.data?.login !== 'Invalid') {
-      setAuthToken(result.data.login.split(" ")[0])
-      setUser(result.data.login.split(" ")[1])
+
+    // const client = createApolloClient()
+    // const LoginMutation = gql`
+    // mutation Login($email: String!, $password: String!){
+    //     login(email: $email, password: $password)
+    //   }
+    // `
+    // const result = await client.mutate({
+    //   mutation: LoginMutation,
+    //   variables: { email, password },
+    // })
+
+
+    if (result?.data !== 'Invalid') {
+      setAuthToken(result.data.split(" ")[0])
+      setUser(result.data.split(" ")[1])
 
     }
   }
