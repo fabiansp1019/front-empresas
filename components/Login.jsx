@@ -5,29 +5,42 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 import { useAuth } from '../libs/auth'
 
 const login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
-  const { signIn, isSignedIn } = useAuth()
+  const { signIn } = useAuth()
 
 
   const onSubmit = () => {
 
-    signIn({ email, password });
-    if(!isSignedIn) {
-      document.getElementById("message").innerHTML = "debes loguearte";
+    signIn({ email, password })
+    .then((res) => {
+      if (res){
+      setAlert(res.alerta);
+      setAlertMessage(res.message);
+
+      setTimeout(() => {
+          setAlert(false)
+      }, 3000);
+      // console.log(res)
     }
+    })
+
   };
 
   return (
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="sm">
-          <Box sx={{ bgcolor: "#cfe8fc", height: "80vh" }}>
+          <Box sx={{ bgcolor: "", height: "80vh" }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -61,6 +74,13 @@ const login = () => {
                 <div id="message"></div>
               </Grid>
             </Grid>
+            {
+              alert && (
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                  <Alert variant="outlined" severity="error">{alertMessage}</Alert>
+                </Stack>
+              )
+            }
           </Box>
         </Container>
       </React.Fragment>

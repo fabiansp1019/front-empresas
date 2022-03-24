@@ -28,8 +28,8 @@ export const useAuth = () => {
 }
 
 function useProvideAuth() {
-  const [authToken, setAuthToken] = useState(null)
-  const [user, setUser] = useState(null)
+  const [authToken, setAuthToken] = useState(null);
+  const [user, setUser] = useState(null);
 
 
   const getAuthHeaders = () => {
@@ -42,7 +42,7 @@ function useProvideAuth() {
 
   function createApolloClient() {
     const link = new HttpLink({
-      uri: process.env.NEXT_PUBLIC_DIRECCION_BACKEND + '/graphql',
+      uri: 'http://147.182.239.233:4000/graphql',
       headers: getAuthHeaders(),
     })
 
@@ -61,14 +61,14 @@ function useProvideAuth() {
 
     const result = await axios({
       method: 'post',
-      url: process.env.NEXT_PUBLIC_DIRECCION_BACKEND + '/login',
+      url: 'http://147.182.239.233:4000/login',
       data: {
         email,
         password
       }
     });
 
-    console.log(result)
+    // console.log(result)
 
 
     // const client = createApolloClient()
@@ -83,10 +83,16 @@ function useProvideAuth() {
     // })
 
 
-    if (result?.data !== 'Invalid') {
+    if (result?.data !== 'Invalid' ) {
       setAuthToken(result.data.split(" ")[0])
       setUser(result.data.split(" ")[1])
 
+    }
+    if (result?.data == 'Invalid' ){
+      return {
+        message: 'los datos suministrados son invalidos',
+        alerta: true
+      }
     }
   }
 
