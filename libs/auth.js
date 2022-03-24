@@ -67,10 +67,6 @@ function useProvideAuth() {
         password
       }
     });
-
-    // console.log(result)
-
-
     // const client = createApolloClient()
     // const LoginMutation = gql`
     // mutation Login($email: String!, $password: String!){
