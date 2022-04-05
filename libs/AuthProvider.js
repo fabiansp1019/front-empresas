@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-import { useFetchCurrentUser } from '../service/auth'
+// import { useFetchCurrentUser } from '../service/auth'
 
 
 const defaultState = {
@@ -10,9 +10,9 @@ const defaultState = {
 const AuthContext = createContext(defaultState)
 
 const AuthProvider = ({ children }) => {
-  const state = useFetchCurrentUser()
+  // const state = useFetchCurrentUser()
 
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider >{children}</AuthContext.Provider>
 }
 
 export default AuthProvider 

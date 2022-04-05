@@ -95,24 +95,11 @@ const StyledTreeItem = withStyles((theme) => ({
       opacity: 0.3,
     },
   },
-  group: {
-    marginLeft: 7,
-    paddingLeft: 18,
-    borderLeft: `1px dashed ${alpha(theme.palette.text.primary, 0.4)}`,
-  },
 }))((props) => (
   <TreeItem {...props} TransitionComponent={TransitionComponent} />
 ));
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
+
 
 const Listar_Empresas = () => {
 
@@ -137,7 +124,7 @@ const Listar_Empresas = () => {
 
   const { loading, error, data } = useQuery(GET_EMPRESAS);
 
-  const classes = useStyles();
+  
 
 
   if (loading) {
@@ -197,7 +184,7 @@ const Listar_Empresas = () => {
 
 
   return (
-      <>
+      <div>
         {data.empresas.map((empresa, keyMayor) => {
           var claves = [];
           var impuesto = [];
@@ -211,7 +198,7 @@ const Listar_Empresas = () => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography className={classes.heading}>
+                <Typography >
                   {empresa.razonSocial +
                     " NIT: " +
                     empresa.nit +
@@ -219,11 +206,10 @@ const Listar_Empresas = () => {
                     empresa.ciudad}
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
+              {/* <AccordionDetails>
                 <Typography>
 
                   <TreeView
-                    className={classes.root}
                     defaultExpanded={["1"]}
                     defaultCollapseIcon={<MinusSquare />}
                     defaultExpandIcon={<PlusSquare />}
@@ -287,7 +273,6 @@ const Listar_Empresas = () => {
                   </TreeView>
 
                   <TreeView
-                    className={classes.root}
                     defaultExpanded={["1"]}
                     defaultCollapseIcon={<MinusSquare />}
                     defaultExpandIcon={<PlusSquare />}
@@ -402,11 +387,11 @@ const Listar_Empresas = () => {
                     </StyledTreeItem>
                   </TreeView>
                 </Typography>
-              </AccordionDetails>
+              </AccordionDetails> */}
             </Accordion>
           );
         })}
-      </>
+      </div>
     
   );
 };

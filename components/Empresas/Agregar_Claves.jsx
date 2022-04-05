@@ -20,13 +20,6 @@ import {
   CREAR_IMPUESTO,
 } from "../../graphql/queries";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 
 export const Claves = ({ id }) => {
   const [nombreEntidad, setNombreEntidad] = React.useState("");
@@ -96,7 +89,7 @@ export const Claves = ({ id }) => {
         label="Comentario"
         onChange={(e) => setComentario(e.target.value)}
       />
-      <Button onClick={guardarClave}>Guardar</Button>
+      <button onClick={guardarClave}>Guardar</button>
     </>
   );
 };
@@ -135,7 +128,7 @@ export const Impuestos = ({ id }) => {
         onChange={(e) => setComentario(e.target.value)}
       />
 
-      <Button onClick={guardarImpuesto}>Guardar</Button>
+      <button onClick={guardarImpuesto}>Guardar</button>
     </>
   );
 };
@@ -144,7 +137,6 @@ const Agregar_Claves = () => {
   const [personName, setPersonName] = React.useState("");
   const [cambiar, setCambiar] = React.useState(false);
   const [id, setId] = React.useState("");
-  const classes = useStyles();
   
 
   const { loading, error, data } = useQuery(GET_EMPRESAS);
@@ -166,15 +158,12 @@ const Agregar_Claves = () => {
     <>
       <List
         component="nav"
-        className={classes.root}
         aria-label="mailbox folders"
       >
-        <ListItem button>
+        <ListItem >
           <FormControl>
             <InputLabel id="demo-mutiple-name-label">Empresa</InputLabel>
             <Select
-              labelId="demo-mutiple-name-label"
-              id="demo-mutiple-name"
               value={personName}
               onChange={handleChange}
               input={<Input />}
@@ -190,12 +179,13 @@ const Agregar_Claves = () => {
         <Divider />
       </List>
 
-      <Button onClick={() =>{ 
+      <button onClick={() =>{ 
         setCambiar(!cambiar)
         const { loading, error, data } = useQuery(GET_EMPRESAS);
       }}>
+        h
         {cambiar ? "Claves" : "Impuestos"}
-      </Button>
+      </button>
       {cambiar ? <Claves id={id} /> : <Impuestos id={id} />}
     </>
   );

@@ -42,7 +42,7 @@ function useProvideAuth() {
 
   function createApolloClient() {
     const link = new HttpLink({
-      uri: 'http://147.182.239.233:4000/graphql',
+      uri: 'http://localhost:4000/graphql',
       headers: getAuthHeaders(),
     })
 
@@ -61,26 +61,13 @@ function useProvideAuth() {
 
     const result = await axios({
       method: 'post',
-      url: 'http://147.182.239.233:4000/login',
+      url: 'http://localhost:4000/login',
       data: {
         email,
         password
       }
     });
 
-    // console.log(result)
-
-
-    // const client = createApolloClient()
-    // const LoginMutation = gql`
-    // mutation Login($email: String!, $password: String!){
-    //     login(email: $email, password: $password)
-    //   }
-    // `
-    // const result = await client.mutate({
-    //   mutation: LoginMutation,
-    //   variables: { email, password },
-    // })
 
 
     if (result?.data !== 'Invalid' ) {

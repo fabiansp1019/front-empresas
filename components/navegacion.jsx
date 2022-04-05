@@ -17,6 +17,7 @@ function TabPanel(props) {
 
   return (
     <div
+    color='primary'
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -45,16 +46,16 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//     backgroundColor: theme.palette.background.paper,
+//   },
+// }));
 
 const Navegacion = () => {
   const { isSignedIn, user } = useAuth();
-  const classes = useStyles();
+  // const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -62,27 +63,18 @@ const Navegacion = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <div >
 
-      <AppBar position="static">
+      <AppBar position="static" color='primary'>
 
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label={!isSignedIn() ? (<Link href={'/'}><Typography>Login</Typography></Link>) : (<Link href={'/'}><Typography>{user}</Typography></Link>) } {...a11yProps(0)} />
-          {!isSignedIn() ? null : (<Tab label={<Link href={'/private/empresas'}><Typography>Empresas </Typography></Link>} {...a11yProps(1)}  />)}
-          {!isSignedIn() ? null : (<Tab label={<Link href={'/private/listado'}><Typography>Listado </Typography></Link>} {...a11yProps(2)}  />)}
+          <Tab label={!isSignedIn() ? (<Link href={'/public/about'}><Typography>about</Typography></Link>) : null} {...a11yProps(2)} />
         </Tabs>
 
       </AppBar>
-      <TabPanel value={value} index={0} >
-        <Link href={'/login'}><a>login</a></Link>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      
+
+
     </div>
   );
 }
