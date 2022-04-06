@@ -168,7 +168,7 @@ const drawerWidth = 256;
 
 export default function Paperbase({children, nav}) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  // const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
+  const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -182,14 +182,14 @@ export default function Paperbase({children, nav}) {
           component="nav"
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         >
-          {/* {isSmUp ? null : ( */}
+          {isSmUp ? null : (
             <Navigator
               PaperProps={{ style: { width: drawerWidth } }}
               variant="temporary"
               open={mobileOpen}
               onClose={handleDrawerToggle}
             />
-          {/* )} */}
+          )} 
 
           <Navigator
             PaperProps={{ style: { width: drawerWidth } }}
@@ -204,7 +204,7 @@ export default function Paperbase({children, nav}) {
               {children}
             </Content>
           </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: 'primary.main' }}>
+          <Box component="footer" >
             <Copyright />
           </Box>
         </Box>

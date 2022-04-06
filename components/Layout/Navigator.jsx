@@ -26,7 +26,7 @@ const item = {
   px: 3,
   color: 'primary.light',
   '&:hover, &:focus': {
-    bgcolor: 'secondary',
+    color: 'primary.main',
   },
 };
 
@@ -46,46 +46,51 @@ export default function Navigator(props) {
         <ListItem sx={{ ...item, ...itemCategory, fontSize: 22,  }} >
           SISTEMAS DE INFORMACION
         </ListItem>
-        <ListItem color='secondary' sx={{ ...item, ...itemCategory }}>
-          <ListItemIcon>
-            <HomeIcon color='secondary' />
+        <ListItem  sx={{ ...item, ...itemCategory }}>
+          <ListItemIcon sx={{ color: 'primary.main' }}>
+            <HomeIcon />
           </ListItemIcon>
           <ListItemText>Projectos</ListItemText>
         </ListItem>
 
-          <Box sx={{ bgcolor: 'secondary' }}>
-            <ListItem sx={{ py: 2, px: 3 }}>
+          <Box >
+            <ListItem >
               <ListItemText ></ListItemText>
             </ListItem>
 
             <ListItem disablePadding key={'Build'}>
-                {/* {url ? url : null} */}
+              <ListItemButton>
                 <Link href={'/'}>
-                <ListItem color='secondary' selected={false} sx={item} >
-                  <ListItemIcon><DnsRoundedIcon  /></ListItemIcon>
-                  <ListItemText sx={{ color: 'primary.ligth' }}>Inicio</ListItemText>
+                <ListItem  selected={false} sx={item} >
+                  <ListItemIcon sx={{ color: 'primary.main' }}><DnsRoundedIcon  /></ListItemIcon>
+                  <ListItemText >Inicio</ListItemText>
                 </ListItem>
                 </Link>
+                </ListItemButton>
               </ListItem>
 
               <ListItem disablePadding key={'Build'}>
-                {/* {url ? url : null} */}
+              
                 <Link href={'/private/empresas'}>
-                <ListItem color='secondary' selected={false} sx={item} >
-                  <ListItemIcon><DnsRoundedIcon bgcolor='primary.main' /></ListItemIcon>
+                <ListItem  selected={false} sx={item} >
+                <ListItemButton>
+                  <ListItemIcon sx={{ color: 'primary.main' }}><DnsRoundedIcon bgcolor='primary.main' /></ListItemIcon>
                   <ListItemText>Empresas</ListItemText>
+                  </ListItemButton>
                 </ListItem>
                 </Link>
+              
               </ListItem>
 
               <ListItem disablePadding key={'Build'}>
-                {/* {url ? url : null} */}
+                <ListItemButton>
                 <Link href={'/private/listado'}>
                 <ListItem selected={false} sx={item} >
-                  <ListItemIcon><PeopleIcon color='primary.ligth' /></ListItemIcon>
+                  <ListItemIcon sx={{ color: 'primary.main' }}><PeopleIcon /></ListItemIcon>
                   <ListItemText>Listado</ListItemText>
                 </ListItem>
                 </Link>
+                </ListItemButton>
               </ListItem>
 
 
