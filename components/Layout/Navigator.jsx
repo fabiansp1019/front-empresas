@@ -70,16 +70,14 @@ export default function Navigator(props) {
               </ListItem>
 
               <ListItem disablePadding key={'Build'}>
-              
+              <ListItemButton>
                 <Link href={'/private/empresas'}>
                 <ListItem  selected={false} sx={item} >
-                <ListItemButton>
                   <ListItemIcon sx={{ color: 'primary.main' }}><DnsRoundedIcon bgcolor='primary.main' /></ListItemIcon>
                   <ListItemText>Empresas</ListItemText>
-                  </ListItemButton>
                 </ListItem>
                 </Link>
-              
+                </ListItemButton>
               </ListItem>
 
               <ListItem disablePadding key={'Build'}>

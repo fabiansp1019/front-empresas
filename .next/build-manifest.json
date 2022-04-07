@@ -30,20 +30,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/private/emp/add_key": [
+    "/private/emp/[info]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/private/emp/add_key.js"
+      "static/chunks/pages/private/emp/[info].js"
     ],
     "/private/empresas": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/private/empresas.js"
-    ],
-    "/private/listado": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/private/listado.js"
     ]
   },
   "ampFirstPages": []

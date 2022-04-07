@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import BottomNavigation from '@material-ui/core/BottomNavigation';
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from "next/link";
 import KeyIcon from '@mui/icons-material/Key';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import Agregar_Claves from "../../components/Empresas/Agregar_Claves";
 
 import ListItem from '@mui/material/ListItem';
 
@@ -21,7 +16,7 @@ export const Nav = () =>{
    <ListItem></ListItem>
    <ListItem></ListItem>
    <ListItem><Link href={'/private/emp/add_key'}><KeyIcon color="primary" /></Link></ListItem>
-   <ListItem><Link href={'/private'}><AddCircleIcon color="primary"/></Link></ListItem>
+   <ListItem><Link href={'/private/emp/create_emp'}><AddCircleIcon color="primary"/></Link></ListItem>
    <ListItem></ListItem>
    <ListItem></ListItem>
   {/* <BottomNavigationAction  icon={<RestoreIcon />} /> */}
@@ -31,13 +26,6 @@ export const Nav = () =>{
 
 
 const Empresas = () => {
-  const [abrirCrearEmpresa, setAbrirCrearEmpresa] = useState(false);
-
-  // const classes = useStyles();
- 
-
-
-
 
   return (
     <>

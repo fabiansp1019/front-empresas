@@ -156,12 +156,9 @@ const Agregar_Claves = () => {
   };
   return (
     <>
-      <List
-        component="nav"
-        aria-label="mailbox folders"
-      >
-        <ListItem >
-          <FormControl>
+      < >
+        < >
+          <>
             <InputLabel id="demo-mutiple-name-label">Empresa</InputLabel>
             <Select
               value={personName}
@@ -174,16 +171,15 @@ const Agregar_Claves = () => {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
-        </ListItem>
+          </>
+        </>
         <Divider />
-      </List>
+      </>
 
       <button onClick={() =>{ 
         setCambiar(!cambiar)
         const { loading, error, data } = useQuery(GET_EMPRESAS);
       }}>
-        h
         {cambiar ? "Claves" : "Impuestos"}
       </button>
       {cambiar ? <Claves id={id} /> : <Impuestos id={id} />}
