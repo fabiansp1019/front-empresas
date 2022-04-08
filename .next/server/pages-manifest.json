@@ -1,5 +1,14 @@
 {
   "/_app": "pages/_app.js",
+  "/": "pages/index.html",
+  "/private/emp/[info]": "pages/private/emp/[info].html",
+  "/private/emp/add_key": "pages/private/emp/add_key.html",
+  "/private/emp/create_emp": "pages/private/emp/create_emp.html",
+  "/private/empresas": "pages/private/empresas.html",
+  "/private": "pages/private.html",
+  "/private/listado": "pages/private/listado.html",
+  "/public/about": "pages/public/about.html",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js"
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
 }

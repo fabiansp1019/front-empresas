@@ -1,105 +1,127 @@
 "use strict";
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (() => {
 var exports = {};
-exports.id = "pages/_app";
-exports.ids = ["pages/_app"];
+exports.id = 888;
+exports.ids = [888];
 exports.modules = {
 
-/***/ "./libs/auth.js":
-/*!**********************!*\
-  !*** ./libs/auth.js ***!
-  \**********************/
+/***/ 7362:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"AuthProvider\": () => (/* binding */ AuthProvider),\n/* harmony export */   \"useAuth\": () => (/* binding */ useAuth)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ \"axios\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ \"@apollo/client\");\n/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_apollo_client__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\nconst authContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)();\nfunction AuthProvider({ children  }) {\n    const auth = useProvideAuth();\n    return(/*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(authContext.Provider, {\n        value: auth,\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_apollo_client__WEBPACK_IMPORTED_MODULE_3__.ApolloProvider, {\n            client: auth.createApolloClient(),\n            children: children\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\USUARIO\\\\Desktop\\\\Node js\\\\API\\\\GraphQl\\\\Emp\\\\libs\\\\auth.js\",\n            lineNumber: 19,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\USUARIO\\\\Desktop\\\\Node js\\\\API\\\\GraphQl\\\\Emp\\\\libs\\\\auth.js\",\n        lineNumber: 18,\n        columnNumber: 5\n    }, this));\n}\nconst useAuth = ()=>{\n    return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(authContext);\n};\nfunction useProvideAuth() {\n    const { 0: authToken , 1: setAuthToken  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);\n    const { 0: user , 1: setUser  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);\n    const getAuthHeaders = ()=>{\n        if (!authToken) return null;\n        return {\n            authorization: `Bearer ${authToken}`\n        };\n    };\n    function createApolloClient() {\n        const link = new _apollo_client__WEBPACK_IMPORTED_MODULE_3__.HttpLink({\n            uri: 'http://localhost:4000/graphql',\n            headers: getAuthHeaders()\n        });\n        return new _apollo_client__WEBPACK_IMPORTED_MODULE_3__.ApolloClient({\n            link,\n            cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_3__.InMemoryCache()\n        });\n    }\n    const signOut = ()=>{\n        setAuthToken(null);\n        setUser(null);\n    };\n    const signIn = async ({ email , password  })=>{\n        const result = await axios__WEBPACK_IMPORTED_MODULE_2___default()({\n            method: 'post',\n            url: 'http://localhost:4000/login',\n            data: {\n                email,\n                password\n            }\n        });\n        if ((result === null || result === void 0 ? void 0 : result.data) !== 'Invalid') {\n            setAuthToken(result.data.split(\" \")[0]);\n            setUser(result.data.split(\" \")[1]);\n        }\n        if ((result === null || result === void 0 ? void 0 : result.data) == 'Invalid') {\n            return {\n                message: 'los datos suministrados son invalidos',\n                alerta: true\n            };\n        }\n    };\n    const isSignedIn = ()=>{\n        if (authToken) {\n            return true;\n        } else {\n            return false;\n        }\n    };\n    return {\n        createApolloClient,\n        signIn,\n        signOut,\n        isSignedIn,\n        user\n    };\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9saWJzL2F1dGguanMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7QUFBa0U7QUFDeEM7QUFPSDtBQUV2QixLQUFLLENBQUNVLFdBQVcsaUJBQUdQLG9EQUFhO0FBRzFCLFNBQVNRLFlBQVksQ0FBQyxDQUFDLENBQUNDLFFBQVEsRUFBQyxDQUFDLEVBQUUsQ0FBQztJQUMxQyxLQUFLLENBQUNDLElBQUksR0FBR0MsY0FBYztJQUUzQixNQUFNLDZFQUNISixXQUFXLENBQUNLLFFBQVE7UUFBQ0MsS0FBSyxFQUFFSCxJQUFJOzhGQUM5QlIsMERBQWM7WUFBQ1ksTUFBTSxFQUFFSixJQUFJLENBQUNLLGtCQUFrQjtzQkFDNUNOLFFBQVE7Ozs7Ozs7Ozs7O0FBSWpCLENBQUM7QUFFTSxLQUFLLENBQUNPLE9BQU8sT0FBUyxDQUFDO0lBQzVCLE1BQU0sQ0FBQ2pCLGlEQUFVLENBQUNRLFdBQVc7QUFDL0IsQ0FBQztTQUVRSSxjQUFjLEdBQUcsQ0FBQztJQUN6QixLQUFLLE1BQUVNLFNBQVMsTUFBRUMsWUFBWSxNQUFJcEIsK0NBQVEsQ0FBQyxJQUFJO0lBQy9DLEtBQUssTUFBRXFCLElBQUksTUFBRUMsT0FBTyxNQUFJdEIsK0NBQVEsQ0FBQyxJQUFJO0lBR3JDLEtBQUssQ0FBQ3VCLGNBQWMsT0FBUyxDQUFDO1FBQzVCLEVBQUUsR0FBR0osU0FBUyxFQUFFLE1BQU0sQ0FBQyxJQUFJO1FBRTNCLE1BQU0sQ0FBQyxDQUFDO1lBQ05LLGFBQWEsR0FBRyxPQUFPLEVBQUVMLFNBQVM7UUFDcEMsQ0FBQztJQUNILENBQUM7YUFFUUYsa0JBQWtCLEdBQUcsQ0FBQztRQUM3QixLQUFLLENBQUNRLElBQUksR0FBRyxHQUFHLENBQUNsQixvREFBUSxDQUFDLENBQUM7WUFDekJtQixHQUFHLEVBQUUsQ0FBK0I7WUFDcENDLE9BQU8sRUFBRUosY0FBYztRQUN6QixDQUFDO1FBRUQsTUFBTSxDQUFDLEdBQUcsQ0FBQ2xCLHdEQUFZLENBQUMsQ0FBQztZQUN2Qm9CLElBQUk7WUFDSkcsS0FBSyxFQUFFLEdBQUcsQ0FBQ3RCLHlEQUFhO1FBQzFCLENBQUM7SUFDSCxDQUFDO0lBRUQsS0FBSyxDQUFDdUIsT0FBTyxPQUFTLENBQUM7UUFDckJULFlBQVksQ0FBQyxJQUFJO1FBQ2pCRSxPQUFPLENBQUMsSUFBSTtJQUNkLENBQUM7SUFFRCxLQUFLLENBQUNRLE1BQU0sVUFBVSxDQUFDLENBQUNDLEtBQUssR0FBRUMsUUFBUSxFQUFDLENBQUMsR0FBSyxDQUFDO1FBRTdDLEtBQUssQ0FBQ0MsTUFBTSxHQUFHLEtBQUssQ0FBQzlCLDRDQUFLLENBQUMsQ0FBQztZQUMxQitCLE1BQU0sRUFBRSxDQUFNO1lBQ2RDLEdBQUcsRUFBRSxDQUE2QjtZQUNsQ0MsSUFBSSxFQUFFLENBQUM7Z0JBQ0xMLEtBQUs7Z0JBQ0xDLFFBQVE7WUFDVixDQUFDO1FBQ0gsQ0FBQztRQUlELEVBQUUsR0FBRUMsTUFBTSxhQUFOQSxNQUFNLEtBQU5BLElBQUksQ0FBSkEsQ0FBWSxHQUFaQSxJQUFJLENBQUpBLENBQVksR0FBWkEsTUFBTSxDQUFFRyxJQUFJLE1BQUssQ0FBUyxVQUFHLENBQUM7WUFDaENoQixZQUFZLENBQUNhLE1BQU0sQ0FBQ0csSUFBSSxDQUFDQyxLQUFLLENBQUMsQ0FBRyxJQUFFLENBQUM7WUFDckNmLE9BQU8sQ0FBQ1csTUFBTSxDQUFDRyxJQUFJLENBQUNDLEtBQUssQ0FBQyxDQUFHLElBQUUsQ0FBQztRQUVsQyxDQUFDO1FBQ0QsRUFBRSxHQUFFSixNQUFNLGFBQU5BLE1BQU0sS0FBTkEsSUFBSSxDQUFKQSxDQUFZLEdBQVpBLElBQUksQ0FBSkEsQ0FBWSxHQUFaQSxNQUFNLENBQUVHLElBQUksS0FBSSxDQUFTLFVBQUUsQ0FBQztZQUM5QixNQUFNLENBQUMsQ0FBQztnQkFDTkUsT0FBTyxFQUFFLENBQXVDO2dCQUNoREMsTUFBTSxFQUFFLElBQUk7WUFDZCxDQUFDO1FBQ0gsQ0FBQztJQUNILENBQUM7SUFFRCxLQUFLLENBQUNDLFVBQVUsT0FBUyxDQUFDO1FBQ3hCLEVBQUUsRUFBRXJCLFNBQVMsRUFBRSxDQUFDO1lBQ2QsTUFBTSxDQUFDLElBQUk7UUFDYixDQUFDLE1BQU0sQ0FBQztZQUNOLE1BQU0sQ0FBQyxLQUFLO1FBQ2QsQ0FBQztJQUNILENBQUM7SUFFRCxNQUFNLENBQUMsQ0FBQztRQUNORixrQkFBa0I7UUFDbEJhLE1BQU07UUFDTkQsT0FBTztRQUNQVyxVQUFVO1FBQ1ZuQixJQUFJO0lBQ04sQ0FBQztBQUNILENBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lbXAvLi9saWJzL2F1dGguanM/ZjdkYyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHsgdXNlU3RhdGUsIHVzZUNvbnRleHQsIGNyZWF0ZUNvbnRleHQgfSBmcm9tICdyZWFjdCdcclxuaW1wb3J0IGF4aW9zICBmcm9tICdheGlvcydcclxuaW1wb3J0IHtcclxuICBBcG9sbG9Qcm92aWRlcixcclxuICBBcG9sbG9DbGllbnQsXHJcbiAgSW5NZW1vcnlDYWNoZSxcclxuICBIdHRwTGluayxcclxuICBncWwsXHJcbn0gZnJvbSAnQGFwb2xsby9jbGllbnQnXHJcblxyXG5jb25zdCBhdXRoQ29udGV4dCA9IGNyZWF0ZUNvbnRleHQoKVxyXG5cclxuXHJcbmV4cG9ydCBmdW5jdGlvbiBBdXRoUHJvdmlkZXIoeyBjaGlsZHJlbiB9KSB7XHJcbiAgY29uc3QgYXV0aCA9IHVzZVByb3ZpZGVBdXRoKClcclxuXHJcbiAgcmV0dXJuIChcclxuICAgIDxhdXRoQ29udGV4dC5Qcm92aWRlciB2YWx1ZT17YXV0aH0+XHJcbiAgICAgIDxBcG9sbG9Qcm92aWRlciBjbGllbnQ9e2F1dGguY3JlYXRlQXBvbGxvQ2xpZW50KCl9PlxyXG4gICAgICAgIHtjaGlsZHJlbn1cclxuICAgICAgPC9BcG9sbG9Qcm92aWRlcj5cclxuICAgIDwvYXV0aENvbnRleHQuUHJvdmlkZXI+XHJcbiAgKVxyXG59XHJcblxyXG5leHBvcnQgY29uc3QgdXNlQXV0aCA9ICgpID0+IHtcclxuICByZXR1cm4gdXNlQ29udGV4dChhdXRoQ29udGV4dClcclxufVxyXG5cclxuZnVuY3Rpb24gdXNlUHJvdmlkZUF1dGgoKSB7XHJcbiAgY29uc3QgW2F1dGhUb2tlbiwgc2V0QXV0aFRva2VuXSA9IHVzZVN0YXRlKG51bGwpO1xyXG4gIGNvbnN0IFt1c2VyLCBzZXRVc2VyXSA9IHVzZVN0YXRlKG51bGwpO1xyXG5cclxuXHJcbiAgY29uc3QgZ2V0QXV0aEhlYWRlcnMgPSAoKSA9PiB7XHJcbiAgICBpZiAoIWF1dGhUb2tlbikgcmV0dXJuIG51bGxcclxuXHJcbiAgICByZXR1cm4ge1xyXG4gICAgICBhdXRob3JpemF0aW9uOiBgQmVhcmVyICR7YXV0aFRva2VufWAsXHJcbiAgICB9XHJcbiAgfVxyXG5cclxuICBmdW5jdGlvbiBjcmVhdGVBcG9sbG9DbGllbnQoKSB7XHJcbiAgICBjb25zdCBsaW5rID0gbmV3IEh0dHBMaW5rKHtcclxuICAgICAgdXJpOiAnaHR0cDovL2xvY2FsaG9zdDo0MDAwL2dyYXBocWwnLFxyXG4gICAgICBoZWFkZXJzOiBnZXRBdXRoSGVhZGVycygpLFxyXG4gICAgfSlcclxuXHJcbiAgICByZXR1cm4gbmV3IEFwb2xsb0NsaWVudCh7XHJcbiAgICAgIGxpbmssXHJcbiAgICAgIGNhY2hlOiBuZXcgSW5NZW1vcnlDYWNoZSgpLFxyXG4gICAgfSlcclxuICB9XHJcblxyXG4gIGNvbnN0IHNpZ25PdXQgPSAoKSA9PiB7XHJcbiAgICBzZXRBdXRoVG9rZW4obnVsbClcclxuICAgIHNldFVzZXIobnVsbClcclxuICB9XHJcblxyXG4gIGNvbnN0IHNpZ25JbiA9IGFzeW5jICh7IGVtYWlsLCBwYXNzd29yZCB9KSA9PiB7XHJcblxyXG4gICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgYXhpb3Moe1xyXG4gICAgICBtZXRob2Q6ICdwb3N0JyxcclxuICAgICAgdXJsOiAnaHR0cDovL2xvY2FsaG9zdDo0MDAwL2xvZ2luJyxcclxuICAgICAgZGF0YToge1xyXG4gICAgICAgIGVtYWlsLFxyXG4gICAgICAgIHBhc3N3b3JkXHJcbiAgICAgIH1cclxuICAgIH0pO1xyXG5cclxuXHJcblxyXG4gICAgaWYgKHJlc3VsdD8uZGF0YSAhPT0gJ0ludmFsaWQnICkge1xyXG4gICAgICBzZXRBdXRoVG9rZW4ocmVzdWx0LmRhdGEuc3BsaXQoXCIgXCIpWzBdKVxyXG4gICAgICBzZXRVc2VyKHJlc3VsdC5kYXRhLnNwbGl0KFwiIFwiKVsxXSlcclxuXHJcbiAgICB9XHJcbiAgICBpZiAocmVzdWx0Py5kYXRhID09ICdJbnZhbGlkJyApe1xyXG4gICAgICByZXR1cm4ge1xyXG4gICAgICAgIG1lc3NhZ2U6ICdsb3MgZGF0b3Mgc3VtaW5pc3RyYWRvcyBzb24gaW52YWxpZG9zJyxcclxuICAgICAgICBhbGVydGE6IHRydWVcclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgY29uc3QgaXNTaWduZWRJbiA9ICgpID0+IHtcclxuICAgIGlmIChhdXRoVG9rZW4pIHtcclxuICAgICAgcmV0dXJuIHRydWVcclxuICAgIH0gZWxzZSB7XHJcbiAgICAgIHJldHVybiBmYWxzZVxyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgcmV0dXJuIHtcclxuICAgIGNyZWF0ZUFwb2xsb0NsaWVudCxcclxuICAgIHNpZ25JbixcclxuICAgIHNpZ25PdXQsXHJcbiAgICBpc1NpZ25lZEluLFxyXG4gICAgdXNlclxyXG4gIH1cclxufSJdLCJuYW1lcyI6WyJSZWFjdCIsInVzZVN0YXRlIiwidXNlQ29udGV4dCIsImNyZWF0ZUNvbnRleHQiLCJheGlvcyIsIkFwb2xsb1Byb3ZpZGVyIiwiQXBvbGxvQ2xpZW50IiwiSW5NZW1vcnlDYWNoZSIsIkh0dHBMaW5rIiwiZ3FsIiwiYXV0aENvbnRleHQiLCJBdXRoUHJvdmlkZXIiLCJjaGlsZHJlbiIsImF1dGgiLCJ1c2VQcm92aWRlQXV0aCIsIlByb3ZpZGVyIiwidmFsdWUiLCJjbGllbnQiLCJjcmVhdGVBcG9sbG9DbGllbnQiLCJ1c2VBdXRoIiwiYXV0aFRva2VuIiwic2V0QXV0aFRva2VuIiwidXNlciIsInNldFVzZXIiLCJnZXRBdXRoSGVhZGVycyIsImF1dGhvcml6YXRpb24iLCJsaW5rIiwidXJpIiwiaGVhZGVycyIsImNhY2hlIiwic2lnbk91dCIsInNpZ25JbiIsImVtYWlsIiwicGFzc3dvcmQiLCJyZXN1bHQiLCJtZXRob2QiLCJ1cmwiLCJkYXRhIiwic3BsaXQiLCJtZXNzYWdlIiwiYWxlcnRhIiwiaXNTaWduZWRJbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./libs/auth.js\n");
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ _app)
+});
+
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(997);
+// EXTERNAL MODULE: ./libs/auth.js
+var auth = __webpack_require__(6667);
+// EXTERNAL MODULE: external "@mui/material/styles"
+var styles_ = __webpack_require__(8442);
+;// CONCATENATED MODULE: external "@material-ui/core/colors"
+const colors_namespaceObject = require("@material-ui/core/colors");
+;// CONCATENATED MODULE: ./libs/theme.js
+
+
+// Create a theme instance.
+const theme = (0,styles_.createTheme)({
+    palette: {
+        primary: {
+            main: '#000B50',
+            ligth: "#46F509",
+            dark: "#46F509"
+        },
+        secondary: {
+            main: '#E7F509'
+        },
+        error: {
+            main: colors_namespaceObject.red.A400
+        }
+    }
+});
+/* harmony default export */ const libs_theme = (theme);
+
+;// CONCATENATED MODULE: ./pages/_app.js
+
+
+
+
+// const theme = createTheme({
+//   primary: {
+//     // light: will be calculated from palette.primary.main,
+//     main: '#03053A',
+//     // dark: will be calculated from palette.primary.main,
+//     // contrastText: will be calculated to contrast with palette.primary.main
+//   },
+//   secondary: {
+//     light: '#0066ff',
+//     main: '#E6E30F',
+//     // dark: will be calculated from palette.secondary.main,
+//     contrastText: '#ffcc00',
+//   },
+//   // Used by `getContrastText()` to maximize the contrast between
+//   // the background and the text.
+//   contrastThreshold: 3,
+//   // Used by the functions below to shift a color's luminance by approximately
+//   // two indexes within its tonal palette.
+//   // E.g., shift from Red 500 to Red 300 or Red 700.
+//   tonalOffset: 0.2,
+//   status: {
+//     danger: '#ffcc00',
+//   },
+// });
+function MyApp({ Component , pageProps  }) {
+    return(// <ApolloProvider client={client}>
+    /*#__PURE__*/ jsx_runtime_.jsx(auth/* AuthProvider */.H, {
+        children: /*#__PURE__*/ jsx_runtime_.jsx(styles_.ThemeProvider, {
+            theme: libs_theme,
+            children: /*#__PURE__*/ jsx_runtime_.jsx(Component, {
+                ...pageProps
+            })
+        })
+    }));
+}
+/* harmony default export */ const _app = (MyApp);
+
 
 /***/ }),
 
-/***/ "./libs/theme.js":
-/*!***********************!*\
-  !*** ./libs/theme.js ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/colors */ \"@material-ui/core/colors\");\n/* harmony import */ var _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_colors__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material/styles */ \"@mui/material/styles\");\n/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mui_material_styles__WEBPACK_IMPORTED_MODULE_1__);\n\n\n// Create a theme instance.\nconst theme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_1__.createTheme)({\n    palette: {\n        primary: {\n            main: '#000B50',\n            ligth: \"#46F509\",\n            dark: \"#46F509\"\n        },\n        secondary: {\n            main: '#E7F509'\n        },\n        error: {\n            main: _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_0__.red.A400\n        }\n    }\n});\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (theme);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9saWJzL3RoZW1lLmpzLmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQThDO0FBQ0k7QUFFbEQsRUFBMkI7QUFDM0IsS0FBSyxDQUFDRSxLQUFLLEdBQUdELGlFQUFXLENBQUMsQ0FBQztJQUN6QkUsT0FBTyxFQUFFLENBQUM7UUFDUkMsT0FBTyxFQUFFLENBQUM7WUFDUkMsSUFBSSxFQUFFLENBQVM7WUFDZkMsS0FBSyxFQUFFLENBQVM7WUFDaEJDLElBQUksRUFBRSxDQUFTO1FBQ2pCLENBQUM7UUFDREMsU0FBUyxFQUFFLENBQUM7WUFDVkgsSUFBSSxFQUFFLENBQVM7UUFDakIsQ0FBQztRQUNESSxLQUFLLEVBQUUsQ0FBQztZQUNOSixJQUFJLEVBQUVMLDhEQUFRO1FBQ2hCLENBQUM7SUFDSCxDQUFDO0FBQ0gsQ0FBQztBQUVELGlFQUFlRSxLQUFLLEVBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lbXAvLi9saWJzL3RoZW1lLmpzPzIyNzYiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVkIH0gZnJvbSAnQG1hdGVyaWFsLXVpL2NvcmUvY29sb3JzJztcclxuaW1wb3J0IHsgY3JlYXRlVGhlbWUgfSBmcm9tICdAbXVpL21hdGVyaWFsL3N0eWxlcyc7XHJcblxyXG4vLyBDcmVhdGUgYSB0aGVtZSBpbnN0YW5jZS5cclxuY29uc3QgdGhlbWUgPSBjcmVhdGVUaGVtZSh7XHJcbiAgcGFsZXR0ZToge1xyXG4gICAgcHJpbWFyeToge1xyXG4gICAgICBtYWluOiAnIzAwMEI1MCcsXHJcbiAgICAgIGxpZ3RoOiBcIiM0NkY1MDlcIixcclxuICAgICAgZGFyazogXCIjNDZGNTA5XCJcclxuICAgIH0sXHJcbiAgICBzZWNvbmRhcnk6IHtcclxuICAgICAgbWFpbjogJyNFN0Y1MDknLFxyXG4gICAgfSxcclxuICAgIGVycm9yOiB7XHJcbiAgICAgIG1haW46IHJlZC5BNDAwLFxyXG4gICAgfSxcclxuICB9LFxyXG59KTtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IHRoZW1lOyJdLCJuYW1lcyI6WyJyZWQiLCJjcmVhdGVUaGVtZSIsInRoZW1lIiwicGFsZXR0ZSIsInByaW1hcnkiLCJtYWluIiwibGlndGgiLCJkYXJrIiwic2Vjb25kYXJ5IiwiZXJyb3IiLCJBNDAwIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./libs/theme.js\n");
-
-/***/ }),
-
-/***/ "./pages/_app.js":
-/*!***********************!*\
-  !*** ./pages/_app.js ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _libs_auth_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../libs/auth.js */ \"./libs/auth.js\");\n/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/styles */ \"@mui/material/styles\");\n/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mui_material_styles__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _libs_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../libs/theme */ \"./libs/theme.js\");\n\n\n\n\n// const theme = createTheme({\n//   primary: {\n//     // light: will be calculated from palette.primary.main,\n//     main: '#03053A',\n//     // dark: will be calculated from palette.primary.main,\n//     // contrastText: will be calculated to contrast with palette.primary.main\n//   },\n//   secondary: {\n//     light: '#0066ff',\n//     main: '#E6E30F',\n//     // dark: will be calculated from palette.secondary.main,\n//     contrastText: '#ffcc00',\n//   },\n//   // Used by `getContrastText()` to maximize the contrast between\n//   // the background and the text.\n//   contrastThreshold: 3,\n//   // Used by the functions below to shift a color's luminance by approximately\n//   // two indexes within its tonal palette.\n//   // E.g., shift from Red 500 to Red 300 or Red 700.\n//   tonalOffset: 0.2,\n//   status: {\n//     danger: '#ffcc00',\n//   },\n// });\nfunction MyApp({ Component , pageProps  }) {\n    return(// <ApolloProvider client={client}>\n    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_libs_auth_js__WEBPACK_IMPORTED_MODULE_1__.AuthProvider, {\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material_styles__WEBPACK_IMPORTED_MODULE_2__.ThemeProvider, {\n            theme: _libs_theme__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\n            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(Component, {\n                ...pageProps\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\USUARIO\\\\Desktop\\\\Node js\\\\API\\\\GraphQl\\\\Emp\\\\pages\\\\_app.js\",\n                lineNumber: 36,\n                columnNumber: 9\n            }, this)\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\USUARIO\\\\Desktop\\\\Node js\\\\API\\\\GraphQl\\\\Emp\\\\pages\\\\_app.js\",\n            lineNumber: 35,\n            columnNumber: 9\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\USUARIO\\\\Desktop\\\\Node js\\\\API\\\\GraphQl\\\\Emp\\\\pages\\\\_app.js\",\n        lineNumber: 34,\n        columnNumber: 7\n    }, this));\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MyApp);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9wYWdlcy9fYXBwLmpzLmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQThDO0FBQzJCO0FBQ3hDO0FBQ2pDLEVBQThCO0FBQzlCLEVBQWU7QUFDZixFQUE4RDtBQUM5RCxFQUF1QjtBQUN2QixFQUE2RDtBQUM3RCxFQUFnRjtBQUNoRixFQUFPO0FBQ1AsRUFBaUI7QUFDakIsRUFBd0I7QUFDeEIsRUFBdUI7QUFDdkIsRUFBK0Q7QUFDL0QsRUFBK0I7QUFDL0IsRUFBTztBQUNQLEVBQW9FO0FBQ3BFLEVBQW9DO0FBQ3BDLEVBQTBCO0FBQzFCLEVBQWlGO0FBQ2pGLEVBQTZDO0FBQzdDLEVBQXVEO0FBQ3ZELEVBQXNCO0FBRXRCLEVBQWM7QUFDZCxFQUF5QjtBQUN6QixFQUFPO0FBQ1AsRUFBTTtTQUVHSyxLQUFLLENBQUMsQ0FBQyxDQUFDQyxTQUFTLEdBQUVDLFNBQVMsRUFBQyxDQUFDLEVBQUUsQ0FBQztJQUN4QyxNQUFNLENBQ0osRUFBbUM7Z0ZBRWhDUCx1REFBWTs4RkFDVkUsK0RBQWE7WUFBQ0UsS0FBSyxFQUFFQSxtREFBSztrR0FDMUJFLFNBQVM7bUJBQUtDLFNBQVM7Ozs7Ozs7Ozs7Ozs7Ozs7QUFLaEMsQ0FBQztBQUVELGlFQUFlRixLQUFLLEVBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lbXAvLi9wYWdlcy9fYXBwLmpzP2UwYWQiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQXV0aFByb3ZpZGVyIH0gZnJvbSBcIi4uL2xpYnMvYXV0aC5qc1wiO1xyXG5pbXBvcnQgeyBjcmVhdGVUaGVtZSwgVGhlbWVQcm92aWRlciwgc3R5bGVkIH0gZnJvbSBcIkBtdWkvbWF0ZXJpYWwvc3R5bGVzXCI7XHJcbmltcG9ydCB0aGVtZSBmcm9tICcuLi9saWJzL3RoZW1lJ1xyXG4vLyBjb25zdCB0aGVtZSA9IGNyZWF0ZVRoZW1lKHtcclxuLy8gICBwcmltYXJ5OiB7XHJcbi8vICAgICAvLyBsaWdodDogd2lsbCBiZSBjYWxjdWxhdGVkIGZyb20gcGFsZXR0ZS5wcmltYXJ5Lm1haW4sXHJcbi8vICAgICBtYWluOiAnIzAzMDUzQScsXHJcbi8vICAgICAvLyBkYXJrOiB3aWxsIGJlIGNhbGN1bGF0ZWQgZnJvbSBwYWxldHRlLnByaW1hcnkubWFpbixcclxuLy8gICAgIC8vIGNvbnRyYXN0VGV4dDogd2lsbCBiZSBjYWxjdWxhdGVkIHRvIGNvbnRyYXN0IHdpdGggcGFsZXR0ZS5wcmltYXJ5Lm1haW5cclxuLy8gICB9LFxyXG4vLyAgIHNlY29uZGFyeToge1xyXG4vLyAgICAgbGlnaHQ6ICcjMDA2NmZmJyxcclxuLy8gICAgIG1haW46ICcjRTZFMzBGJyxcclxuLy8gICAgIC8vIGRhcms6IHdpbGwgYmUgY2FsY3VsYXRlZCBmcm9tIHBhbGV0dGUuc2Vjb25kYXJ5Lm1haW4sXHJcbi8vICAgICBjb250cmFzdFRleHQ6ICcjZmZjYzAwJyxcclxuLy8gICB9LFxyXG4vLyAgIC8vIFVzZWQgYnkgYGdldENvbnRyYXN0VGV4dCgpYCB0byBtYXhpbWl6ZSB0aGUgY29udHJhc3QgYmV0d2VlblxyXG4vLyAgIC8vIHRoZSBiYWNrZ3JvdW5kIGFuZCB0aGUgdGV4dC5cclxuLy8gICBjb250cmFzdFRocmVzaG9sZDogMyxcclxuLy8gICAvLyBVc2VkIGJ5IHRoZSBmdW5jdGlvbnMgYmVsb3cgdG8gc2hpZnQgYSBjb2xvcidzIGx1bWluYW5jZSBieSBhcHByb3hpbWF0ZWx5XHJcbi8vICAgLy8gdHdvIGluZGV4ZXMgd2l0aGluIGl0cyB0b25hbCBwYWxldHRlLlxyXG4vLyAgIC8vIEUuZy4sIHNoaWZ0IGZyb20gUmVkIDUwMCB0byBSZWQgMzAwIG9yIFJlZCA3MDAuXHJcbi8vICAgdG9uYWxPZmZzZXQ6IDAuMixcclxuXHJcbi8vICAgc3RhdHVzOiB7XHJcbi8vICAgICBkYW5nZXI6ICcjZmZjYzAwJyxcclxuLy8gICB9LFxyXG4vLyB9KTtcclxuXHJcbmZ1bmN0aW9uIE15QXBwKHsgQ29tcG9uZW50LCBwYWdlUHJvcHMgfSkge1xyXG4gIHJldHVybiAoXHJcbiAgICAvLyA8QXBvbGxvUHJvdmlkZXIgY2xpZW50PXtjbGllbnR9PlxyXG4gICAgXHJcbiAgICAgIDxBdXRoUHJvdmlkZXI+XHJcbiAgICAgICAgPFRoZW1lUHJvdmlkZXIgdGhlbWU9e3RoZW1lfT5cclxuICAgICAgICA8Q29tcG9uZW50IHsuLi5wYWdlUHJvcHN9IC8+XHJcbiAgICAgICAgPC9UaGVtZVByb3ZpZGVyPlxyXG4gICAgICA8L0F1dGhQcm92aWRlcj5cclxuICAgIC8vIDwvQXBvbGxvUHJvdmlkZXI+XHJcbiAgKTtcclxufVxyXG5cclxuZXhwb3J0IGRlZmF1bHQgTXlBcHA7XHJcbiJdLCJuYW1lcyI6WyJBdXRoUHJvdmlkZXIiLCJjcmVhdGVUaGVtZSIsIlRoZW1lUHJvdmlkZXIiLCJzdHlsZWQiLCJ0aGVtZSIsIk15QXBwIiwiQ29tcG9uZW50IiwicGFnZVByb3BzIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./pages/_app.js\n");
-
-/***/ }),
-
-/***/ "@apollo/client":
-/*!*********************************!*\
-  !*** external "@apollo/client" ***!
-  \*********************************/
+/***/ 9114:
 /***/ ((module) => {
 
 module.exports = require("@apollo/client");
 
 /***/ }),
 
-/***/ "@material-ui/core/colors":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/colors" ***!
-  \*******************************************/
-/***/ ((module) => {
-
-module.exports = require("@material-ui/core/colors");
-
-/***/ }),
-
-/***/ "@mui/material/styles":
-/*!***************************************!*\
-  !*** external "@mui/material/styles" ***!
-  \***************************************/
+/***/ 8442:
 /***/ ((module) => {
 
 module.exports = require("@mui/material/styles");
 
 /***/ }),
 
-/***/ "axios":
-/*!************************!*\
-  !*** external "axios" ***!
-  \************************/
+/***/ 2167:
 /***/ ((module) => {
 
 module.exports = require("axios");
 
 /***/ }),
 
-/***/ "react":
-/*!************************!*\
-  !*** external "react" ***!
-  \************************/
+/***/ 6689:
 /***/ ((module) => {
 
 module.exports = require("react");
 
 /***/ }),
 
-/***/ "react/jsx-dev-runtime":
-/*!****************************************!*\
-  !*** external "react/jsx-dev-runtime" ***!
-  \****************************************/
+/***/ 997:
 /***/ ((module) => {
 
-module.exports = require("react/jsx-dev-runtime");
+module.exports = require("react/jsx-runtime");
 
 /***/ })
 
@@ -110,7 +132,7 @@ module.exports = require("react/jsx-dev-runtime");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__("./pages/_app.js"));
+var __webpack_exports__ = __webpack_require__.X(0, [667], () => (__webpack_exec__(7362)));
 module.exports = __webpack_exports__;
 
 })();
