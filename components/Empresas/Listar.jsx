@@ -181,15 +181,15 @@ const Listar_Empresas = () => {
         claves = empresa.claves;
 
         return (
-          <Link href={`/private/emp/${empresa.id}`}>
-            <Typography>
+          <Link href={`/private/emp/[info]`} as={`/private/emp/${empresa.id}`} >
+            <Typography key={keyMayor}>
               <>
                 <nav aria-label="main mailbox folders">
                   <List sx={{
                     width: "100vw",
                   }} >
                     <ListItem disablePadding >
-                      <ListItemButton id={empresa.id} onClick={(e)=>console.log(e.target.id)}>
+                      <ListItemButton id={empresa.id} >
                         <ListItemIcon>
                           <Stack direction="row" spacing={3}>
                             <Avatar

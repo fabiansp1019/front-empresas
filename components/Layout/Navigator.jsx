@@ -58,7 +58,7 @@ export default function Navigator(props) {
               <ListItemText ></ListItemText>
             </ListItem>
 
-            <ListItem disablePadding key={'Build'}>
+            <ListItem disablePadding key={'1'}>
               <ListItemButton>
                 <Link href={'/'}>
                 <ListItem  selected={false} sx={item} >
@@ -69,7 +69,7 @@ export default function Navigator(props) {
                 </ListItemButton>
               </ListItem>
 
-              <ListItem disablePadding key={'Build'}>
+              <ListItem disablePadding key={'2'}>
               <ListItemButton>
                 <Link href={'/private/empresas'}>
                 <ListItem  selected={false} sx={item} >
@@ -80,7 +80,7 @@ export default function Navigator(props) {
                 </ListItemButton>
               </ListItem>
 
-              <ListItem disablePadding key={'Build'}>
+              <ListItem disablePadding key={'3'}>
                 <ListItemButton>
                 <Link href={'/private/listado'}>
                 <ListItem selected={false} sx={item} >

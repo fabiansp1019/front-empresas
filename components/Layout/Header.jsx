@@ -39,14 +39,14 @@ export default function Header(props) {
             <Grid item xs />
             <Grid item>
               <Tooltip title="Alerts • No alerts">
-                <IconButton color="secondary">
+                <IconButton >
                   <NotificationsIcon />
                 </IconButton>
               </Tooltip>
             </Grid>
             <Grid item>
               <IconButton  sx={{ p: 0.5 }}>
-                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
+                <Avatar src="https://img.blogs.es/anexom/wp-content/uploads/2021/12/perfil-1024x754.jpg" alt="My Avatar" />
               </IconButton>
             </Grid>
           </Grid>
