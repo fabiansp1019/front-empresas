@@ -1,25 +1,17 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import TextField from "@material-ui/core/TextField";
+import { useRouter } from "next/router";
+
+import LockIcon from "@mui/icons-material/Lock";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import { TextField } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Paper from "@mui/material/Paper";
 import Button from "@material-ui/core/Button";
-import { useRouter } from 'next/router'
 
-import { useQuery, useMutation } from "@apollo/client";
-import {
-  GET_EMPRESAS,
-  CREAR_CLAVE,
-  CREAR_IMPUESTO,
-} from "../../graphql/queries";
-
+import { useMutation } from "@apollo/client";
+import { CREAR_CLAVE, CREAR_IMPUESTO } from "../../graphql/queries";
 
 export const Claves = ({ id }) => {
   const [nombreEntidad, setNombreEntidad] = React.useState("");
@@ -49,7 +41,7 @@ export const Claves = ({ id }) => {
           comentario: comentario,
         },
       });
-      router.push('/')
+      router.push("/");
       if (loading) {
         return "loading";
       }
@@ -69,27 +61,42 @@ export const Claves = ({ id }) => {
   };
   return (
     <>
-      <TextField
-        id="nombreEntidad"
-        label="Nombre Entidad"
-        onChange={(e) => setNombreEntidad(e.target.value)}
-      />
-      <TextField
-        id="usuario"
-        label="Usuario"
-        onChange={(e) => setUsuario(e.target.value)}
-      />
-      <TextField
-        id="contraseña"
-        label="Contraseña"
-        onChange={(e) => setContrasenna(e.target.value)}
-      />
-      <TextField
-        id="comentario"
-        label="Comentario"
-        onChange={(e) => setComentario(e.target.value)}
-      />
-      <button onClick={guardarClave}>Guardar</button>
+      <Box sx={{ m: 2 }}>
+        <h3>Agregar Clave</h3>
+        <Paper>
+        <form sx={{ width: "25%", margin: '1rem' }} autoComplete="off">
+            <div>
+          <TextField
+            id="nombreEntidad"
+            variant="filled"
+            label="Nombre Entidad"
+            onChange={(e) => setNombreEntidad(e.target.value)}
+          />
+          <TextField
+            id="usuario"
+            variant="filled"
+            label="Usuario"
+            onChange={(e) => setUsuario(e.target.value)}
+          />
+          <TextField
+            id="contraseña"
+            variant="filled"
+            label="Contraseña"
+            onChange={(e) => setContrasenna(e.target.value)}
+          />
+          <TextField
+            id="comentario"
+            variant="filled"
+            label="Comentario"
+            onChange={(e) => setComentario(e.target.value)}
+          />
+          <Button onClick={guardarClave} variant="contained" color="primary">
+            Guardar
+          </Button>
+          </div>
+          </form>
+        </Paper>
+      </Box>
     </>
   );
 };
@@ -110,79 +117,80 @@ export const Impuestos = ({ id }) => {
           comentario: comentario,
         },
       });
-      router.push('/')
+      router.push("/");
       document.getElementById("impuesto").value = "";
       document.getElementById("comentario").value = "";
     }
   };
   return (
     <>
-      <TextField
-        id="impuesto"
-        label="Nombre Impuesto"
-        onChange={(e) => setNombreImpuesto(e.target.value)}
-      />
-      <TextField
-        id="comentario"
-        label="Comentario"
-        onChange={(e) => setComentario(e.target.value)}
-      />
-
-      <button onClick={guardarImpuesto}>Guardar</button>
+      <Box sx={{ m: 2 }}>
+        <h3>Agregar Responsabilidad</h3>
+        <Paper>
+          <form sx={{ width: "25%", margin: '1rem' }} autoComplete="off">
+            <div>
+            <TextField
+              id="impuesto"
+              variant="filled"
+              label="Nombre Impuesto"
+              onChange={(e) => setNombreImpuesto(e.target.value)}
+            />
+            <TextField
+              id="comentario"
+              variant="filled"
+              label="Comentario"
+              onChange={(e) => setComentario(e.target.value)}
+            />
+            </div>
+          </form>
+          <Button onClick={guardarImpuesto} variant="contained" color="primary">
+            Guardar
+          </Button>
+        </Paper>
+      </Box>
     </>
   );
 };
 
 const Agregar_Claves = () => {
-  const [personName, setPersonName] = React.useState("");
-  const [cambiar, setCambiar] = React.useState(false);
-  const [id, setId] = React.useState("");
-  
+  const { query } = useRouter();
+  const [cambiar, setCambiar] = React.useState("clave");
 
-  const { loading, error, data } = useQuery(GET_EMPRESAS);
+  const id = query.info;
 
-  if (loading) {
-    return "loading";
-  }
-  if (error) {
-    return <NoAutorizado />;
-  }
+  const [alignment, setAlignment] = React.useState("left");
+
+  const handleAlignment = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
 
   // console.log(data)
 
-  const handleChange = (event) => {
-    setPersonName(event.target.value);
-    setId(event.target.value);
-  };
   return (
     <>
-      < >
-        < >
-          <>
-            <InputLabel id="demo-mutiple-name-label">Empresa</InputLabel>
-            <Select
-              value={personName}
-              onChange={handleChange}
-              input={<Input />}
-            >
-              {data.empresas.map((name) => (
-                <MenuItem key={name.id} value={name.id}>
-                  {name.razonSocial}
-                </MenuItem>
-              ))}
-            </Select>
-          </>
-        </>
-        <Divider />
-      </>
+      <ToggleButtonGroup
+        value={alignment}
+        exclusive
+        onChange={handleAlignment}
+        aria-label="text alignment"
+      >
+        <ToggleButton
+          value="left"
+          aria-label="left aligned"
+          onClick={() => setCambiar("clave")}
+        >
+          <LockIcon />
+        </ToggleButton>
+        <ToggleButton
+          value="rigth"
+          aria-label="centered"
+          onClick={() => setCambiar("impuesto")}
+        >
+          <AlternateEmailIcon />
+        </ToggleButton>
+      </ToggleButtonGroup>
 
-      <button onClick={() =>{ 
-        setCambiar(!cambiar)
-        const { loading, error, data } = useQuery(GET_EMPRESAS);
-      }}>
-        {cambiar ? "Claves" : "Impuestos"}
-      </button>
-      {cambiar ? <Claves id={id} /> : <Impuestos id={id} />}
+      {cambiar === "clave" ? <Claves id={id} /> : <Impuestos id={id} />}
     </>
   );
 };
