@@ -1,5 +1,5 @@
 import React from 'react'
-import CrearEmpresa from '../../../components/Empresas/crear_empresa'
+import CrearEmpresa from '../../../components/Empresas/Crear_empresa'
 import LayoutP from '../../../components/Layoutprivate'
 
 const create_emp = () => {
