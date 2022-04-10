@@ -156,6 +156,10 @@ export const LOGIN = gql`
    }
 `;
 
+
+
+
+
 export const ADD_BLOGPOST = gql`
   mutation AddBlogPost($text: String) {
     addBlogPost(text: $text) {

@@ -35,15 +35,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/private/emp/[info].js"
     ],
-    "/private/emp/create_emp": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/private/emp/create_emp.js"
-    ],
     "/private/empresas": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/private/empresas.js"
+    ],
+    "/private/listado": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/private/listado.js"
     ]
   },
   "ampFirstPages": []

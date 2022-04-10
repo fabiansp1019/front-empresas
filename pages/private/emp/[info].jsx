@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Children, useState } from "react";
 import Box from "@material-ui/core/Box";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
@@ -20,17 +20,107 @@ import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CreateIcon from "@mui/icons-material/Create";
+import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import { FormControl, Input } from "@material-ui/core";
 
 import { useRouter } from "next/router";
 import LayoutP from "../../../components/Layoutprivate";
 import Agregar_Claves from "../../../components/Empresas/Agregar_Claves";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_EMPRESA } from "../../../graphql/queries";
+import { GET_EMPRESA, MODIFICAR_CONTRASENIAS } from "../../../graphql/queries";
 import NoAutorizado from "../../../components/NoAutorizado";
 
+export const useStylesModal = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
+
 export const InformacionGeneral = ({ data }) => {
+  const classes = useStylesModal();
+  const router = useRouter();
+  const [open, setOpen] = React.useState(false);
+
+  const [nit, setNit] = useState("");
+  const [razonSocial, setRazonSocial] = useState("");
+  const [ciudad, setCiudad] = useState("");
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <div>
+      <div>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <Box sx={{ m: 2 }}>
+                <Paper>
+                  <FormControl>
+                    <Input
+                      id="nit"
+                      aria-describedby="my-helper-text"
+                      value={data.empresa.nit}
+                      onChange={(e) => setNit(e.target.value)}
+                    />
+                  </FormControl>
+
+                  <FormControl>
+                    <Input
+                      id="razonSocial"
+                      aria-describedby="my-helper-text"
+                      value={data.empresa.razonSocial}
+                      onChange={(e) => setRazonSocial(e.target.value)}
+                    />
+                  </FormControl>
+
+                  <FormControl>
+                    <Input
+                      id="ciudad"
+                      aria-describedby="my-helper-text"
+                      value={data.empresa.ciudad}
+                      onChange={(e) => setCiudad(e.target.value)}
+                    />
+                  </FormControl>
+
+                  <FormControl>
+                    <Button color="primary">Guardar</Button>
+                  </FormControl>
+                </Paper>
+              </Box>
+            </div>
+          </Fade>
+        </Modal>
+      </div>
       <Box sx={{ m: 2 }}>
         <Typography variant="h6">Informacion General</Typography>
         <List
@@ -58,14 +148,123 @@ export const InformacionGeneral = ({ data }) => {
             <ListItemText primary={data.empresa.ciudad} secondary="CIUDAD" />
           </ListItem>
         </List>
+
+        <Button onClick={handleOpen}>
+          <CreateIcon />
+        </Button>
       </Box>
     </div>
   );
 };
 
 export const Claves = ({ data }) => {
+  const classes = useStylesModal();
+  const router = useRouter();
+  const [open, setOpen] = React.useState(false);
+
+  const [idClave, setIdClave] = useState("");
+  const [entidad, setEntidad] = React.useState("");
+  const [usuario, setUsuario] = React.useState("");
+  const [contrasenna, setContrasenna] = React.useState("");
+  const [comentario, setComentario] = React.useState("");
+  const [
+    modificarClavesEmpresas,
+    { dataModificarClaves, loadingModificarClaves, errorModificarClaves },
+  ] = useMutation(MODIFICAR_CONTRASENIAS);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const modificarClaves = () => {
+    modificarClavesEmpresas({
+      variables: {
+        id: idClave,
+        usuario: usuario,
+        contrasenna: contrasenna,
+        comentario: comentario,
+      },
+    });
+    router.push(`/private/emp/${router.query.info}`);
+
+    if (loadingModificarClaves) {
+      return "loading";
+    }
+    if (errorModificarClaves) {
+      return <NoAutorizado />;
+    }
+    // console.log(dataComImp);
+  };
+
   return (
     <div>
+      <div>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <Box sx={{ m: 2 }}>
+                <Paper>
+                  <FormControl>
+                    <h1
+                      id="entidad"
+                      aria-describedby="my-helper-text"
+                      value={entidad}
+                    />
+                  </FormControl>
+
+                  <FormControl>
+                    <Input
+                      id="usuario"
+                      aria-describedby="my-helper-text"
+                      value={usuario}
+                      onChange={(e) => setUsuario(e.target.value)}
+                    />
+                  </FormControl>
+
+                  <FormControl>
+                    <Input
+                      id="contrasenna"
+                      aria-describedby="my-helper-text"
+                      value={contrasenna}
+                      onChange={(e) => setContrasenna(e.target.value)}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <TextareaAutosize
+                      id="comentario"
+                      aria-label="minimum height"
+                      minRows={3}
+                      value={comentario}
+                      onChange={(e) => setComentario(e.target.value)}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <Button color="primary" onClick={modificarClaves}>
+                      Guardar
+                    </Button>
+                  </FormControl>
+                </Paper>
+              </Box>
+            </div>
+          </Fade>
+        </Modal>
+      </div>
+
       <Box sx={{ m: 2 }}>
         <Typography variant="h6">Usuarios y Claves</Typography>
         <List
@@ -81,6 +280,22 @@ export const Claves = ({ data }) => {
                 <Avatar>
                   <ImageIcon />
                 </Avatar>
+                <Button
+                  onClick={() => {
+                    handleOpen();
+                    setEntidad(clave.entidad);
+                    setUsuario(clave.usuario);
+                    setContrasenna(clave.contrasenna);
+                    setComentario(clave.comentario);
+                    setIdClave(clave.id);
+                  }}
+                >
+                  <CreateIcon
+                    sx={{
+                      fontSize: "8px",
+                    }}
+                  />
+                </Button>
               </ListItemAvatar>
               <ListItem>
                 <ListItemText primary={clave.entidad} secondary="ENTIDAD" />
@@ -100,6 +315,7 @@ export const Claves = ({ data }) => {
               <ListItem>
                 <ListItemText primary={clave.comentario} />
               </ListItem>
+
               {/* <div>-------</div> */}
               <Divider />
             </>
