@@ -1,22 +1,26 @@
 import React from "react";
-import Layout from ".././components/Layout";
+import Layout from "../components/LayoutPublic";
 
 import { useAuth } from '../libs/auth'
 import Login from "../components/Login";
+import LayoutPrivate from "../components/Layoutprivate";
 const Index = () => {
   const { signOut, isSignedIn, user } = useAuth();
 
   return (
     <>
-      <Layout>
-        <br/>
-        {!isSignedIn() && <Login />}
+
+        {!isSignedIn() && <Layout><Login /> </Layout>}
+
+
         {isSignedIn() && (<>
+        <LayoutPrivate>
           estamos logueados
-          {user}
+          {" - " + user}
           <button onClick={() => signOut()}>Cerrar sesion</button>
+          </LayoutPrivate>
         </>)}
-      </Layout>
+     
     </>
   );
 };

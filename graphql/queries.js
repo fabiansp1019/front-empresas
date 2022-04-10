@@ -95,6 +95,31 @@ query {
 }
 `;
 
+export const GET_EMPRESA = gql`
+query($id:ID!) {
+  empresa(id:$id){
+    id
+    nit
+    razonSocial
+    direccion
+    ciudad
+    responsabilidad{
+      id
+      impuesto
+      responsabilidad
+      comentario
+    }
+    claves{
+      id
+      entidad
+      usuario
+      contrasenna
+      comentario
+    }
+  }
+}
+`;
+
 export const MODIFICAR_COMENTARIO_IMPUESTO = gql`
 mutation ModificarComentarioImpuesto($id: ID!, $comentario: String!){
   modificarComentarioImpuesto(
@@ -130,6 +155,10 @@ export const LOGIN = gql`
     login(email: $email, password: $password)
    }
 `;
+
+
+
+
 
 export const ADD_BLOGPOST = gql`
   mutation AddBlogPost($text: String) {
