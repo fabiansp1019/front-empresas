@@ -49,8 +49,26 @@ export const useStylesModal = makeStyles((theme) => ({
   },
 }));
 
+export const useStylesAvatar = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
+  large: {
+    width: theme.spacing(17),
+    height: theme.spacing(17),
+  },
+}));
+
 export const InformacionGeneral = ({ data }) => {
   const classes = useStylesModal();
+  const classesAvatar = useStylesAvatar();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
 
@@ -68,6 +86,7 @@ export const InformacionGeneral = ({ data }) => {
 
   return (
     <div>
+      {/* modal para poder modificar la informacion */}
       <div>
         <Modal
           aria-labelledby="transition-modal-title"
@@ -131,7 +150,8 @@ export const InformacionGeneral = ({ data }) => {
           }}
         >
           <ListItemAvatar>
-            <Avatar sx={{ width: "15vw", height: "25vh" }}>
+          {/* sx={{ width: "15vw", height: "25vh" }} */}
+            <Avatar className={classesAvatar.large} >  
               <ImageIcon />
             </Avatar>
           </ListItemAvatar>
@@ -468,7 +488,7 @@ const info = () => {
             flexWrap: "wrap",
             "& > :not(style)": {
               m: 1,
-              width: "60vw",
+              width: "70vw",
               minHeight: "50vh",
             },
           }}
