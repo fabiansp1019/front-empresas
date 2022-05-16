@@ -9,7 +9,6 @@ query {
   }
 }
 `;
-
 export const CREAREMPRESA = gql`
 mutation (
   $nit: String!,
@@ -69,7 +68,6 @@ mutation($empresaId:ID!, $entidad:String!, $usuario:String!, $contrasenna:String
   }
 }
 `;
-
 export const GET_EMPRESAS = gql`
 query {
   empresas{
@@ -94,7 +92,6 @@ query {
   }
 }
 `;
-
 export const GET_EMPRESA = gql`
 query($id:ID!) {
   empresa(id:$id){
@@ -119,7 +116,6 @@ query($id:ID!) {
   }
 }
 `;
-
 export const MODIFICAR_COMENTARIO_IMPUESTO = gql`
 mutation ModificarComentarioImpuesto($id: ID!, $comentario: String!){
   modificarComentarioImpuesto(
@@ -132,7 +128,6 @@ mutation ModificarComentarioImpuesto($id: ID!, $comentario: String!){
   }
 }
 `;
-
 export const MODIFICAR_CONTRASENIAS = gql`
 mutation ActualizarClaves($id: ID!, $usuario: String!, $contrasenna: String!, $comentario: String!){
   actualizarClaves(
@@ -149,13 +144,21 @@ mutation ActualizarClaves($id: ID!, $usuario: String!, $contrasenna: String!, $c
   }
 }
 `;
-
 export const LOGIN = gql`
    mutation Login($email: String!, $password: String!){
     login(email: $email, password: $password)
    }
 `;
-
+export const GET_USUARIO = gql`
+query($id:ID!) {
+  user(id:$id){
+    username
+    email
+    displayName
+    foto
+  }
+}
+`;
 
 
 
