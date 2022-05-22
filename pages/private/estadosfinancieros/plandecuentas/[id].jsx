@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import LayoutPrivate from "../../../components/Layoutprivate";
+import LayoutPrivate from "../../../../components/Layoutprivate";
+import Nav_Estados_Financieros from "../../../../components/Empresas/Nav_Estados_Financieros";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -38,15 +39,7 @@ export const ClasePucStyle = ({ codigo, nombre }) => {
   );
 };
 
-export const ClassTest = () => {
-  return (
-    
-    <Box sx={{ width:'700px', height:'300px', bgcolor:'red'}}>
-      brayan xx
-    </Box>
-    
-  )
-}
+
 
 const plandecuentas = () => {
   const [estadosFinancieros, setEstadosFinancieros] = useState([]);
@@ -68,18 +61,10 @@ const plandecuentas = () => {
   }, []);
 
   return (
-    <LayoutPrivate>
+    <LayoutPrivate nav={<Nav_Estados_Financieros />}>
       <div>
-      {/* <ClassTest/> */}
+
       <Box sx={{with:'100vw'}}>
-      <>
-          <Link href={"/private/estadosfinancieros/agregargrupos"}>
-            <a>agregar grupos</a>
-          </Link>
-          <Link href={"/private/estadosfinancieros/plandecuentas"}>
-            <a>Plan de Cuentas</a>
-          </Link>
-        </>
 
           <ul>
             {estadosFinancieros.map((estado) => {

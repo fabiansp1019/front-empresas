@@ -1,227 +1,111 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import LayoutPrivate from "../../../components/Layoutprivate";
 import axios from "axios";
 import Link from "next/link";
-import LayoutPrivate from "../../../components/Layoutprivate";
-import libs from "../../../libs/util";
+
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Grid from "@mui/material/Grid";
+
+// import isWeekend from 'date-fns/isWeekend';
+
+// import { AdapterDateFns } from '@mui'
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+
 
 const index = () => {
-  const [estadosFinancieros, setEstadosFinancieros] = useState([]);
-  const [dataa, setDataa] = useState([]);
-  const [saldosPorGrupos, setSaldosPorGrupos] = useState([]);
-  const [saldosPorCuentas, setSaldosPorCuentas] = useState([]);
+  const [search, setSearch] = React.useState("");
+  const [data, setData] = React.useState([]);
+  const [value, setValue] = React.useState(new Date());
 
   const getdata = async () => {
     const req = await axios({
-      method: "get",
-      url: "http://localhost:4000/api/listarclases",
+      method: "post",
+      url: "http://localhost:4000/api/buscarEmpresas",
       headers: {
         authorization: window.localStorage.getItem("loggedApp"),
       },
+      data: {
+        search,
+      },
     });
-    setEstadosFinancieros(req.data.lista);
-    // setDataa(req.data.auxiliares);
-    // console.log(req.data.auxiliares);
-
-    //SALDO POR CLASE
-    const miCarritoSinDuplicados = req.data.auxiliares.reduce(
-      (acumulador, valorActual) => {
-        const elementoYaExiste = acumulador.find(
-          (elemento) => elemento.clase === valorActual.clase
-        );
-        if (elementoYaExiste) {
-          return acumulador.map((elemento) => {
-            if (elemento.clase === valorActual.clase) {
-              return {
-                ...elemento,
-                saldoTotal: elemento.saldo + valorActual.saldo,
-              };
-            }
-            return elemento;
-          });
-        }
-
-        const tot = {
-          clase: valorActual.clase,
-          saldo: valorActual.saldo,
-        };
-
-        //  console.log(tot);
-        return [...acumulador, tot]; //[...acumulador, valorActual];
-      },
-      []
-    );
-    setDataa(miCarritoSinDuplicados);
-
-    // SALDOS POR GRUPOS
-    const saldosPorGrupo = req.data.auxiliares.reduce(
-      (acumulador, valorActual) => {
-        const elementoYaExiste = acumulador.find(
-          (elemento) => elemento.grupo === valorActual.grupo
-        );
-        if (elementoYaExiste) {
-          return acumulador.map((elemento) => {
-            if (elemento.grupo === valorActual.grupo) {
-              return {
-                ...elemento,
-                saldoTotal: elemento.saldo + valorActual.saldo,
-              };
-            }
-            return elemento;
-          });
-        }
-
-        const tot = {
-          grupo: valorActual.grupo,
-          saldo: valorActual.saldo,
-        };
-
-        //  console.log(tot);
-        return [...acumulador, tot]; //[...acumulador, valorActual];
-      },
-      []
-    );
-    setSaldosPorGrupos(saldosPorGrupo);
-    // console.log(saldosPorGrupo)
-
-    // SALDOS POR CUENTAS
-    const saldosPorCuentas = req.data.auxiliares.reduce(
-      (acumulador, valorActual) => {
-        const elementoYaExiste = acumulador.find(
-          (elemento) => elemento.cuenta === valorActual.cuenta
-        );
-        if (elementoYaExiste) {
-          return acumulador.map((elemento) => {
-            if (elemento.cuenta === valorActual.cuenta) {
-              return {
-                ...elemento,
-                saldoTotal: elemento.saldo + valorActual.saldo,
-              };
-            }
-            return elemento;
-          });
-        }
-
-        const tot = {
-          cuenta: valorActual.cuenta,
-          saldo: valorActual.saldo,
-        };
-
-        //  console.log(tot);
-        return [...acumulador, tot]; //[...acumulador, valorActual];
-      },
-      []
-    );
-    setSaldosPorCuentas(saldosPorCuentas);
-    // console.log(saldosPorCuentas)
+    setData(req.data);
+    // console.log(req.data);
   };
 
-  useEffect(() => {
-    getdata();
-    // console.log(saldos());
-  }, []);
-
-  // if(dataa){
-  //   const valor = dataa.find({clase: "1"}).clase;
-  //   console.log(valor);
-  // }
-
-  // console.log(estadosFinancieros.filter((e) => e.clase == "1"));
+  const OnChange = (e) => {
+    setSearch(e.target.value);
+  };
 
   return (
     <LayoutPrivate>
-      <div>
-        <div>
-          <Link href={"/private/estadosfinancieros/agregargrupos"}>
-            <a>agregar grupos</a>
-          </Link>
-          <Link href={"/private/estadosfinancieros/plandecuentas"}>
-            <a>Plan de Cuentas</a>
-          </Link>
-
-        </div>
-
-        <div>
-          <ul>
-            {estadosFinancieros.map((estado) => {
-              return (
-                <>
-                  <li>
-                    {" "}
-                    Clase : {estado.clase} - {estado.nombre} - Total :
-                    {libs.formatNumber(
-                      dataa.filter((e) => e.clase == estado.clase)[0]
-                        ?.saldoTotal
-                    )}
-                    {/*  console.log(dataa.find({clase: '5'}))  */}
-                  </li>
-                  <ul>
-                    {estado.grupos.map((grup) => {
-                      return (
-                        <>
-                          {saldosPorGrupos.filter(
-                            (e) => e.grupo == grup.grupo
-                          )[0]?.saldoTotal > 0 && (
-                            <>
-                              <li>
-                                grupo: {grup.grupo} - {grup.nombre} - Total :
-                                {libs.formatNumber(
-                                  saldosPorGrupos.filter(
-                                    (e) => e.grupo == grup.grupo
-                                  )[0]?.saldoTotal
-                                )}
-                              </li>
-                              <ul>
-                                {grup.cuentas.map((cuenta) => {
-                                  return (
-                                    <>
-                                      {saldosPorCuentas.filter(
-                                        (e) => e.cuenta == cuenta.cuentas
-                                      )[0]?.saldoTotal > 0 && (
-                                        <>
-                                          <li>
-                                            cuenta: {cuenta.cuentas} -{" "}
-                                            {cuenta.nombre} - Total :
-                                            {libs.formatNumber(
-                                              saldosPorCuentas.filter(
-                                                (e) =>
-                                                  e.cuenta == cuenta.cuentas
-                                              )[0]?.saldoTotal
-                                )}
-                                          </li>
-                                          {/* <ul>
-                                            {cuenta.subcuentas.map(
-                                              (subcuenta) => {
-                                                return (
-                                                  <>
-                                                    <li>
-                                                      sub Cuenta:{" "}
-                                                      {subcuenta.subcuentas} -{" "}
-                                                      {subcuenta.nombre}
-                                                    </li>
-                                                  </>
-                                                );
-                                              }
-                                            )}
-                                          </ul> */}
-                                        </>
-                                      )}
-                                    </>
-                                    // aquii
-                                  );
-                                })}
-                              </ul>
-                            </>
-                          )}
-                        </>
-                      );
-                    })}
-                  </ul>
-                </>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
+      <>
+        <Button />
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={5} sx={{ position: "fixed", right: "50px" }}>
+              <Stack spacing={2} direction="row">
+                <Box sx={{ display: "block", alignItems: "flex-end" }}>
+                  <AccountCircle
+                    sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                  />
+                  <TextField
+                    id="input-with-sx"
+                    label="Cliente"
+                    variant="standard"
+                    onChange={OnChange}
+                  />
+                </Box>
+                <Button
+                  color="secondary"
+                  size="small"
+                  variant="contained"
+                  onClick={getdata}
+                >
+                  Buscar
+                </Button>
+              </Stack>
+              {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <StaticDatePicker
+        orientation="landscape"
+        openTo="day"
+        value={value}
+        // shouldDisableDate={isWeekend}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider> */}
+            </Grid>
+            <Grid item xs={7}>
+              <nav aria-label="main mailbox folders">
+                <List>
+                  {data.map((item, key) => (
+                    <Link href={'/private/estadosfinancieros/estadodesituacionfinanciera/[id]'} as={'/private/estadosfinancieros/estadodesituacionfinanciera/'+item?._id}>
+                      <ListItem disablePadding key={key + 10}>
+                        <ListItemButton>
+                          <ListItemText
+                            primary={item?.razonSocial}/>
+                        </ListItemButton>
+                      </ListItem>
+                    </Link>
+                  ))}
+                </List>
+              </nav>
+            </Grid>
+          </Grid>
+        </Box>
+      </>
     </LayoutPrivate>
   );
 };

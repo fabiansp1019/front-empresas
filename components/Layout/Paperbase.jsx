@@ -59,7 +59,7 @@ theme = {
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: 'secondary',
+          backgroundColor: '#0f99f5',
         },
       },
     },
@@ -164,7 +164,7 @@ theme = {
   },
 };
 
-const drawerWidth = 256;
+const drawerWidth = 190;
 
 export default function Paperbase({children, nav}) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -199,7 +199,7 @@ export default function Paperbase({children, nav}) {
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           <Header onDrawerToggle={handleDrawerToggle} />
           {nav}
-          <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: 'secondary' }}>
+          <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: 'primary' }}>
             <Content>
               {children}
             </Content>

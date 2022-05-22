@@ -19,28 +19,7 @@ import Typography from "@mui/material/Typography";
 import { useAuth } from "../../libs/auth";
 import { List, ListItem } from "@material-ui/core";
 
-const lightColor = "rgba(255, 255, 255, 0.7)";
-
-const settings = [
-  "<Link href={`/private/user/[id]`} as={`/private/user/621ef0bb044c35a8c1a2f91d`}><a>Perfil</a></Link>",
-  "profile",
-  "Account",
-  "Dashboard",
-  "Logout",
-];
-
-// export const Buttt = () => {
-//   return (
-//     <>
-//       <Link
-//         href={`/private/user/[id]`}
-//         as={`/private/user/621ef0bb044c35a8c1a2f91d`}
-//       >
-//         <a>Perfil</a>
-//       </Link>
-//     </>
-//   );
-// };
+ 
 
 export default function Header(props) {
   const { onDrawerToggle } = props;
@@ -56,9 +35,38 @@ export default function Header(props) {
     setAnchorElUser(null);
   };
 
+  const settings = [
+    {
+      but: (
+        <>
+          {" "}
+          {isSignedIn && (
+            <>
+              <Link href={`/private/user/621ef0bb044c35a8c1a2f91d`}>
+                <a>Perfil</a>
+              </Link>{" "}
+            </>
+          )}{" "}
+        </>
+      ),
+    },
+    {
+      but: (
+        <>
+          {" "}
+          {isSignedIn && (
+            <>
+              <Button onClick={() => signOut()}>Cerrar sesion</Button>,
+            </>
+          )}{" "}
+        </>
+      ),
+    },
+  ];
+
   return (
     <React.Fragment>
-      <AppBar color="primary" position="sticky" elevation={0}>
+      <AppBar  position="sticky" elevation={0}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: "none", xs: "block" } }} item>
@@ -72,13 +80,6 @@ export default function Header(props) {
               </IconButton>
             </Grid>
             <Grid item xs />
-            <Grid item>
-              <Typography color={"primary"}>
-                <Link href={`/private/user/${user?.id}`}>
-                  <a>perfil</a>
-                </Link>
-              </Typography>
-            </Grid>
             <Grid item>
               <Tooltip title="Alerts • No alerts">
                 <IconButton>
@@ -110,23 +111,14 @@ export default function Header(props) {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {isSignedIn && (
-                    <>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Link href={`/private/user/${user?.id}`}>
-                          <a>Perfil</a>
-                        </Link>
-                      </MenuItem>
-
-                      <MenuItem>
-                        <Button onClick={() => signOut()}>Cerrar sesion</Button>
-                      </MenuItem>
-                    </>
-                  )}
-
+                  {settings.map((setting, key) => (
+                    <MenuItem key={key + 1} onClick={handleCloseUserMenu}>
+                      {setting.but}
+                    </MenuItem>
+                  ))}{" "}
                   {/* {settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                      <Typography textAlign="center">{setting.but}</Typography>
                     </MenuItem>
                   ))} */}
                 </Menu>

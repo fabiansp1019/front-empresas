@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
 import * as XLSX from "xlsx";
-import LayoutPrivate from "../../../components/Layoutprivate";
+import LayoutPrivate from "../../../../components/Layoutprivate";
 import { withStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
+import Nav_Estados_Financieros from "../../../../components/Empresas/Nav_Estados_Financieros";
 
 export const AgregarGrupos = () => {
   const [grupos, setGrupos] = React.useState([]);
@@ -47,7 +48,7 @@ export const AgregarGrupos = () => {
       },
     });
 
-    console.log(res.data)
+    console.log(res.data);
   };
   return (
     <div className="container">
@@ -128,7 +129,7 @@ export const AgregarCuentas = () => {
       },
     });
 
-    console.log(res)
+    console.log(res);
   };
   return (
     <div className="container">
@@ -220,7 +221,6 @@ export const AgregarSubCuentas = () => {
       />
       AGREGAR SUBCUENTA
       <input type="submit" onClick={sendData} />
-
       <table id="wrapper" className="t-unica-scroll">
         <thead>
           <tr>
@@ -294,15 +294,14 @@ export const AgregarAuxiliares = () => {
           readExcel(file);
         }}
       />
-
       <input type="submit" onClick={sendData} />
-        AUXILIARES
+      AUXILIARES
       <table id="wrapper" className="t-unica-scroll">
         <thead>
           <tr>
-          <th>clase</th>
-          <th>grupo</th>
-          <th>cuenta</th>
+            <th>clase</th>
+            <th>grupo</th>
+            <th>cuenta</th>
             <th>subcuenta</th>
             <th>auiliar</th>
             <th>nombre</th>
@@ -338,7 +337,7 @@ const agregar = () => {
   };
 
   return (
-    <LayoutPrivate>
+    <LayoutPrivate nav={<Nav_Estados_Financieros />}>
       <div>
         <div>
           <Radio

@@ -17,7 +17,7 @@ const Index = () => {
       )}
 
       {isSignedIn() && (
-        <>
+        
           <LayoutPrivate>
             Bienvenido
             {" - " + user?.displayName}
@@ -30,7 +30,7 @@ const Index = () => {
               <a>estados financieros</a>
             </Link>
           </LayoutPrivate>
-        </>
+       
       )}
     </>
   );

@@ -1,23 +1,14 @@
 import React, { useState } from "react";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import { alpha, makeStyles, withStyles } from "@material-ui/core/styles";
-import TreeView from "@material-ui/lab/TreeView";
-import Box from "@mui/material/Box";
+import { withStyles } from "@material-ui/core/styles";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
 import Link from "next/link";
 
 
@@ -32,7 +23,6 @@ import {
 } from "../../graphql/queries";
 
 import NoAutorizado from "../../components/NoAutorizado";
-import { Button } from "@material-ui/core";
 
 
 
@@ -70,14 +60,6 @@ const StyledTreeItem = withStyles((theme) => ({
 ));
 
 const Listar_Empresas = () => {
-  const [abiertoComentario, setAbiertoComentario] = useState(false);
-  const [modificarClavesComentario, setModificarClavesComentario] =
-    useState("");
-  const [modificarClavesUsuario, setModificarClavesUsuario] = useState("");
-  const [modificarClavesClave, setModificarClavesClave] = useState("");
-  const [idModificar, setIdModificar] = useState("");
-  const [comentario, setComentario] = useState("");
-  const [id_impComentario, setIdImpComentario] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [
     ModificarComentarioImpuesto,

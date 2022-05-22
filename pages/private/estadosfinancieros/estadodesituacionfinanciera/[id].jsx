@@ -1,0 +1,324 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import LayoutPrivate from "../../../../components/Layoutprivate";
+import libs from "../../../../libs/util";
+import Nav_Estados_Financieros from "../../../../components/Empresas/Nav_Estados_Financieros";
+import CabeceraEstadosFinancieros from "../../../../components/Empresas/estadosFinancieros/CabeceraEstadosFinancieros";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+
+export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
+  return (
+    <>
+      <Box
+        sx={{
+          width: "59vw",
+          background: "#f5f5f5",
+          margin: "none",
+          border: "0px",
+        }} //p: 2, border: "1px dashed grey",
+      >
+        <>
+          <Grid container spacing={1}>
+            <Grid item xs={2}>
+              <Typography align="left" variant="h7">
+                <strong>{codigo}</strong>
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography align="left" variant="h7">
+                <strong>{nombre?.toUpperCase()}</strong>
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography align="left" variant="h7"></Typography>
+            </Grid>
+            <Grid item xs={12}></Grid>
+            <Grid item xs={12}>
+              {children}
+            </Grid>
+            {/* inicia otra fila  */}
+            <Grid item xs={2}></Grid>
+            <Grid item xs={6}>
+              <Typography align="left" variant="h7">
+                <strong>TOTAL {nombre?.toUpperCase()}</strong>
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography align="right" variant="h6">
+                <strong>{valor}</strong>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              
+            </Grid>
+            <Grid item xs={12}>
+              
+            </Grid>
+          </Grid>
+        </>
+      </Box>
+    </>
+  );
+};
+
+export const GrupossEEFF = ({ codigo, nombre, valor, children }) => {
+  return (
+    <>
+      <Box
+        sx={{ width: "59vw", backgroundColor: "#f5f5f5" }} //p: 2, border: "1px dashed grey",
+      >
+        <>
+          <Grid container spacing={1}>
+            {/* inicia una columna */}
+            <Grid item xs={2}>
+              <Typography align="left" variant="h7">
+                {codigo}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography align="left" variant="h7">
+                {nombre.toUpperCase()}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              {/* finaliza una column */}
+              <Typography align="left" variant="h7"></Typography>
+            </Grid>
+            <Grid item xs={12}></Grid>
+            {/* aqui van las cuentas */}
+            <Grid item xs={12}>
+              {children}
+            </Grid>
+            {/* inicia otra fila  */}
+            <Grid item xs={2}></Grid>
+            <Grid item xs={6}>
+              <Typography align="left" variant="h7">
+                <strong>TOTAL {nombre.toUpperCase()}</strong>
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography align="right" variant="h6">
+                <strong>{valor}</strong>
+              </Typography>
+            </Grid>
+          </Grid>
+        </>
+      </Box>
+    </>
+  );
+};
+export const CuentasEEFF = ({ codigo, nombre, valor }) => {
+  return (
+    <>
+      <Box
+        sx={{
+          width: "59vw",
+          border: 0,
+          background: "#f5f5f5",
+          // "&:hover": {
+          //   backgroundColor: "#C3F9FF",
+          //   opacity: [0.9, 0.8, 0.7],
+          // },
+        }} //p: 2, border: "1px dashed grey",
+      >
+        <>
+          <Grid container spacing={1}>
+            <Grid item xs={2}>
+              <Typography align="left" variant="h7">
+                {codigo}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography align="left" variant="h7">
+                {nombre.toUpperCase()}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography align="right" variant="h6">
+                {valor}
+              </Typography>
+            </Grid>
+          </Grid>
+        </>
+      </Box>
+    </>
+  );
+};
+
+export const Aux = ({ codigo, nombre, valor, children }) => {
+  return (
+    <>
+      <Box
+        sx={{
+          width: "59vw",
+          background: "#f5f5f5",
+          margin: "none",
+          border: "0px",
+        }} //p: 2, border: "1px dashed grey",
+      >
+        <>
+          <Grid container spacing={1}>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={6}>
+              <Typography align="left" variant="h7">
+                <strong>{nombre?.toUpperCase()}</strong>
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography align="right" variant="h6">
+                <strong>{valor}</strong>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}></Grid>
+            <Grid item xs={12}></Grid>
+          </Grid>
+        </>
+      </Box>
+    </>
+  );
+};
+
+const esf = () => {
+  const [estadosFinancieros, setEstadosFinancieros] = useState([]);
+  const [totalActivos, setTotalActivos] = useState("");
+  const [dataa, setDataa] = useState([]);
+  const [saldosPorGrupos, setSaldosPorGrupos] = useState([]);
+  const [saldosPorCuentas, setSaldosPorCuentas] = useState([]);
+  const [totales, setTotales] = useState([]);
+
+  const getdata = async () => {
+    const req = await axios({
+      method: "get",
+      url: "http://localhost:4000/api/listarclases",
+      headers: {
+        authorization: window.localStorage.getItem("loggedApp"),
+      },
+    });
+    setEstadosFinancieros(req.data.lista);
+    // setDataa(req.data.auxiliares);
+    setDataa(req.data.saldoPorClase);
+    setSaldosPorGrupos(req.data.saldosPorGrupo);
+    setSaldosPorCuentas(req.data.saldosPorCuentas);
+    setTotales(req.data.valores_adicionales);
+    // console.log(saldosPorCuentas)
+  };
+
+  useEffect(() => {
+    getdata();
+    // console.log(saldos());
+  }, []);
+
+  return (
+    <LayoutPrivate nav={<Nav_Estados_Financieros />}>
+      <div>
+        <div>
+          <Box
+            sx={{ width: "59vw" }} //p: 2, border: "1px dashed grey",
+          >
+            <>
+              <Grid container spacing={2}>
+                <Grid item xs={3}>
+                  <Typography align="left" variant="h6"></Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography align="center" variant="h6">
+                    <CabeceraEstadosFinancieros name={'ESTADO DE SITUACION FINANCIERA'} />
+                  </Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography align="rigth" variant="h6"></Typography>
+                </Grid>
+              </Grid>
+            </>
+          </Box>
+
+          <>
+            {estadosFinancieros.map((estado) => {
+              // setTotalActivos(estado.clase == '1' ? 'siii' : null)
+              return (
+                <>
+                  {(estado.clase !== "4") &
+                  (estado.clase !== "5") &
+                  (estado.clase !== "6") &
+                  (estado.clase !== "7") ? (
+                    <>
+                      <ClasessEEFF
+                        codigo={estado.clase}
+                        nombre={estado.nombre}
+                        valor={libs.formatNumber(
+                          dataa.filter((e) => e.clase == estado.clase)[0]
+                            ?.saldoTotal
+                        )}
+                      >
+                        <>
+                          {estado.grupos.map((grup) => {
+                            return (
+                              <>
+                                {saldosPorGrupos.filter(
+                                  (e) => e.grupo == grup.grupo
+                                )[0]?.saldoTotal > 0 && (
+                                  <>
+                                    <GrupossEEFF
+                                      codigo={grup.grupo}
+                                      nombre={grup.nombre}
+                                      valor={libs.formatNumber(
+                                        saldosPorGrupos.filter(
+                                          (e) => e.grupo == grup.grupo
+                                        )[0]?.saldoTotal
+                                      )}
+                                    >
+                                      <>
+                                        {grup.cuentas.map((cuenta) => {
+                                          return (
+                                            <>
+                                              {saldosPorCuentas.filter(
+                                                (e) =>
+                                                  e.cuenta == cuenta.cuentas
+                                              )[0]?.saldoTotal > 0 && (
+                                                <>
+                                                  <CuentasEEFF
+                                                    codigo={cuenta.cuentas}
+                                                    nombre={cuenta.nombre}
+                                                    valor={libs.formatNumber(
+                                                      saldosPorCuentas.filter(
+                                                        (e) =>
+                                                          e.cuenta ==
+                                                          cuenta.cuentas
+                                                      )[0]?.saldoTotal
+                                                    )}
+                                                  />
+                                                </>
+                                              )}
+                                            </>
+                                            // aquii
+                                          );
+                                        })}
+                                      </>
+                                    </GrupossEEFF>
+                                  </>
+                                )}
+                              </>
+                            );
+                          })}
+                        </>
+                      </ClasessEEFF>
+                    </>
+                  ) : null}
+                </>
+              );
+            })}
+            <Aux
+              codigo={""}
+              nombre={"PASIVO MAS PATRIMONIO"}
+              valor={libs.formatNumber(totales?.pasivoMasPatrimonio)}
+            />
+          </>
+        </div>
+      </div>
+    </LayoutPrivate>
+  );
+};
+
+export default esf;
