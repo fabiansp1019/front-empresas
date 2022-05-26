@@ -15,18 +15,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 
-// import isWeekend from 'date-fns/isWeekend';
-
-// import { AdapterDateFns } from '@mui'
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 
 
 const index = () => {
   const [search, setSearch] = React.useState("");
   const [data, setData] = React.useState([]);
-  const [value, setValue] = React.useState(new Date());
-
+ 
   const getdata = async () => {
     const req = await axios({
       method: "post",
@@ -49,7 +43,6 @@ const index = () => {
   return (
     <LayoutPrivate>
       <>
-        <Button />
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={5} sx={{ position: "fixed", right: "50px" }}>
@@ -74,28 +67,23 @@ const index = () => {
                   Buscar
                 </Button>
               </Stack>
-              {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <StaticDatePicker
-        orientation="landscape"
-        openTo="day"
-        value={value}
-        // shouldDisableDate={isWeekend}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} />}
-      />
-    </LocalizationProvider> */}
             </Grid>
             <Grid item xs={7}>
               <nav aria-label="main mailbox folders">
                 <List>
                   {data.map((item, key) => (
-                    <Link href={'/private/estadosfinancieros/estadodesituacionfinanciera/[id]'} as={'/private/estadosfinancieros/estadodesituacionfinanciera/'+item?._id}>
+                    <Link
+                      href={
+                        "/private/estadosfinancieros/estadodesituacionfinanciera/[id]"
+                      }
+                      as={
+                        "/private/estadosfinancieros/estadodesituacionfinanciera/" +
+                        item?._id
+                      }
+                    >
                       <ListItem disablePadding key={key + 10}>
                         <ListItemButton>
-                          <ListItemText
-                            primary={item?.razonSocial}/>
+                          <ListItemText primary={item?.razonSocial} />
                         </ListItemButton>
                       </ListItem>
                     </Link>
@@ -109,5 +97,16 @@ const index = () => {
     </LayoutPrivate>
   );
 };
+
+// export async function getStaticProps() {
+//   const res = await fetch('https://api.github.com/repos/vercel/next.js')
+//   const json = await res.json()
+
+//   return {
+//     props: {
+//       stars: json.stargazers_count,
+//     },
+//   }
+// }
 
 export default index;

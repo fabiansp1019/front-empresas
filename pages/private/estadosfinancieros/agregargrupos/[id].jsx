@@ -5,7 +5,7 @@ import LayoutPrivate from "../../../../components/Layoutprivate";
 import { withStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
-import Nav_Estados_Financieros from "../../../../components/Empresas/Nav_Estados_Financieros";
+import Nav_Estados_Financieros from "../../../../components/Empresas/estadosFinancieros/Nav_Estados_Financieros";
 
 export const AgregarGrupos = () => {
   const [grupos, setGrupos] = React.useState([]);

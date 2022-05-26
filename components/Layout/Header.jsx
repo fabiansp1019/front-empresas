@@ -23,7 +23,7 @@ import { List, ListItem } from "@material-ui/core";
 
 export default function Header(props) {
   const { onDrawerToggle } = props;
-  const { user, signOut, isSignedIn } = useAuth();
+  // const { user, signOut, isSignedIn } = useAuth();
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -35,34 +35,34 @@ export default function Header(props) {
     setAnchorElUser(null);
   };
 
-  const settings = [
-    {
-      but: (
-        <>
-          {" "}
-          {isSignedIn && (
-            <>
-              <Link href={`/private/user/621ef0bb044c35a8c1a2f91d`}>
-                <a>Perfil</a>
-              </Link>{" "}
-            </>
-          )}{" "}
-        </>
-      ),
-    },
-    {
-      but: (
-        <>
-          {" "}
-          {isSignedIn && (
-            <>
-              <Button onClick={() => signOut()}>Cerrar sesion</Button>,
-            </>
-          )}{" "}
-        </>
-      ),
-    },
-  ];
+  // const settings = [
+  //   {
+  //     but: (
+  //       <>
+  //         {" "}
+  //         {isSignedIn && (
+  //           <>
+  //             <Link href={`/private/user/621ef0bb044c35a8c1a2f91d`}>
+  //               <a>Perfil</a>
+  //             </Link>{" "}
+  //           </>
+  //         )}{" "}
+  //       </>
+  //     ),
+  //   },
+  //   {
+  //     but: (
+  //       <>
+  //         {" "}
+  //         {isSignedIn && (
+  //           <>
+  //             <Button onClick={() => signOut()}>Cerrar sesion</Button>,
+  //           </>
+  //         )}{" "}
+  //       </>
+  //     ),
+  //   },
+  // ];
 
   return (
     <React.Fragment>
@@ -89,7 +89,7 @@ export default function Header(props) {
             </Grid>
 
             <Grid item>
-              <Box sx={{ flexGrow: 0 }}>
+              {/* <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0.5 }}>
                     <Avatar src={user?.foto} alt="My Avatar" />
@@ -116,13 +116,8 @@ export default function Header(props) {
                       {setting.but}
                     </MenuItem>
                   ))}{" "}
-                  {/* {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting.but}</Typography>
-                    </MenuItem>
-                  ))} */}
                 </Menu>
-              </Box>
+              </Box> */}
             </Grid>
           </Grid>
         </Toolbar>

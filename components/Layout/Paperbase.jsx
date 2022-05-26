@@ -196,10 +196,10 @@ export default function Paperbase({children, nav}) {
             sx={{ display: { sm: 'block', xs: 'none' } }}
           />
         </Box>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Header onDrawerToggle={handleDrawerToggle} />
+        <Box sx={{flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Header  onDrawerToggle={handleDrawerToggle} />
           {nav}
-          <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: 'primary' }}>
+          <Box component="main" sx={{ flex: 1, py: 2, px: 4, bgcolor: 'primary' }}>
             <Content>
               {children}
             </Content>

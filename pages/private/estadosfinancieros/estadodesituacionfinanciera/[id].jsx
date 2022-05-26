@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LayoutPrivate from "../../../../components/Layoutprivate";
 import libs from "../../../../libs/util";
-import Nav_Estados_Financieros from "../../../../components/Empresas/Nav_Estados_Financieros";
+import Nav_Estados_Financieros from "../../../../components/Empresas/estadosFinancieros/Nav_Estados_Financieros";
 import CabeceraEstadosFinancieros from "../../../../components/Empresas/estadosFinancieros/CabeceraEstadosFinancieros";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import PDF from "../../../../components/Empresas/estadosFinancieros/PDF_ESFA";
+
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  PDFDownloadLink,
+  PDFViewer,
+} from "@react-pdf/renderer";
 
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
   return (
@@ -147,7 +159,7 @@ export const CuentasEEFF = ({ codigo, nombre, valor }) => {
   );
 };
 
-export const Aux = ({ codigo, nombre, valor, children }) => {
+export const Aux = ({ nombre, valor }) => {
   return (
     <>
       <Box
@@ -180,13 +192,23 @@ export const Aux = ({ codigo, nombre, valor, children }) => {
   );
 };
 
+const Encabezado = {
+  razonsocial: "TU CIUDAD EN RED SAS",
+  nit: "123456789",
+  periodo: "A DICIEMBRE DEL 2021",
+  estadoFinanciero: "ESTADO DE SITUACION FINANCIERA",
+  cifras: "Cifras expresadas en miles de pesos COP",
+  url: "https://media.istockphoto.com/photos/sign-of-radioactive-danger-depicted-on-a-concrete-wall-picture-id1342028724?s=612x612",
+}
+
 const esf = () => {
   const [estadosFinancieros, setEstadosFinancieros] = useState([]);
-  const [totalActivos, setTotalActivos] = useState("");
   const [dataa, setDataa] = useState([]);
   const [saldosPorGrupos, setSaldosPorGrupos] = useState([]);
   const [saldosPorCuentas, setSaldosPorCuentas] = useState([]);
   const [totales, setTotales] = useState([]);
+
+  const [verPDF, setVerPDF] = React.useState(false);
 
   const getdata = async () => {
     const req = await axios({
@@ -214,6 +236,22 @@ const esf = () => {
     <LayoutPrivate nav={<Nav_Estados_Financieros />}>
       <div>
         <div>
+        <>
+
+          {verPDF && (
+            <>
+            <button onClick={() => setVerPDF(false)}>Cerrar</button>
+              <PDFViewer style={{ width: "70vw", height: "90vh" }}>
+                <PDF estadosFinancieros={estadosFinancieros} dataa={dataa}
+                saldosPorCuentas={saldosPorCuentas} saldosPorGrupos={saldosPorGrupos}
+                encabezado={Encabezado} totales={totales}
+                />
+              </PDFViewer>
+              
+            </>
+          )}
+        </>
+        {verPDF==false && (<><button onClick={() => setVerPDF(true)}>Abrir</button>
           <Box
             sx={{ width: "59vw" }} //p: 2, border: "1px dashed grey",
           >
@@ -233,7 +271,6 @@ const esf = () => {
               </Grid>
             </>
           </Box>
-
           <>
             {estadosFinancieros.map((estado) => {
               // setTotalActivos(estado.clase == '1' ? 'siii' : null)
@@ -315,6 +352,8 @@ const esf = () => {
               valor={libs.formatNumber(totales?.pasivoMasPatrimonio)}
             />
           </>
+
+          </>)}
         </div>
       </div>
     </LayoutPrivate>

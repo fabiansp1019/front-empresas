@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import LayoutPrivate from "../../../../components/Layoutprivate";
-import Nav_Estados_Financieros from "../../../../components/Empresas/Nav_Estados_Financieros";
+import Nav_Estados_Financieros from "../../../../components/Empresas/estadosFinancieros/Nav_Estados_Financieros";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";

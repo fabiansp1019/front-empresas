@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 
 export default function Content({children}) {
   return (
-    <Paper sx={{ minHeight:100, maxWidth: 936, margin: 'auto', overflow: 'hidden' }}>
+    <Paper sx={{ minHeight:'100vh', maxWidth: 936, paddingTop:0, margin: 'auto', overflow: 'hidden' }}>
       <AppBar
         position="static"
         color="default"

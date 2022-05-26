@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import LayoutPrivate from "../../../../components/Layoutprivate";
 import libs from "../../../../libs/util";
-import Nav_Estados_Financieros from "../../../../components/Empresas/Nav_Estados_Financieros";
+import Nav_Estados_Financieros from "../../../../components/Empresas/estadosFinancieros/Nav_Estados_Financieros";
 import CabeceraEstadosFinancieros from "../../../../components/Empresas/estadosFinancieros/CabeceraEstadosFinancieros";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import PDF from "../../../../components/Empresas/estadosFinancieros/PDF_ERI";
+
+import { PDFViewer } from "@react-pdf/renderer";
 
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
   return (
@@ -50,12 +53,8 @@ export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
                 <strong>{valor}</strong>
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              
-            </Grid>
-            <Grid item xs={12}>
-              
-            </Grid>
+            <Grid item xs={12}></Grid>
+            <Grid item xs={12}></Grid>
           </Grid>
         </>
       </Box>
@@ -179,12 +178,23 @@ export const Aux = ({ codigo, nombre, valor, children }) => {
   );
 };
 
+const Encabezado = {
+  razonsocial: "TU CIUDAD EN RED SAS",
+  nit: "123456789",
+  periodo: "A DICIEMBRE DEL 2021",
+  estadoFinanciero: "ESTADO DE RESULTADO INTEGRAL",
+  cifras: "Cifras expresadas en miles de pesos COP",
+  url: "https://media.istockphoto.com/photos/sign-of-radioactive-danger-depicted-on-a-concrete-wall-picture-id1342028724?s=612x612",
+};
+
 const eri = ({ testPropsData }) => {
   const [estadosFinancieros, setEstadosFinancieros] = useState([]);
   const [dataa, setDataa] = useState([]);
   const [saldosPorGrupos, setSaldosPorGrupos] = useState([]);
   const [saldosPorCuentas, setSaldosPorCuentas] = useState([]);
   const [totales, setTotales] = useState([]);
+
+  const [verPDF, setVerPDF] = React.useState(false);
 
   const getdata = async () => {
     const req = await axios({
@@ -209,121 +219,152 @@ const eri = ({ testPropsData }) => {
     <LayoutPrivate nav={<Nav_Estados_Financieros />}>
       <div>
         <div>
-          <Box
-            sx={{ width: "59vw" }} //p: 2, border: "1px dashed grey",
-          >
-            <>
-              <Grid container spacing={2}>
-                <Grid item xs={3}>
-                  <Typography align="left" variant="h6"></Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography align="center" variant="h6">
-                    <CabeceraEstadosFinancieros name={'ESTADO DE RESULTADO'} />
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography align="rigth" variant="h6"></Typography>
-                </Grid>
-              </Grid>
-            </>
-          </Box>
-
           <>
-            {estadosFinancieros.map((estado, key) => {
-              return (
-                <>
-                  {(estado.clase !== "1") &
-                  (estado.clase !== "2") &
-                  (estado.clase !== "3") ? (
-                    <>
-                      {dataa.filter((e) => e.clase == estado.clase)[0]
-                        ?.saldoTotal > 0 && (
-                        <>
-                          <ClasessEEFF
-                          key={key +10}
-                            codigo={estado.clase}
-                            nombre={estado.nombre}
-                            valor={libs.formatNumber(
-                              dataa.filter((e) => e.clase == estado.clase)[0]
-                                ?.saldoTotal
-                            )}
-                          >
-                            <>
-                              {estado.grupos.map((grup) => {
-                                return (
-                                  <>
-                                    {saldosPorGrupos.filter(
-                                      (e) => e.grupo == grup.grupo
-                                    )[0]?.saldoTotal > 0 && (
-                                      <>
-                                        <GrupossEEFF
-                                          codigo={grup.grupo}
-                                          nombre={grup.nombre}
-                                          valor={libs.formatNumber(
-                                            saldosPorGrupos.filter(
-                                              (e) => e.grupo == grup.grupo
-                                            )[0]?.saldoTotal
-                                          )}
-                                        >
-                                          <>
-                                            {grup.cuentas.map((cuenta) => {
-                                              return (
-                                                <>
-                                                  {saldosPorCuentas.filter(
-                                                    (e) =>
-                                                      e.cuenta == cuenta.cuentas
-                                                  )[0]?.saldoTotal > 0 && (
-                                                    <>
-                                                      <CuentasEEFF
-                                                        codigo={cuenta.cuentas}
-                                                        nombre={cuenta.nombre}
-                                                        valor={libs.formatNumber(
-                                                          saldosPorCuentas.filter(
-                                                            (e) =>
-                                                              e.cuenta ==
-                                                              cuenta.cuentas
-                                                          )[0]?.saldoTotal
-                                                        )}
-                                                      />
-                                                    </>
-                                                  )}
-                                                </>
-                                                // aquii
-                                              );
-                                            })}
-                                          </>
-                                        </GrupossEEFF>
-                                      </>
-                                    )}
-                                  </>
-                                );
-                              })}
-                            </>
-                          </ClasessEEFF>
-                        </>
-                      )}
-                    </>
-                  ) : null}
-                </>
-              );
-            })}
-            <Aux
-              codigo={""}
-              nombre={"UTILIDAD ANTES DE IMPUESTO"}
-              valor={libs.formatNumber(totales.utilidad)}
-            />
-            <Aux
-              codigo={""}
-              nombre={"IMPUESTO"}
-              valor={libs.formatNumber(totales.impuesto)}
-            />
-            <Aux
-              codigo={""}
-              nombre={"UTILIDAD NETA DESPUES DE IMPUESTO"}
-              valor={libs.formatNumber(totales.utilidadDespuesDeImpuesto)}
-            />
+            {verPDF && (
+              <>
+                <button onClick={() => setVerPDF(false)}>Cerrar</button>
+                <PDFViewer style={{ width: "70vw", height: "90vh" }}>
+                  <PDF
+                    estadosFinancieros={estadosFinancieros}
+                    dataa={dataa}
+                    saldosPorCuentas={saldosPorCuentas}
+                    saldosPorGrupos={saldosPorGrupos}
+                    encabezado={Encabezado}
+                    totales={totales}
+                  />
+                </PDFViewer>
+              </>
+            )}
           </>
+          {verPDF == false && (
+            <>
+              <button onClick={() => setVerPDF(true)}>Abrir</button>
+              <Box
+                sx={{ width: "59vw" }} //p: 2, border: "1px dashed grey",
+                id="element-to-print"
+              >
+                <>
+                  <Grid container spacing={2}>
+                    <Grid item xs={3}>
+                      <Typography align="left" variant="h6"></Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography align="center" variant="h6">
+                        <CabeceraEstadosFinancieros
+                          name={"ESTADO DE RESULTADO"}
+                        />
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Typography align="rigth" variant="h6"></Typography>
+                    </Grid>
+                  </Grid>
+                </>
+              </Box>
+
+              <>
+                {estadosFinancieros.map((estado, key) => {
+                  return (
+                    <>
+                      {(estado.clase !== "1") &
+                      (estado.clase !== "2") &
+                      (estado.clase !== "3") ? (
+                        <>
+                          {dataa.filter((e) => e.clase == estado.clase)[0]
+                            ?.saldoTotal > 0 && (
+                            <>
+                              <ClasessEEFF
+                                key={key + 10}
+                                codigo={estado.clase}
+                                nombre={estado.nombre}
+                                valor={libs.formatNumber(
+                                  dataa.filter(
+                                    (e) => e.clase == estado.clase
+                                  )[0]?.saldoTotal
+                                )}
+                              >
+                                <>
+                                  {estado.grupos.map((grup) => {
+                                    return (
+                                      <>
+                                        {saldosPorGrupos.filter(
+                                          (e) => e.grupo == grup.grupo
+                                        )[0]?.saldoTotal > 0 && (
+                                          <>
+                                            <GrupossEEFF
+                                              codigo={grup.grupo}
+                                              nombre={grup.nombre}
+                                              valor={libs.formatNumber(
+                                                saldosPorGrupos.filter(
+                                                  (e) => e.grupo == grup.grupo
+                                                )[0]?.saldoTotal
+                                              )}
+                                            >
+                                              <>
+                                                {grup.cuentas.map((cuenta) => {
+                                                  return (
+                                                    <>
+                                                      {saldosPorCuentas.filter(
+                                                        (e) =>
+                                                          e.cuenta ==
+                                                          cuenta.cuentas
+                                                      )[0]?.saldoTotal > 0 && (
+                                                        <>
+                                                          <CuentasEEFF
+                                                            codigo={
+                                                              cuenta.cuentas
+                                                            }
+                                                            nombre={
+                                                              cuenta.nombre
+                                                            }
+                                                            valor={libs.formatNumber(
+                                                              saldosPorCuentas.filter(
+                                                                (e) =>
+                                                                  e.cuenta ==
+                                                                  cuenta.cuentas
+                                                              )[0]?.saldoTotal
+                                                            )}
+                                                          />
+                                                        </>
+                                                      )}
+                                                    </>
+                                                    // aquii
+                                                  );
+                                                })}
+                                              </>
+                                            </GrupossEEFF>
+                                          </>
+                                        )}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              </ClasessEEFF>
+                            </>
+                          )}
+                        </>
+                      ) : null}
+                    </>
+                  );
+                })}
+                <Aux
+                  codigo={""}
+                  nombre={"UTILIDAD ANTES DE IMPUESTO"}
+                  valor={libs.formatNumber(totales?.utilidad)}
+                />
+                <Aux
+                  codigo={""}
+                  nombre={"IMPUESTO"}
+                  valor={libs.formatNumber(totales?.impuesto)}
+                />
+                <Aux
+                  codigo={""}
+                  nombre={"UTILIDAD NETA DESPUES DE IMPUESTO"}
+                  valor={libs.formatNumber(totales?.utilidadDespuesDeImpuesto)}
+                />
+              </>
+            </>
+          )}
         </div>
       </div>
     </LayoutPrivate>

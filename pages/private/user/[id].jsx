@@ -191,12 +191,12 @@ setTimeout(() => {
                           style={{ width: `${progrbar}%` }}
                         >
                           {progrbar}%
-                        </div>
+                        </div>   onClick={sendUrl}
                       </div>
                     ) : null} */}
                   </form>
                   {url ? (
-                    <Button color="secondary" onClick={sendUrl}>
+                    <Button color="secondary" >
                       Guardar Archivo {url}
                     </Button>
                   ) : null}
