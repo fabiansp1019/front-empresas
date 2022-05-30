@@ -70,13 +70,17 @@ function useProvideAuth() {
       }
     });
 
-    // console.log(result)
+    console.log(result)
 
     if (result?.data !== 'Invalid' ) {
-      const ussr = JSON.parse(result.data.split(" ")[1])
-      // console.log(ussr)
-      setAuthToken(result.data.split(" ")[0])
-      setUser(ussr)
+      try{
+        const ussr = JSON.parse(result.data.split(" ")[1])
+        // console.log(ussr)
+        setAuthToken(result.data.split(" ")[0])
+        setUser(ussr)
+      }catch(err){
+        console.log(err)
+      }
 
     }
     if (result?.data == 'Invalid' ){
