@@ -70,7 +70,7 @@ function useProvideAuth() {
       }
     });
 
-    console.log(result)
+    // console.log(result)
 
     if (result?.data !== 'Invalid' ) {
       try{
