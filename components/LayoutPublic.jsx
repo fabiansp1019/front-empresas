@@ -9,12 +9,10 @@ const LayoutPublic = ({ children }) => {
   const {isSignedIn, user } = useAuth()
   return (
     <>
-  
       <Head>
         <title>MACHINE</title>
       </Head>
       <Navegacion />
-
       <>{children}</>
 
 
