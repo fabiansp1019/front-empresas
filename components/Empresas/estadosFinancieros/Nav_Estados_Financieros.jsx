@@ -1,17 +1,16 @@
 import React from 'react'
 import Link from "next/link";
 import { useRouter } from 'next/router'
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ListItem from "@mui/material/ListItem";
 import { Button } from "@material-ui/core";
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Box from "@mui/material/Box";
 
 const Nav_Estados_Financieros = () => {
   const router = useRouter()
   const { id } = router.query
   return (
-    <BottomNavigation>
-    <ListItem>
+    <Box sx={{ with: "100vw" }}>
+    <ButtonGroup variant="text" aria-label="text button group">
       <Link href={"/private/estadosfinancieros/estadodesituacionfinanciera/"+id}>
         <Button>BALANCE</Button>
       </Link>
@@ -24,8 +23,8 @@ const Nav_Estados_Financieros = () => {
       <Link href={"/private/estadosfinancieros/plandecuentas/"+id}>
         <Button>PLAN CUENTAS</Button>
       </Link>
-    </ListItem>
-  </BottomNavigation>
+  </ButtonGroup>
+  </Box>
   )
 }
 

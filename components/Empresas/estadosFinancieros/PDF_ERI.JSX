@@ -146,14 +146,16 @@ const PDF = ({
             }}
           >
             <View style={{ flex: 2, padding:0 }}>
-              <Image style={{height: 70}} src={encabezado.url} />
+            {encabezado?.url && (
+              <Image style={{height: 70}} src={encabezado?.url} />
+              )}
             </View>
             <View style={{ flex: 3 }}>
-              <Encabezado concepto={encabezado.razonsocial} />
-              <Encabezado concepto={encabezado.nit} />
-              <Encabezado concepto={encabezado.periodo} />
-              <Encabezado concepto={encabezado.estadoFinanciero} />
-              <Encabezado concepto={encabezado.cifras} />
+              <Encabezado concepto={encabezado?.razonsocial} />
+              <Encabezado concepto={encabezado?.nit} />
+              <Encabezado concepto={encabezado?.periodo} />
+              <Encabezado concepto={encabezado?.estadoFinanciero} />
+              <Encabezado concepto={encabezado?.cifras} />
             </View>
           </View>
           <Encabezado concepto="" />

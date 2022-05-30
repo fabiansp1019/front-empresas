@@ -1,4 +1,5 @@
 import React, { Children, useState } from "react";
+import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
@@ -26,14 +27,17 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { FormControl, Input } from "@material-ui/core";
-
+import { Card, CardContent, FormControl, Input } from "@material-ui/core";
 import { useRouter } from "next/router";
 import LayoutP from "../../../components/Layoutprivate";
 import Agregar_Claves from "../../../components/Empresas/Agregar_Claves";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_EMPRESA, MODIFICAR_CONTRASENIAS } from "../../../graphql/queries";
 import NoAutorizado from "../../../components/NoAutorizado";
+import Alert from '@mui/material/Alert';
+import libs from '../../../libs/util';
+import { useAuth } from "../../../libs/auth";
+import { fbStorage } from "../../../services/firebase";
 
 export const useStylesModal = makeStyles((theme) => ({
   modal: {
@@ -71,10 +75,11 @@ export const InformacionGeneral = ({ data }) => {
   const classesAvatar = useStylesAvatar();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-
-  const [nit, setNit] = useState("");
-  const [razonSocial, setRazonSocial] = useState("");
-  const [ciudad, setCiudad] = useState("");
+  const { getAuthHeaders } = useAuth();
+  const [url, setUrl] = useState("");
+  const [file, setFile] = useState();
+  const [progrbar, setProgrbar] = useState(0);
+  const [alert, setAlert] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -82,6 +87,69 @@ export const InformacionGeneral = ({ data }) => {
 
   const handleOpen = () => {
     setOpen(true);
+  };
+
+  const onChangeFile = (e) => {
+    e.preventDefault();
+    // console.log(e.target.files[0]);
+
+    const pesoValido = e.target.files[0].size < 50 * 1024 * 1024;
+    const isNameOfOneImageRegEx = /.(jpe?g|png)$/i;
+    const extencionValida = isNameOfOneImageRegEx.test(e.target.files[0].name);
+    if (extencionValida) {
+      if (pesoValido) {
+        setFile(e.target.files[0]);
+      } else {
+        setAlert(true);
+      }
+    } else {
+      setAlert(true);
+
+    }
+  };
+
+  const EnvioApiImg = async () => {
+    await axios({
+      method: "post",
+      url: libs.location() + "api/buscarempresaupdate",
+      headers: getAuthHeaders(),
+      data: {
+        logo: url,
+        id: router.query.info
+      },
+    });
+
+    setUrl("");
+    router.push('/private/empresas');
+  };
+
+  const onSendImage = async (e) => {
+    e.preventDefault();
+
+    if (!file) {
+      console.log("Elige un arvhivo de tu computador.");
+    } else {
+      const storageRef = fbStorage.ref(file.name).put(file);
+      storageRef.on(
+        "state_changed",
+        function (snapshot) {
+          var progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgrbar(progress);
+          //console.log("Upload is " + progress + "% done");
+        },
+        function (error) {},
+        function () {
+          storageRef.snapshot.ref
+            .getDownloadURL()
+            .then(async function (downloadURL) {
+              console.log("File available at", downloadURL);
+              setUrl(downloadURL);
+            });
+        }
+      );
+    }
   };
 
   return (
@@ -150,10 +218,45 @@ export const InformacionGeneral = ({ data }) => {
           }}
         >
           <ListItemAvatar>
-          {/* sx={{ width: "15vw", height: "25vh" }} */}
-            <Avatar className={classesAvatar.large} >  
-              <ImageIcon />
+          {data?.empresa?.logo ? (
+            <Avatar className={classesAvatar.large} src={data?.empresa?.logo}>
             </Avatar>
+            ): (
+              <Card>
+          <CardContent>
+            <Typography>
+              {progrbar !== 0 && (
+                <>
+                  <div>progreso.... {progrbar}</div>
+                </>
+              )}
+              {!url ? (
+                <>
+                  <form onSubmit={onSendImage}>
+                    <input
+                      className="form-control"
+                      type="file"
+                      onChange={onChangeFile}
+                      accept=".jpg, .jpeg, .png"
+                    />
+                    <Button color="secondary" type="submit">
+                      Cargar
+                    </Button>
+                  </form>
+                </>
+              ) : (
+                <>
+                  {/* {setProgrbar(0)} */}
+                  <Button color="secondary" onClick={EnvioApiImg}>
+                    Guardar Archivo
+                  </Button>
+                </>
+              )}
+              {alert && (<Alert id="notificaciones" severity="error">Error, solo se recibo formatos imagen</Alert>)}
+            </Typography>
+          </CardContent>
+        </Card>
+            )}
           </ListItemAvatar>
           <ListItem>
             <ListItemText primary={data.empresa.nit} secondary="NIT" />
@@ -467,7 +570,7 @@ const info = () => {
   if (error) {
     return <NoAutorizado />;
   }
-  // console.log(data);
+  console.log(data);
   // sx={{position:'fixed', top:'20%', right: '20%'}}
 
   const testingPropHijo = (selectEstatus) => {
@@ -478,7 +581,7 @@ const info = () => {
     <LayoutP>
       <Box color="text.primary">
         <Stack spacing={1}>
-          <h1>{data.empresa.razonSocial}</h1>
+          <h1>{data?.empresa?.razonSocial}</h1>
           <Skeleton variant="text" />
         </Stack>
 

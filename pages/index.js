@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../components/LayoutPublic";
 import Link from "next/link";
-
 import { useAuth } from "../libs/auth";
 import Login from "../components/Login";
 import LayoutPrivate from "../components/Layoutprivate";

@@ -2,12 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import LayoutPrivate from "../../../../components/Layoutprivate";
 import libs from "../../../../libs/util";
+import { useAuth } from "../../../../libs/auth";
 import Nav_Estados_Financieros from "../../../../components/Empresas/estadosFinancieros/Nav_Estados_Financieros";
 import CabeceraEstadosFinancieros from "../../../../components/Empresas/estadosFinancieros/CabeceraEstadosFinancieros";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import PDF from "../../../../components/Empresas/estadosFinancieros/PDF_ERI";
+import { useRouter } from "next/router";
 
 import { PDFViewer } from "@react-pdf/renderer";
 
@@ -178,14 +180,14 @@ export const Aux = ({ codigo, nombre, valor, children }) => {
   );
 };
 
-const Encabezado = {
-  razonsocial: "TU CIUDAD EN RED SAS",
-  nit: "123456789",
-  periodo: "A DICIEMBRE DEL 2021",
-  estadoFinanciero: "ESTADO DE RESULTADO INTEGRAL",
-  cifras: "Cifras expresadas en miles de pesos COP",
-  url: "https://media.istockphoto.com/photos/sign-of-radioactive-danger-depicted-on-a-concrete-wall-picture-id1342028724?s=612x612",
-};
+// const Encabezado = {
+//   razonsocial: "TU CIUDAD EN RED SAS",
+//   nit: "123456789",
+//   periodo: "A DICIEMBRE DEL 2021",
+//   estadoFinanciero: "ESTADO DE RESULTADO INTEGRAL",
+//   cifras: "Cifras expresadas en miles de pesos COP",
+//   url: "https://media.istockphoto.com/photos/sign-of-radioactive-danger-depicted-on-a-concrete-wall-picture-id1342028724?s=612x612",
+// };
 
 const eri = ({ testPropsData }) => {
   const [estadosFinancieros, setEstadosFinancieros] = useState([]);
@@ -193,17 +195,21 @@ const eri = ({ testPropsData }) => {
   const [saldosPorGrupos, setSaldosPorGrupos] = useState([]);
   const [saldosPorCuentas, setSaldosPorCuentas] = useState([]);
   const [totales, setTotales] = useState([]);
-
+  const { query } = useRouter();
+  const { getAuthHeaders } = useAuth()
+  const [encabezado, setEncabezado] = React.useState({});
   const [verPDF, setVerPDF] = React.useState(false);
 
   const getdata = async () => {
     const req = await axios({
-      method: "get",
-      url: "http://localhost:4000/api/listarclases",
-      headers: {
-        authorization: window.localStorage.getItem("loggedApp"),
-      },
+      method: "post",
+      url: libs.location() + "api/listarclases",
+      headers: getAuthHeaders(),
+      data: {
+        dataId: query.id
+      }
     });
+    // console.log(query.id)
     setEstadosFinancieros(req.data.lista);
     setDataa(req.data.saldoPorClase);
     setSaldosPorGrupos(req.data.saldosPorGrupo);
@@ -211,8 +217,26 @@ const eri = ({ testPropsData }) => {
     setTotales(req.data.valores_adicionales);
   };
 
-  useEffect(() => {
+  useEffect(async() => {
     getdata();
+
+    const req = await axios({
+      method: "post",
+      url: libs.location() + "api/listarclases",
+      headers: getAuthHeaders(),
+      data: {
+        dataId: query.id
+      }
+    });
+
+    setEncabezado({
+      razonsocial: req.data.razonSocial,
+      nit: req.data.nit,
+      periodo: "A DICIEMBRE DEL 2021",
+      estadoFinanciero: "ESTADO DE RESULTADO INTEGRAL",
+      cifras: "Cifras expresadas en miles de pesos COP",
+      url: req.data?.logo,
+    });
   }, []);
 
   return (
@@ -229,7 +253,7 @@ const eri = ({ testPropsData }) => {
                     dataa={dataa}
                     saldosPorCuentas={saldosPorCuentas}
                     saldosPorGrupos={saldosPorGrupos}
-                    encabezado={Encabezado}
+                    encabezado={encabezado}
                     totales={totales}
                   />
                 </PDFViewer>
@@ -274,7 +298,7 @@ const eri = ({ testPropsData }) => {
                             ?.saldoTotal > 0 && (
                             <>
                               <ClasessEEFF
-                                key={key + 10}
+                                key={key}
                                 codigo={estado.clase}
                                 nombre={estado.nombre}
                                 valor={libs.formatNumber(
@@ -284,7 +308,7 @@ const eri = ({ testPropsData }) => {
                                 )}
                               >
                                 <>
-                                  {estado.grupos.map((grup) => {
+                                  {estado.grupos.map((grup, key1) => {
                                     return (
                                       <>
                                         {saldosPorGrupos.filter(
@@ -292,6 +316,7 @@ const eri = ({ testPropsData }) => {
                                         )[0]?.saldoTotal > 0 && (
                                           <>
                                             <GrupossEEFF
+                                            key={key1}
                                               codigo={grup.grupo}
                                               nombre={grup.nombre}
                                               valor={libs.formatNumber(
@@ -301,7 +326,7 @@ const eri = ({ testPropsData }) => {
                                               )}
                                             >
                                               <>
-                                                {grup.cuentas.map((cuenta) => {
+                                                {grup.cuentas.map((cuenta, key2) => {
                                                   return (
                                                     <>
                                                       {saldosPorCuentas.filter(
@@ -311,6 +336,7 @@ const eri = ({ testPropsData }) => {
                                                       )[0]?.saldoTotal > 0 && (
                                                         <>
                                                           <CuentasEEFF
+                                                          key={key2}
                                                             codigo={
                                                               cuenta.cuentas
                                                             }

@@ -1,30 +1,27 @@
 import * as React from "react";
+import { useRouter } from "next/router";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import HelpIcon from "@mui/icons-material/Help";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
 import { useAuth } from "../../libs/auth";
-import { List, ListItem } from "@material-ui/core";
 
  
 
 export default function Header(props) {
   const { onDrawerToggle } = props;
-  // const { user, signOut, isSignedIn } = useAuth();
-
+  const router = useRouter();
+  const { user, signOut, isSignedIn } = useAuth();
+// console.log(user?.foto);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -35,34 +32,38 @@ export default function Header(props) {
     setAnchorElUser(null);
   };
 
-  // const settings = [
-  //   {
-  //     but: (
-  //       <>
-  //         {" "}
-  //         {isSignedIn && (
-  //           <>
-  //             <Link href={`/private/user/621ef0bb044c35a8c1a2f91d`}>
-  //               <a>Perfil</a>
-  //             </Link>{" "}
-  //           </>
-  //         )}{" "}
-  //       </>
-  //     ),
-  //   },
-  //   {
-  //     but: (
-  //       <>
-  //         {" "}
-  //         {isSignedIn && (
-  //           <>
-  //             <Button onClick={() => signOut()}>Cerrar sesion</Button>,
-  //           </>
-  //         )}{" "}
-  //       </>
-  //     ),
-  //   },
-  // ];
+  const settings = [
+    {
+      but: (
+        <>
+          {" "}
+          {isSignedIn && (
+            <>
+            <Button onClick={()=>router.push(`/private/user/${user?.id}`)}>Perfil</Button>
+              {/* <Link href={`/private/user/621ef0bb044c35a8c1a2f91d`}>
+                <a>Perfil</a>
+              </Link>{" "} */}
+            </>
+          )}{" "}
+        </>
+      ),
+    },
+    {
+      but: (
+        <>
+          {" "}
+          {isSignedIn && (
+            <>
+              <Button onClick={() => {
+                signOut();
+                router.push(`/`);
+                }}>Cerrar sesion</Button>,
+            </>
+          )}{" "}
+        </>
+      ),
+    },
+  ];
 
   return (
     <React.Fragment>
@@ -89,7 +90,7 @@ export default function Header(props) {
             </Grid>
 
             <Grid item>
-              {/* <Box sx={{ flexGrow: 0 }}>
+              <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0.5 }}>
                     <Avatar src={user?.foto} alt="My Avatar" />
@@ -117,7 +118,7 @@ export default function Header(props) {
                     </MenuItem>
                   ))}{" "}
                 </Menu>
-              </Box> */}
+              </Box>
             </Grid>
           </Grid>
         </Toolbar>

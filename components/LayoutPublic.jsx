@@ -11,7 +11,7 @@ const LayoutPublic = ({ children }) => {
     <>
   
       <Head>
-        <title>SITEMAS ADM</title>
+        <title>MACHINE</title>
       </Head>
       <Navegacion />
 

@@ -89,40 +89,6 @@ const Listar_Empresas = () => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
 
-  // modificar comentario en el impuesto
-  // const modificarComentario = () => {
-  //   // e.preventDefault();
-
-  //   ModificarComentarioImpuesto({
-  //     variables: { id: id_impComentario, comentario: comentario },
-  //   });
-  //   if (loadingComImp) {
-  //     return "loading";
-  //   }
-  //   if (errorComImp) {
-  //     return <NoAutorizado />;
-  //   }
-  //   // console.log(dataComImp);
-  // };
-
-  // const modificarClaves = () => {
-  //   modificarClavesEmpresas({
-  //     variables: {
-  //       id: idModificar,
-  //       usuario: modificarClavesUsuario,
-  //       contrasenna: modificarClavesClave,
-  //       comentario: modificarClavesComentario,
-  //     },
-  //   });
-
-  //   if (loadingModificarClaves) {
-  //     return "loading";
-  //   }
-  //   if (errorModificarClaves) {
-  //     return <NoAutorizado />;
-  //   }
-  //   // console.log(dataComImp);
-  // };
 
   return (
     <div>

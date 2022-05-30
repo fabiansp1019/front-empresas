@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import Box from "@material-ui/core/Box";
-import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import CreateIcon from "@mui/icons-material/Create";
 import Button from "@material-ui/core/Button";
 import Grid from "@mui/material/Grid";
 import { Card, CardContent, FormControl, Input } from "@material-ui/core";
@@ -17,10 +15,11 @@ import { useQuery, useMutation } from "@apollo/client";
 import { GET_USUARIO } from "../../../graphql/queries";
 import { useRouter } from "next/router";
 import LayoutP from "../../../components/Layoutprivate";
+import Alert from '@mui/material/Alert';
 import { useAuth } from "../../../libs/auth";
+import libs from "../../../libs/util";
 
-import { fbStorage } from "../../../services/firebase"; 
-
+import { fbStorage } from "../../../services/firebase";
 
 export const useStylesAvatar = makeStyles((theme) => ({
   root: {
@@ -42,19 +41,12 @@ export const useStylesAvatar = makeStyles((theme) => ({
 const id = () => {
   const classesAvatar = useStylesAvatar();
   const router = useRouter();
-  const [open, setOpen] = React.useState(false);
-
+  const { getAuthHeaders } = useAuth();
   const [informacion, setInformacion] = useState("");
-
-  const {user} = useAuth();
-
-  const [nit, setNit] = useState("");
-  const [razonSocial, setRazonSocial] = useState("");
-  const [ciudad, setCiudad] = useState("");
-
   const [url, setUrl] = useState("");
   const [file, setFile] = useState();
   const [progrbar, setProgrbar] = useState(0);
+  const [alert, setAlert] = useState(false);
 
   const { data, loading, error } = useQuery(GET_USUARIO, {
     variables: {
@@ -62,41 +54,46 @@ const id = () => {
     },
   });
   // useEffect(() => {}, []);
-setTimeout(() => {
-  if(data){
-    setInformacion(data.user)
-    // console.log(data)
-  }
-})
-  // console.log(user)
+  setTimeout(() => {
+    if (data) {
+      setInformacion(data.user);
+      // console.log(data.user.email)
+    }
+  });
+  // console.log(data);
 
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const onChangeFile = (e) => {
     e.preventDefault();
     // console.log(e.target.files[0]);
 
     const pesoValido = e.target.files[0].size < 50 * 1024 * 1024;
-    const isNameOfOneImageRegEx = /.(jpe?g|gif|png|pdf)$/i;
-    // const pesoValido = e.target.files[0].size < 24
-
+    const isNameOfOneImageRegEx = /.(jpe?g|png)$/i;
     const extencionValida = isNameOfOneImageRegEx.test(e.target.files[0].name);
     if (extencionValida) {
       if (pesoValido) {
         setFile(e.target.files[0]);
       } else {
-        return toast.error("Imagen muy pesada, debe ser inferior a 30 MB");
+        setAlert(true);
       }
     } else {
-      return toast.error("El formato debe ser JPG JPEG PNG GIF PDF ");
+      setAlert(true);
+
     }
+  };
+
+  const EnvioApiImg = async () => {
+    await axios({
+      method: "put",
+      url: libs.location() + "api/actualizarusuario/" + router.query.id,
+      headers: getAuthHeaders(),
+      data: {
+        foto: url,
+      },
+    });
+
+    setUrl("");
   };
 
   const onSendImage = async (e) => {
@@ -120,7 +117,7 @@ setTimeout(() => {
           storageRef.snapshot.ref
             .getDownloadURL()
             .then(async function (downloadURL) {
-              //console.log('File available at', downloadURL);
+              console.log("File available at", downloadURL);
               setUrl(downloadURL);
             });
         }
@@ -144,15 +141,18 @@ setTimeout(() => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={3}>
               <ListItemAvatar>
-                <Avatar className={classesAvatar.large}
-                src={informacion.foto}
-                >
-                </Avatar>
+                <Avatar
+                  className={classesAvatar.large}
+                  src={informacion.foto}
+                ></Avatar>
               </ListItemAvatar>
             </Grid>
             <Grid item xs={12} sm={7}>
               <ListItem>
-                <ListItemText primary={informacion.displayName} secondary="Nombre" />
+                <ListItemText
+                  primary={informacion.displayName}
+                  secondary="Nombre"
+                />
               </ListItem>
               <ListItem>
                 <ListItemText
@@ -164,47 +164,40 @@ setTimeout(() => {
           </Grid>
         </List>
 
-        <Button onClick={handleOpen}>
-          <CreateIcon />
-        </Button>
-
-        ------------------
         <Card>
-              <CardContent>
-                <Typography>
+          <CardContent>
+            <Typography>
+              {progrbar !== 0 && (
+                <>
+                  <div>progreso.... {progrbar}</div>
+                </>
+              )}
+              {!url ? (
+                <>
                   <form onSubmit={onSendImage}>
-
                     <input
                       className="form-control"
                       type="file"
                       onChange={onChangeFile}
-                      accept=".jpg, .jpeg, .png, .gif, .pdf"
+                      accept=".jpg, .jpeg, .png"
                     />
                     <Button color="secondary" type="submit">
                       Cargar
                     </Button>
-                    {/* {loading === true ? (
-                      <div className="progress rounded-0">
-                        <div
-                          className="progress-bar progress-bar-striped bg-success"
-                          role="progressbar"
-                          style={{ width: `${progrbar}%` }}
-                        >
-                          {progrbar}%
-                        </div>   onClick={sendUrl}
-                      </div>
-                    ) : null} */}
                   </form>
-                  {url ? (
-                    <Button color="secondary" >
-                      Guardar Archivo {url}
-                    </Button>
-                  ) : null}
-
-
-                </Typography>
-              </CardContent>
-            </Card>
+                </>
+              ) : (
+                <>
+                  {/* {setProgrbar(0)} */}
+                  <Button color="secondary" onClick={EnvioApiImg}>
+                    Guardar Archivo
+                  </Button>
+                </>
+              )}
+              {alert && (<Alert id="notificaciones" severity="error">Error, solo se recibo formatos imagen</Alert>)}
+            </Typography>
+          </CardContent>
+        </Card>
       </Box>
     </LayoutP>
   );

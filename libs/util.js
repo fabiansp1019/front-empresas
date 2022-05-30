@@ -13,5 +13,8 @@ const ayudas = {
     //console.log(formato1);
     return formato1;
   },
+  location (){
+    return 'http://localhost:4000/'
+  }
 };
 export default ayudas;

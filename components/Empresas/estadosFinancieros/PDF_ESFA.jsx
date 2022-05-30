@@ -142,14 +142,16 @@ const PDFESFA = ({
             }}
           >
             <View style={{ flex: 2, padding: 0 }}>
-              <Image style={{ height: 70 }} src={encabezado.url} />
+              {encabezado?.url && (
+              <Image style={{ height: 70 }} src={encabezado?.url} />
+              )}
             </View>
             <View style={{ flex: 3 }}>
-              <Encabezado concepto={encabezado.razonsocial} />
-              <Encabezado concepto={encabezado.nit} />
-              <Encabezado concepto={encabezado.periodo} />
-              <Encabezado concepto={encabezado.estadoFinanciero} />
-              <Encabezado concepto={encabezado.cifras} />
+              <Encabezado concepto={encabezado?.razonsocial} />
+              <Encabezado concepto={encabezado?.nit} />
+              <Encabezado concepto={encabezado?.periodo} />
+              <Encabezado concepto={encabezado?.estadoFinanciero} />
+              <Encabezado concepto={encabezado?.cifras} />
             </View>
           </View>
           <Encabezado concepto="" />
@@ -175,7 +177,7 @@ const PDFESFA = ({
                         )}
                       >
                         <View style={{ display: "block" }}>
-                          {estado.grupos.map((grup, key) => {
+                          {estado.grupos.map((grup, key1) => {
                             return (
                               <>
                                 {saldosPorGrupos.filter(
@@ -183,7 +185,7 @@ const PDFESFA = ({
                                 )[0]?.saldoTotal > 0 && (
                                   <>
                                     <Grupo
-                                      key={key + 1}
+                                      key={key1 + 1}
                                       codigo={grup.grupo}
                                       nombre={grup.nombre}
                                       valor={libs.formatNumber(
@@ -193,7 +195,7 @@ const PDFESFA = ({
                                       )}
                                     >
                                       <View style={{ display: "block" }}>
-                                        {grup.cuentas.map((cuenta, key) => {
+                                        {grup.cuentas.map((cuenta, key2) => {
                                           return (
                                             <>
                                               {saldosPorCuentas.filter(
@@ -202,7 +204,7 @@ const PDFESFA = ({
                                               )[0]?.saldoTotal > 0 && (
                                                 <>
                                                   <Cuenta
-                                                    key={key + 1}
+                                                    key={key2 + 1}
                                                     codigo={cuenta.cuentas}
                                                     nombre={cuenta.nombre}
                                                     valor={libs.formatNumber(

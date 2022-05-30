@@ -11,7 +11,7 @@ const LayoutPrivate = ({ children, nav }) => {
     <>
   
       <Head>
-        <title>SITEMAS ADM</title>
+        <title>MACHINE</title>
       </Head>
       {/* <Paper /> */}
       <Paper nav={nav}>

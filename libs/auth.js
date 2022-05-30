@@ -1,5 +1,7 @@
 import React, { useState, useContext, createContext } from 'react'
 import axios  from 'axios'
+import libs from '../libs/util'
+
 import {
   ApolloProvider,
   ApolloClient,
@@ -42,7 +44,7 @@ function useProvideAuth() {
 
   function createApolloClient() {
     const link = new HttpLink({
-      uri: 'http://localhost:4000/graphql',
+      uri: libs.location() + 'graphql',
       headers: getAuthHeaders(),
     })
 
@@ -61,7 +63,7 @@ function useProvideAuth() {
 
     const result = await axios({
       method: 'post',
-      url: 'http://localhost:4000/login',
+      url: libs.location() + 'login',
       data: {
         email,
         password
@@ -72,7 +74,7 @@ function useProvideAuth() {
 
     if (result?.data !== 'Invalid' ) {
       const ussr = JSON.parse(result.data.split(" ")[1])
-      console.log(ussr)
+      // console.log(ussr)
       setAuthToken(result.data.split(" ")[0])
       setUser(ussr)
 
@@ -98,6 +100,7 @@ function useProvideAuth() {
     signIn,
     signOut,
     isSignedIn,
-    user
+    user,
+    getAuthHeaders
   }
 }
