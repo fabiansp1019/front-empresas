@@ -11,8 +11,15 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import PDF from "../../../../components/Empresas/estadosFinancieros/PDF_ESFA";
 
-import { PDFViewer } from "@react-pdf/renderer";
-
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  PDFViewer
+} from "@react-pdf/renderer";
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
   return (
     <>

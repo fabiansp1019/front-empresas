@@ -1,10 +1,12 @@
 import React from "react";
 import {
-    Text,
-    View,
-    StyleSheet,
-    Image,
-  } from "@react-pdf/renderer";
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+} from "@react-pdf/renderer";
 
 const FIRMA_PDF = () => {
   return (
