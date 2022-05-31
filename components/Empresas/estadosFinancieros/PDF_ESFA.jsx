@@ -119,7 +119,7 @@ const Encabezado = ({ concepto }) => {
   );
 };
 
-const PDFESFA = ({
+const Pdf_esfa = ({
   estadosFinancieros,
   dataa,
   saldosPorCuentas,
@@ -257,7 +257,7 @@ const PDFESFA = ({
   );
 };
 
-export default PDFESFA;
+export default Pdf_esfa;
 
 export const styles = StyleSheet.create({
   body: {

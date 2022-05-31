@@ -8,7 +8,7 @@ import {
   Image,
 } from "@react-pdf/renderer";
 
-const FIRMA_PDF = () => {
+const Firma_pdf = () => {
   return (
     <View style={styles.cajonFirma}>
       <View style={styles.firmaUno}>
@@ -38,7 +38,7 @@ const FIRMA_PDF = () => {
   );
 };
 
-export default FIRMA_PDF;
+export default Firma_pdf;
 
 const styles = StyleSheet.create({
   body: {

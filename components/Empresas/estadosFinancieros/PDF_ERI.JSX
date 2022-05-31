@@ -122,7 +122,7 @@ const Encabezado = ({ concepto }) => {
   );
 };
 
-const PDF = ({
+const Pdf_eri = ({
   estadosFinancieros,
   dataa,
   saldosPorCuentas,
@@ -283,7 +283,7 @@ const PDF = ({
 
 
 
-export default PDF;
+export default Pdf_eri;
 
 
 
