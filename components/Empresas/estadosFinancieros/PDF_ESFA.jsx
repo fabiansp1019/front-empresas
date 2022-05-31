@@ -1,6 +1,6 @@
 import React from "react";
 import libs from "../../../libs/util";
-import FIRMA_PDF from "./FIRMA_PDF";
+import FIRMA_PDF from "./Firma_pdf";
 
 import {
   Document,

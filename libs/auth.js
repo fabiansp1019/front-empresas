@@ -75,7 +75,7 @@ function useProvideAuth() {
     if (result?.data !== 'Invalid' ) {
       try{
         const ussr = JSON.parse(result.data.split(" ")[1])
-        // console.log(ussr)
+        // console.log(JSON.parse(result.data.split(" ")[1]))
         setAuthToken(result.data.split(" ")[0])
         setUser(ussr)
       }catch(err){

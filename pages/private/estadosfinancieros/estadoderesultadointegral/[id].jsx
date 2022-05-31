@@ -8,7 +8,7 @@ import CabeceraEstadosFinancieros from "../../../../components/Empresas/estadosF
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import PDF from "../../../../components/Empresas/estadosFinancieros/PDF_ERI";
+import PDF from "../../../../components/Empresas/estadosFinancieros/Pdf_eri";
 import { useRouter } from "next/router";
 
 import {
