@@ -78,6 +78,7 @@ function useProvideAuth() {
         // console.log(JSON.parse(result.data.split(" ")[1]))
         setAuthToken(result.data.split(" ")[0])
         setUser(ussr)
+        console.log(result.data)
       }catch(err){
         console.log(err)
       }
