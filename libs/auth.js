@@ -31,8 +31,6 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [authToken, setAuthToken] = useState(null);
-  const [user, setUser] = useState(null);
-
 
   const getAuthHeaders = () => {
     if (!authToken) return null
@@ -56,7 +54,6 @@ function useProvideAuth() {
 
   const signOut = () => {
     setAuthToken(null)
-    setUser(null)
   }
 
   const signIn = async ({ email, password }) => {
@@ -70,15 +67,10 @@ function useProvideAuth() {
       }
     });
 
-    // console.log(result)
-
+  
     if (result?.data !== 'Invalid' ) {
       try{
-        const ussr = JSON.parse(result.data.split(" ")[1])
-        // console.log(JSON.parse(result.data.split(" ")[1]))
-        setAuthToken(result.data.split(" ")[0])
-        setUser(ussr)
-        console.log(result.data)
+        setAuthToken(result.data);
       }catch(err){
         console.log(err)
       }
@@ -105,7 +97,6 @@ function useProvideAuth() {
     signIn,
     signOut,
     isSignedIn,
-    user,
     getAuthHeaders
   }
 }

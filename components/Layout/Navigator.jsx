@@ -10,6 +10,9 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import PeopleIcon from "@mui/icons-material/People";
 import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import BalanceIcon from '@mui/icons-material/Balance';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
 import Link from "next/link";
 
@@ -33,12 +36,12 @@ export const dataNav = [
   {
     nombre: "Inicio",
     url: "/",
-    icon: <DnsRoundedIcon />,
+    icon: <HomeIcon />,
   },
   {
     nombre: "Empresas",
     url: "/private/empresas",
-    icon: <DnsRoundedIcon />,
+    icon: <ApartmentIcon />,
   },
   {
     nombre: "Usuarios",
@@ -48,7 +51,7 @@ export const dataNav = [
   {
     nombre: "Balances",
     url: "/private/estadosfinancieros",
-    icon: <DnsRoundedIcon />,
+    icon: <BalanceIcon />,
   },
 ];
 
@@ -65,7 +68,7 @@ export default function Navigator(props) {
           <Divider sx={{ mt: 7 }} />
           <ListItem sx={{ ...item, ...itemCategory }} key={'2ax'}>
             <ListItemIcon sx={{ color: "primary.secondary" }}>
-              <HomeIcon />
+              <AccountTreeIcon />
             </ListItemIcon>
             <ListItemText>Projectos</ListItemText>
           </ListItem>

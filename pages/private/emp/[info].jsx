@@ -570,12 +570,9 @@ const info = () => {
   if (error) {
     return <NoAutorizado />;
   }
-  console.log(data);
-  // sx={{position:'fixed', top:'20%', right: '20%'}}
 
   const testingPropHijo = (selectEstatus) => {
     setSelector(selectEstatus);
-    // console.log(selectEstatus);
   };
   return (
     <LayoutP>
@@ -605,7 +602,6 @@ const info = () => {
             {selector === "responsabilidad" ? <Impuestos data={data} /> : null}
             {selector === "claves" ? <Claves data={data} /> : null}
             {selector === "agregar" ? <Agregar_Claves data={data} /> : null}
-            {/* <Impuestos data={data} /> */}
           </Paper>
         </Box>
       </Box>

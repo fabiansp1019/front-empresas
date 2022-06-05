@@ -14,15 +14,17 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import { useAuth } from "../../libs/auth";
+import libs from "../../libs/util";
+import axios from "axios";
 
  
 
 export default function Header(props) {
   const { onDrawerToggle } = props;
   const router = useRouter();
-  const { user, signOut, isSignedIn } = useAuth();
-// console.log(user?.foto);
+  const { signOut, isSignedIn, getAuthHeaders } = useAuth();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [imgUrl, setImgUrl] = React.useState("");
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -39,10 +41,7 @@ export default function Header(props) {
           {" "}
           {isSignedIn && (
             <>
-            <Button onClick={()=>router.push(`/private/user/${user?.id}`)}>Perfil</Button>
-              {/* <Link href={`/private/user/621ef0bb044c35a8c1a2f91d`}>
-                <a>Perfil</a>
-              </Link>{" "} */}
+            <Button onClick={()=>router.push(`/private/user`)}>Perfil</Button>
             </>
           )}{" "}
         </>
@@ -64,6 +63,16 @@ export default function Header(props) {
       ),
     },
   ];
+
+  React.useEffect(async () => {
+    const result = await axios({
+      method: 'get',
+      url: libs.location() + 'api/user',
+      headers: getAuthHeaders()
+    });
+    setImgUrl(result.data.foto);
+    // console.log(result);
+  },[]);
 
   return (
     <React.Fragment>
@@ -93,7 +102,7 @@ export default function Header(props) {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0.5 }}>
-                    <Avatar src={user?.foto} alt="My Avatar" />
+                    <Avatar src={imgUrl} alt="My Avatar" />
                   </IconButton>
                 </Tooltip>
                 <Menu

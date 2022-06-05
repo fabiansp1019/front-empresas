@@ -80,12 +80,6 @@ const Listar_Empresas = () => {
     return <NoAutorizado />;
   }
 
-  // console.log(data.empresas);
-
-  // popover para modificar el impuesto y las claves
-  // const handleClick = (event) => {
-  //   setAnchorEl(anchorEl ? null : event.currentTarget);
-  // };
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
 

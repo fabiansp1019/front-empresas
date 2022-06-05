@@ -47,20 +47,24 @@ const id = () => {
   const [file, setFile] = useState();
   const [progrbar, setProgrbar] = useState(0);
   const [alert, setAlert] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
 
   const { data, loading, error } = useQuery(GET_USUARIO, {
     variables: {
       id: router.query.id,
     },
   });
-  // useEffect(() => {}, []);
-  setTimeout(() => {
-    if (data) {
-      setInformacion(data.user);
-      // console.log(data.user.email)
-    }
-  });
-  // console.log(data);
+
+
+  React.useEffect(async() => {
+    const result = await axios({
+      method: 'get',
+      url: libs.location() + 'api/user',
+      headers: getAuthHeaders()
+    });
+    setInformacion(result.data);
+  }, []);
+
 
 
 

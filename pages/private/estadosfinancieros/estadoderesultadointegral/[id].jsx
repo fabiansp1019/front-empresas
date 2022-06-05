@@ -18,7 +18,7 @@ import {
   View,
   StyleSheet,
   Image,
-  PDFViewer
+  PDFViewer,
 } from "@react-pdf/renderer";
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
   return (
@@ -203,7 +203,7 @@ const eri = ({ testPropsData }) => {
   const [saldosPorCuentas, setSaldosPorCuentas] = useState([]);
   const [totales, setTotales] = useState([]);
   const { query } = useRouter();
-  const { getAuthHeaders } = useAuth()
+  const { getAuthHeaders } = useAuth();
   const [encabezado, setEncabezado] = React.useState({});
   const [verPDF, setVerPDF] = React.useState(false);
 
@@ -213,8 +213,8 @@ const eri = ({ testPropsData }) => {
       url: libs.location() + "api/listarclases",
       headers: getAuthHeaders(),
       data: {
-        dataId: query.id
-      }
+        dataId: query.id,
+      },
     });
     // console.log(query.id)
     setEstadosFinancieros(req.data.lista);
@@ -224,7 +224,7 @@ const eri = ({ testPropsData }) => {
     setTotales(req.data.valores_adicionales);
   };
 
-  useEffect(async() => {
+  useEffect(async () => {
     getdata();
 
     const req = await axios({
@@ -232,8 +232,8 @@ const eri = ({ testPropsData }) => {
       url: libs.location() + "api/listarclases",
       headers: getAuthHeaders(),
       data: {
-        dataId: query.id
-      }
+        dataId: query.id,
+      },
     });
 
     setEncabezado({
@@ -254,7 +254,7 @@ const eri = ({ testPropsData }) => {
             {verPDF && (
               <>
                 <button onClick={() => setVerPDF(false)}>Cerrar</button>
-                <PDFViewer style={{ width: "70vw", height: "90vh" }}>
+                {/* <PDFViewer style={{ width: "70vw", height: "90vh" }}>
                   <PDF
                     estadosFinancieros={estadosFinancieros}
                     dataa={dataa}
@@ -263,7 +263,14 @@ const eri = ({ testPropsData }) => {
                     encabezado={encabezado}
                     totales={totales}
                   />
-                </PDFViewer>
+                </PDFViewer> */}
+                <Document>
+                  <Page size="A4" >
+                    <View >
+                      <Text>Section #1</Text>
+                    </View>
+                  </Page>
+                </Document>
               </>
             )}
           </>
@@ -323,7 +330,7 @@ const eri = ({ testPropsData }) => {
                                         )[0]?.saldoTotal > 0 && (
                                           <>
                                             <GrupossEEFF
-                                            key={key1}
+                                              key={key1}
                                               codigo={grup.grupo}
                                               nombre={grup.nombre}
                                               valor={libs.formatNumber(
@@ -333,37 +340,40 @@ const eri = ({ testPropsData }) => {
                                               )}
                                             >
                                               <>
-                                                {grup.cuentas.map((cuenta, key2) => {
-                                                  return (
-                                                    <>
-                                                      {saldosPorCuentas.filter(
-                                                        (e) =>
-                                                          e.cuenta ==
-                                                          cuenta.cuentas
-                                                      )[0]?.saldoTotal > 0 && (
-                                                        <>
-                                                          <CuentasEEFF
-                                                          key={key2}
-                                                            codigo={
-                                                              cuenta.cuentas
-                                                            }
-                                                            nombre={
-                                                              cuenta.nombre
-                                                            }
-                                                            valor={libs.formatNumber(
-                                                              saldosPorCuentas.filter(
-                                                                (e) =>
-                                                                  e.cuenta ==
-                                                                  cuenta.cuentas
-                                                              )[0]?.saldoTotal
-                                                            )}
-                                                          />
-                                                        </>
-                                                      )}
-                                                    </>
-                                                    // aquii
-                                                  );
-                                                })}
+                                                {grup.cuentas.map(
+                                                  (cuenta, key2) => {
+                                                    return (
+                                                      <>
+                                                        {saldosPorCuentas.filter(
+                                                          (e) =>
+                                                            e.cuenta ==
+                                                            cuenta.cuentas
+                                                        )[0]?.saldoTotal >
+                                                          0 && (
+                                                          <>
+                                                            <CuentasEEFF
+                                                              key={key2}
+                                                              codigo={
+                                                                cuenta.cuentas
+                                                              }
+                                                              nombre={
+                                                                cuenta.nombre
+                                                              }
+                                                              valor={libs.formatNumber(
+                                                                saldosPorCuentas.filter(
+                                                                  (e) =>
+                                                                    e.cuenta ==
+                                                                    cuenta.cuentas
+                                                                )[0]?.saldoTotal
+                                                              )}
+                                                            />
+                                                          </>
+                                                        )}
+                                                      </>
+                                                      // aquii
+                                                    );
+                                                  }
+                                                )}
                                               </>
                                             </GrupossEEFF>
                                           </>

@@ -271,7 +271,7 @@ const id = () => {
       url: req.data?.logo,
     });
 
-    console.log(encabezado);
+    // console.log(encabezado);
 
 
   }, []);
@@ -285,7 +285,7 @@ const id = () => {
             {verPDF && (
               <>
                 <button onClick={() => setVerPDF(false)}>Cerrar</button>
-                <PDFViewer style={{ width: "70vw", height: "90vh" }}>
+                {/* <PDFViewer style={{ width: "70vw", height: "90vh" }}>
                   <PDF
                     estadosFinancieros={estadosFinancieros}
                     dataa={dataa}
@@ -294,7 +294,7 @@ const id = () => {
                     encabezado={encabezado}
                     totales={totales}
                   />
-                </PDFViewer>
+                </PDFViewer> */}
               </>
             )}
           </>

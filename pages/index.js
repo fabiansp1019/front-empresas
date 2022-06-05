@@ -20,7 +20,7 @@ const Index = () => {
           <LayoutPrivate>
             Bienvenido
             {" - " + user?.displayName}
-            <Link href={`/private/user/${user?.id}`}>
+            <Link href={`/private/user`}>
               <a>Perfil</a>
             </Link>
             <br />
