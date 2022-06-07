@@ -275,7 +275,7 @@ const Pdf_eri = ({
           <Text style={styles.textClase}>{libs.formatNumber(totales?.utilidadDespuesDeImpuesto)}</Text>
         </View>
       </View>
-      <FIRMA_PDF />
+      {/* <FIRMA_PDF /> */}
       </Page>
     </Document>
   );
