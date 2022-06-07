@@ -11,15 +11,7 @@ import Typography from "@mui/material/Typography";
 import PDF from "../../../../components/Empresas/estadosFinancieros/Pdf_eri";
 import { useRouter } from "next/router";
 
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  PDFViewer,
-} from "@react-pdf/renderer";
+import { PDFViewer } from "@react-pdf/renderer";
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
   return (
     <>
@@ -187,15 +179,6 @@ export const Aux = ({ codigo, nombre, valor, children }) => {
   );
 };
 
-// const Encabezado = {
-//   razonsocial: "TU CIUDAD EN RED SAS",
-//   nit: "123456789",
-//   periodo: "A DICIEMBRE DEL 2021",
-//   estadoFinanciero: "ESTADO DE RESULTADO INTEGRAL",
-//   cifras: "Cifras expresadas en miles de pesos COP",
-//   url: "https://media.istockphoto.com/photos/sign-of-radioactive-danger-depicted-on-a-concrete-wall-picture-id1342028724?s=612x612",
-// };
-
 const eri = ({ testPropsData }) => {
   const [estadosFinancieros, setEstadosFinancieros] = useState([]);
   const [dataa, setDataa] = useState([]);
@@ -254,7 +237,7 @@ const eri = ({ testPropsData }) => {
             {verPDF && (
               <>
                 <button onClick={() => setVerPDF(false)}>Cerrar</button>
-                {/* <PDFViewer style={{ width: "70vw", height: "90vh" }}>
+                <PDFViewer style={{ width: "70vw", height: "90vh" }}>
                   <PDF
                     estadosFinancieros={estadosFinancieros}
                     dataa={dataa}
@@ -263,14 +246,7 @@ const eri = ({ testPropsData }) => {
                     encabezado={encabezado}
                     totales={totales}
                   />
-                </PDFViewer> */}
-                <Document>
-                  <Page size="A4" >
-                    <View >
-                      <Text>Section #1</Text>
-                    </View>
-                  </Page>
-                </Document>
+                </PDFViewer>
               </>
             )}
           </>

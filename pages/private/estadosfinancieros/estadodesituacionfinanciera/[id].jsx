@@ -12,12 +12,6 @@ import Typography from "@mui/material/Typography";
 import PDF from "../../../../components/Empresas/estadosFinancieros/Pdf_esfa";
 
 import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Image,
   PDFViewer
 } from "@react-pdf/renderer";
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
@@ -188,36 +182,6 @@ export const Aux = ({ nombre, valor }) => {
   );
 };
 
-// const Encabezado = {
-//   razonsocial: "TU CIUDAD EN RED SAS",
-//   nit: "123456789",
-//   periodo: "A DICIEMBRE DEL 2021",
-//   estadoFinanciero: "ESTADO DE SITUACION FINANCIERA",
-//   cifras: "Cifras expresadas en miles de pesos COP",
-//   url: "https://media.istockphoto.com/photos/sign-of-radioactive-danger-depicted-on-a-concrete-wall-picture-id1342028724?s=612x612",
-// };
-
-// export const Encabezado = async()=>{
-//   const req = await axios({
-//     method: "post",
-//     url: libs.location() + "api/buscarempresa",
-//     headers: getAuthHeaders(),
-//     data: {
-//       id: query.id,
-//     },
-//   });
-//   // console.log(req.data);
-
-//   return {
-//     razonsocial: req.data.razonSocial,
-//     nit: req.data.nit,
-//     periodo: "A DICIEMBRE DEL 2021",
-//     estadoFinanciero: "ESTADO DE SITUACION FINANCIERA",
-//     cifras: "Cifras expresadas en miles de pesos COP",
-//     url: req.data?.logo,
-//   };
-//   // return data;
-// }
 
 const id = () => {
   const [estadosFinancieros, setEstadosFinancieros] = useState([]);
@@ -285,7 +249,7 @@ const id = () => {
             {verPDF && (
               <>
                 <button onClick={() => setVerPDF(false)}>Cerrar</button>
-                {/* <PDFViewer style={{ width: "70vw", height: "90vh" }}>
+                 {/* <PDFViewer style={{ width: "70vw", height: "90vh" }}>
                   <PDF
                     estadosFinancieros={estadosFinancieros}
                     dataa={dataa}
@@ -294,7 +258,7 @@ const id = () => {
                     encabezado={encabezado}
                     totales={totales}
                   />
-                </PDFViewer> */}
+                </PDFViewer>  */}
               </>
             )}
           </>
