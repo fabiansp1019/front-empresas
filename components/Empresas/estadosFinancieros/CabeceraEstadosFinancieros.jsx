@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import libs from "../../../libs/util";
 import { useAuth } from "../../../libs/auth";
+import Typography from "@mui/material/Typography";
 
 const CabeceraEstadosFinancieros = ({name}) => {
   const [data, setData] = React.useState([]);
@@ -29,10 +30,10 @@ const CabeceraEstadosFinancieros = ({name}) => {
 
   return (
     <>
-      <div>{data?.razonSocial}</div>
-      <div>{data?.nit}</div>
-      <div>{name}</div>
-      <div>A 31 DE DICIEMBRE DEL 2021</div>
+      <div><Typography variant="eeff">{data?.razonSocial}</Typography></div>
+      <div><Typography variant="eeff">{data?.nit}</Typography></div>
+      <div><Typography variant="eeff">{name}</Typography></div>
+      <div><Typography variant="eeff">A 31 DE DICIEMBRE DEL 2021</Typography></div>
     </>
   );
 };

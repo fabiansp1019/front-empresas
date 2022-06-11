@@ -13,114 +13,114 @@ import {
 
 
 
-// const Clase = ({ codigo, nombre, valor, children }) => {
-//   return (
-//     <>
-//       <View style={styles.sectionColumn}>
-//         <View style={styles.sectionCelda1}>
-//           <Text style={styles.textClase}>{codigo}</Text>
-//         </View>
-//         <View style={styles.sectionCelda2}>
-//           <Text style={styles.textClase}>{nombre.toUpperCase()}</Text>
-//         </View>
-//         <View style={styles.sectionCelda3}>
-//           <Text style={styles.textClase}></Text>
-//         </View>
-//       </View>
-//       <View>{children}</View>
-//       <View style={styles.sectionColumn}>
-//         <View style={styles.sectionCelda1}>
-//           <Text style={styles.textClase}></Text>
-//         </View>
-//         <View style={styles.sectionCelda2}>
-//           <Text style={styles.textClase}>TOTAL {nombre.toUpperCase()}</Text>
-//         </View>
-//         <View style={styles.sectionCelda3}>
-//           <Text style={styles.textClase}>{valor}</Text>
-//         </View>
-//       </View>
-//     </>
-//   );
-// };
-// const Grupo = ({ codigo, nombre, valor, children }) => {
-//   return (
-//     <>
-//       <View style={styles.sectionColumnGrup}>
-//         <View style={styles.sectionCelda1}>
-//           <Text style={styles.textGrupo}>{codigo}</Text>
-//         </View>
-//         <View style={styles.sectionCelda2}>
-//           <Text style={styles.textGrupo}>{nombre.toUpperCase()}</Text>
-//         </View>
-//         <View style={styles.sectionCelda3}>
-//           <Text style={styles.textGrupo}></Text>
-//         </View>
-//       </View>
-//       <View>{children}</View>
-//       <View style={styles.sectionColumnGrup}>
-//         <View style={styles.sectionCelda1}>
-//           <Text style={styles.textGrupo}></Text>
-//         </View>
-//         <View style={styles.sectionCelda2}>
-//           <Text style={styles.textGrupo}>TOTAL {nombre.toUpperCase()}</Text>
-//         </View>
-//         <View style={styles.sectionCelda3}>
-//           <Text style={styles.textGrupo}>{valor}</Text>
-//         </View>
-//       </View>
-//     </>
-//   );
-// };
+const Clase = ({ codigo, nombre, valor, children }) => {
+  return (
+    <>
+      <View style={styles.sectionColumn}>
+        <View style={styles.sectionCelda1}>
+          <Text style={styles.textClase}>{codigo}</Text>
+        </View>
+        <View style={styles.sectionCelda2}>
+          <Text style={styles.textClase}>{nombre.toUpperCase()}</Text>
+        </View>
+        <View style={styles.sectionCelda3}>
+          <Text style={styles.textClase}></Text>
+        </View>
+      </View>
+      <View>{children}</View>
+      <View style={styles.sectionColumn}>
+        <View style={styles.sectionCelda1}>
+          <Text style={styles.textClase}></Text>
+        </View>
+        <View style={styles.sectionCelda2}>
+          <Text style={styles.textClase}>TOTAL {nombre.toUpperCase()}</Text>
+        </View>
+        <View style={styles.sectionCelda3}>
+          <Text style={styles.textClase}>{valor}</Text>
+        </View>
+      </View>
+    </>
+  );
+};
+const Grupo = ({ codigo, nombre, valor, children }) => {
+  return (
+    <>
+      <View style={styles.sectionColumnGrup}>
+        <View style={styles.sectionCelda1}>
+          <Text style={styles.textGrupo}>{codigo}</Text>
+        </View>
+        <View style={styles.sectionCelda2}>
+          <Text style={styles.textGrupo}>{nombre.toUpperCase()}</Text>
+        </View>
+        <View style={styles.sectionCelda3}>
+          <Text style={styles.textGrupo}></Text>
+        </View>
+      </View>
+      <View>{children}</View>
+      <View style={styles.sectionColumnGrup}>
+        <View style={styles.sectionCelda1}>
+          <Text style={styles.textGrupo}></Text>
+        </View>
+        <View style={styles.sectionCelda2}>
+          <Text style={styles.textGrupo}>TOTAL {nombre.toUpperCase()}</Text>
+        </View>
+        <View style={styles.sectionCelda3}>
+          <Text style={styles.textGrupo}>{valor}</Text>
+        </View>
+      </View>
+    </>
+  );
+};
 
-// const Cuenta = ({ codigo, nombre, valor }) => {
-//   return (
-//     <View style={styles.sectionColumnCuenta}>
-//       <View style={styles.sectionCelda1}>
-//         <Text style={styles.textCuenta}>{codigo}</Text>
-//       </View>
-//       <View style={styles.sectionCelda2}>
-//         <Text style={styles.textCuenta}>{nombre.toUpperCase()}</Text>
-//       </View>
-//       <View style={styles.sectionCelda3}>
-//         <Text style={styles.textCuenta}>{valor}</Text>
-//       </View>
-//     </View>
-//   );
-// };
+const Cuenta = ({ codigo, nombre, valor }) => {
+  return (
+    <View style={styles.sectionColumnCuenta}>
+      <View style={styles.sectionCelda1}>
+        <Text style={styles.textCuenta}>{codigo}</Text>
+      </View>
+      <View style={styles.sectionCelda2}>
+        <Text style={styles.textCuenta}>{nombre.toUpperCase()}</Text>
+      </View>
+      <View style={styles.sectionCelda3}>
+        <Text style={styles.textCuenta}>{valor}</Text>
+      </View>
+    </View>
+  );
+};
 
-// const Encabezado = ({ concepto }) => {
+const Encabezado = ({ concepto }) => {
 
-//   return (
-//     <>
-//       <View
-//         style={{
-//           width: "100%",
-//           // color: "blue",
-//           paddingBottom: 1,
-//           paddingTop: 1,
-//           paddingLeft: 0,
-//           paddingRight: 0,
-//           backgroundColor: "white",
-//           // display: "flex",
-//           // flexDirection: "row",
-//         }}
-//       >
-//         <View>
-//           <Text
-//             style={{
-//               textAlign: "center",
-//               color: "black",
-//               fontSize: 12,
-//               fontWeight: "bold",
-//             }}
-//           >
-//             {concepto}
-//           </Text>
-//         </View>
-//       </View>
-//     </>
-//   );
-// };
+  return (
+    <>
+      <View
+        style={{
+          width: "100%",
+          // color: "blue",
+          paddingBottom: 1,
+          paddingTop: 1,
+          paddingLeft: 0,
+          paddingRight: 0,
+          backgroundColor: "white",
+          // display: "flex",
+          // flexDirection: "row",
+        }}
+      >
+        <View>
+          <Text
+            style={{
+              textAlign: "center",
+              color: "black",
+              fontSize: 12,
+              fontWeight: "bold",
+            }}
+          >
+            {concepto}
+          </Text>
+        </View>
+      </View>
+    </>
+  );
+};
 
 const Pdf_eri = ({
   estadosFinancieros,
