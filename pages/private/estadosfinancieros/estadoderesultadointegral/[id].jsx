@@ -12,7 +12,6 @@ import Avatar from "@mui/material/Avatar";
 import { useRouter } from "next/router";
 import jsPDF from "jspdf";
 
-// import { PDFViewer } from "@react-pdf/renderer";
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
   return (
     <>

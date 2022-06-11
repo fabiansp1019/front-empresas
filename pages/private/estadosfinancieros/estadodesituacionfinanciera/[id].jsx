@@ -9,11 +9,7 @@ import CabeceraEstadosFinancieros from "../../../../components/Empresas/estadosF
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import PDF from "../../../../components/Empresas/estadosFinancieros/Pdf_esfa";
 
-import {
-  PDFViewer
-} from "@react-pdf/renderer";
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
   return (
     <>
@@ -244,24 +240,7 @@ const id = () => {
     <LayoutPrivate nav={<Nav_Estados_Financieros />}>
       <div>
         <div>
-          {/* <button onClick={()=>console.log(encabezado)}>test</button> */}
-          <>
-            {verPDF && (
-              <>
-                <button onClick={() => setVerPDF(false)}>Cerrar</button>
-                 {/* <PDFViewer style={{ width: "70vw", height: "90vh" }}>
-                  <PDF
-                    estadosFinancieros={estadosFinancieros}
-                    dataa={dataa}
-                    saldosPorCuentas={saldosPorCuentas}
-                    saldosPorGrupos={saldosPorGrupos}
-                    encabezado={encabezado}
-                    totales={totales}
-                  />
-                </PDFViewer>  */}
-              </>
-            )}
-          </>
+
           {verPDF == false && (
             <>
               <button onClick={() => setVerPDF(true)}>Abrir</button>
