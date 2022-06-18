@@ -1,48 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import HomeIcon from "@mui/icons-material/Home";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import InfoIcon from "@mui/icons-material/Info";
+import { useAuth } from "../libs/auth";
+import Grid from "@mui/material/Grid";
+import Link from "next/link";
 
-import { useAuth } from '../libs/auth'
-
-import Link from 'next/link';
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-    color='primary'
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-    
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
+const useStyles = makeStyles((theme) => ({
+  link: {
+    display: "flex",
+    height: "5vh",
+    color: "white",
+  },
+  icon: {
+    marginRight: theme.spacing(0.5),
+    width: 40,
+    height: 30,
+  },
+}));
 
 const Navegacion = () => {
   const { isSignedIn, user } = useAuth();
-  // const classes = useStyles();
+  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -50,20 +33,39 @@ const Navegacion = () => {
   };
 
   return (
-    <div >
+    <div>
+      <AppBar sx={{ height: 20 }} position="static">
+        <Grid container component="main">
+          <Grid item xs={0} sm={3} md={3}></Grid>
+          <Grid item xs={12} sm={6} md={6} sx={{ alignContent: "center" }}>
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link href={"/"}>
+                <Typography color="textPrimary" className={classes.link}>
+                  <HomeIcon className={classes.icon} />
+                  Home
+                </Typography>
+              </Link>
 
-      <AppBar position="static" color='primary'>
+              <Link href={"/public/login"}>
+                <Typography color="textPrimary" className={classes.link}>
+                  <ExitToAppIcon className={classes.icon} />
+                  Login
+                </Typography>
+              </Link>
 
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label={!isSignedIn() ? (<Link href={'/'}><Typography>Login</Typography></Link>) : (<Link href={'/'}><Typography>{user}</Typography></Link>) } {...a11yProps(0)} />
-          <Tab label={!isSignedIn() ? (<Link href={'/public/about'}><Typography>about</Typography></Link>) : null} {...a11yProps(2)} />
-        </Tabs>
-
+              <Link href={"/public/about"}>
+                <Typography color="textPrimary" className={classes.link}>
+                  <InfoIcon className={classes.icon} />
+                  About
+                </Typography>
+              </Link>
+            </Breadcrumbs>
+          </Grid>
+          <Grid item xs={0} sm={3} md={3}></Grid>
+        </Grid>
       </AppBar>
-
-
     </div>
   );
-}
+};
 
-export default Navegacion
+export default Navegacion;

@@ -188,7 +188,6 @@ const id = () => {
   const [saldosPorCuentas, setSaldosPorCuentas] = useState([]);
   const [totales, setTotales] = useState([]);
   const [verPDF, setVerPDF] = React.useState(false);
-  const [idCliente, setIdCliente] = React.useState("");
   const [encabezado, setEncabezado] = React.useState({});
   const { query } = useRouter();
   const { getAuthHeaders } = useAuth();
@@ -232,9 +231,6 @@ const id = () => {
       cifras: "Cifras expresadas en miles de pesos COP",
       url: req.data?.logo,
     });
-
-    // console.log(encabezado);
-
 
   }, []);
 

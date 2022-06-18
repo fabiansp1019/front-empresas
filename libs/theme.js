@@ -18,7 +18,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Roboto',
+      'Arial',
     ].join(','),
     fontSize: '1.5rem',
     eeff:{

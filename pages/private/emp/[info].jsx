@@ -209,7 +209,7 @@ export const InformacionGeneral = ({ data }) => {
         </Modal>
       </div>
       <Box sx={{ m: 2 }}>
-        <Typography variant="h6">Informacion General</Typography>
+        <Typography>Informacion General</Typography>
         <List
           sx={{
             width: "100%",
@@ -490,14 +490,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     transform: "translateZ(0px)",
     flexGrow: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "none",
     border: "none",
     position: "fixed",
     top: "10%",
     right: "10%",
 
-    width: "4rem",
-    height: "2rem",
+    // width: "2rem",
+    // height: "2rem",
   },
 }));
 
@@ -589,7 +589,7 @@ const info = () => {
             "& > :not(style)": {
               m: 1,
               width: "70vw",
-              minHeight: "50vh",
+              minHeight: "70vh",
             },
           }}
         >

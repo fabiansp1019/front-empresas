@@ -48,30 +48,8 @@ const index = () => {
       {data && (
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
-            <Grid item xs={5} sx={{ position: "fixed", right: "50px" }}>
-              <Stack spacing={2} direction="row">
-                <Box sx={{ display: "block", alignItems: "flex-end" }}>
-                  <AccountCircle
-                    sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                  />
-                  <TextField
-                    id="input-with-sx"
-                    label="Cliente"
-                    variant="standard"
-                    onChange={OnChange}
-                  />
-                </Box>
-                <Button
-                  color="secondary"
-                  size="small"
-                  variant="contained"
-                  onClick={getdata}
-                >
-                  Buscar
-                </Button>
-              </Stack>
-            </Grid>
-            <Grid item xs={7}>
+            
+            <Grid item xs={7} sm={8}>
               <nav aria-label="main mailbox folders">
                 <List>
                   {data?.map((item, key) => (
@@ -90,6 +68,26 @@ const index = () => {
                   ))}
                 </List>
               </nav>
+            </Grid>
+            <Grid item xs={5} sm={3} sx={{ position: "fixed", right: "6rem" }}>
+              <Stack spacing={1} direction="row">
+                <Box sx={{ display: "block",  width: '7rem', height: '2rem' }}>
+                  <TextField
+                    id="input-with-sx"
+                    label="Cliente"
+                    variant="standard"
+                    onChange={OnChange}
+                  />
+                </Box>
+                <Button
+                  color="secondary"
+                  size="small"
+                  variant="contained"
+                  onClick={getdata}
+                >
+                  Buscar
+                </Button>
+              </Stack>
             </Grid>
           </Grid>
         </Box>

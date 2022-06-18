@@ -66,7 +66,8 @@ function useProvideAuth() {
         password
       }
     });
-
+     
+    // console.log(result?.data)
   
     if (result?.data !== 'Invalid' ) {
       try{
@@ -80,6 +81,12 @@ function useProvideAuth() {
       return {
         message: 'los datos suministrados son invalidos',
         alerta: true
+      }
+    }
+
+    if (result?.data){
+      return {
+        pass: true
       }
     }
   }
