@@ -8,7 +8,6 @@ import CabeceraEstadosFinancieros from "../../../../components/Empresas/estadosF
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
 import { useRouter } from "next/router";
 import jsPDF from "jspdf";
 
@@ -203,7 +202,7 @@ const eri = () => {
     });
     // console.log(query.id)
     setEstadosFinancieros(req.data.lista);
-    // console.log(req.data.lista);
+    console.log(req.data);
     setDataa(req.data.saldoPorClase);
     setSaldosPorGrupos(req.data.saldosPorGrupo);
     setSaldosPorCuentas(req.data.saldosPorCuentas);
@@ -242,12 +241,34 @@ const eri = () => {
     });
   };
 
+
+  var generateData = function(amount) {
+    var result = [];
+    var data = {
+      coin: "100",
+      game_group: "GameGroup",
+      game_name: "XPTO2",
+      game_version: "25",
+      machine: "20485861",
+      vlt: "0",
+      voldemor:"20"
+    };
+    for (var i = 0; i < amount; i += 1) {
+      data.id = (i + 1).toString();
+      result.push(Object.assign({}, data));
+    }
+    return result;
+  };
+
+
+
+
+
   return (
     <LayoutPrivate nav={<Nav_Estados_Financieros />}>
       <div>
         <button onClick={generePdf}>Abrir</button>
         <Box id="pdf" sx={{ paddingLeft: 2 }}>
-          {/* <GeneratePDF estadosFinancieros={estadosFinancieros} /> */}
 
           {verPDF == false && (
             <>
@@ -256,27 +277,7 @@ const eri = () => {
                 id="element-to-print"
               >
                 <>
-                  <Grid container spacing={2}>
-                    <Grid item xs={3}>
-                      <Typography align="left" variant="h6"></Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                    {encabezado?.url && (
-                      <Avatar
-                        sx={{ bgcolor: green[500] }}
-                        variant="rounded"
-                        src={encabezado?.url}
-                      >h</Avatar>)}
-                      <Typography align="center" variant="h6">
-                        <CabeceraEstadosFinancieros
-                          name={"ESTADO DE RESULTADO"}
-                        />
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <Typography align="rigth" variant="h6"></Typography>
-                    </Grid>
-                  </Grid>
+                  <CabeceraEstadosFinancieros name={"ESTADO DE RESULTADO"} />
                 </>
               </Box>
 

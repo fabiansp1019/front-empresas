@@ -6,6 +6,9 @@ import TextField from '@mui/material/TextField';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import { Button } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
+import axios from "axios";
+import {useAuth} from '../../libs/auth'
+import libs from '../../libs/util'
 import {
   CREAREMPRESA
 } from "../../graphql/queries";
@@ -18,32 +21,32 @@ const [direccion, setDireccion] = React.useState('');
 const [ciudad, setCiudad] = React.useState('');
 const [comentario, setComentario] = React.useState('');
 
-const [
-  crearEmpresa,
-  { loadingCrearEmpresa, errorCrearEmpresa },
-] = useMutation(CREAREMPRESA);
+const { getAuthHeaders } = useAuth();
 
 
-const registrarEmpresa = () => {
+
+
+const registrarEmpresa = async () => {
   //console.log(razonSocial + " " + nitEmpresa + " " + digitoVerificacion + " " + direccion + " " + ciudad + " " + comentario);
 
-  crearEmpresa({
-    variables: {
-      nit: nitEmpresa,
-      digitoVerificacion: digitoVerificacion,
-      razonSocial: razonSocial,
-      direccion: direccion,
-      ciudad: ciudad,
-      body: comentario
-    },
+  const variables = {
+    nit: nitEmpresa,
+    digitoVerificacion: digitoVerificacion,
+    razonSocial: razonSocial,
+    direccion: direccion,
+    ciudad: ciudad,
+    body: comentario
+  }
+
+  const req = await axios({
+    method: "post",
+    url: libs.location() + "api/crearempresa",
+    headers: getAuthHeaders(),
+    data: variables
   });
 
-  if (loadingCrearEmpresa) {
-    return "loading";
-  }
-  if (errorCrearEmpresa) {
-    return <NoAutorizado />;
-  }
+
+
 
   setRazonSocial('');
   setNitEmpresa('');

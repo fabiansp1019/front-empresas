@@ -9,46 +9,48 @@ import CabeceraEstadosFinancieros from "../../../../components/Empresas/estadosF
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import jsPDF from "jspdf";
 
 export const ClasessEEFF = ({ codigo, nombre, valor, children }) => {
   return (
     <>
       <Box
         sx={{
-          width: "59vw",
-          background: "#f5f5f5",
+          width: "55vw",
+          background: "#FFFFFF",
           margin: "none",
           border: "0px",
+          paddingLeft: "1rem",
         }} //p: 2, border: "1px dashed grey",
       >
         <>
-          <Grid container spacing={1}>
-            <Grid item xs={2}>
-              <Typography align="left" variant="h7">
-                <strong>{codigo}</strong>
+          <Grid container spacing={0}>
+            <Grid item xs={1}>
+              <Typography align="justify" variant="eeff">
+                {codigo}
               </Typography>
             </Grid>
-            <Grid item xs={6}>
-              <Typography align="left" variant="h7">
-                <strong>{nombre?.toUpperCase()}</strong>
+            <Grid item xs={5}>
+              <Typography align="left" variant="eeff">
+                {nombre.toUpperCase()}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography align="left" variant="h7"></Typography>
+            <Grid item xs={3}>
+              <Typography align="left" variant="eeff"></Typography>
             </Grid>
             <Grid item xs={12}></Grid>
             <Grid item xs={12}>
               {children}
             </Grid>
             {/* inicia otra fila  */}
-            <Grid item xs={2}></Grid>
-            <Grid item xs={6}>
-              <Typography align="left" variant="h7">
-                <strong>TOTAL {nombre?.toUpperCase()}</strong>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={5}>
+              <Typography align="left" variant="eeff">
+                <strong>TOTAL {nombre.toUpperCase()}</strong>
               </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography align="right" variant="h6">
+            <Grid item xs={3}>
+              <Typography align="right" variant="eeff">
                 <strong>{valor}</strong>
               </Typography>
             </Grid>
@@ -65,24 +67,24 @@ export const GrupossEEFF = ({ codigo, nombre, valor, children }) => {
   return (
     <>
       <Box
-        sx={{ width: "59vw", backgroundColor: "#f5f5f5" }} //p: 2, border: "1px dashed grey",
+        sx={{ width: "55vw", backgroundColor: "#FFFFFF" }} //p: 2, border: "1px dashed grey",
       >
         <>
-          <Grid container spacing={1}>
+          <Grid container spacing={0}>
             {/* inicia una columna */}
-            <Grid item xs={2}>
-              <Typography align="left" variant="h7">
+            <Grid item xs={1}>
+              <Typography align="left" variant="eeff">
                 {codigo}
               </Typography>
             </Grid>
-            <Grid item xs={6}>
-              <Typography align="left" variant="h7">
+            <Grid item xs={5}>
+              <Typography align="left" variant="eeff">
                 {nombre.toUpperCase()}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               {/* finaliza una column */}
-              <Typography align="left" variant="h7"></Typography>
+              <Typography align="left" variant="eeff"></Typography>
             </Grid>
             <Grid item xs={12}></Grid>
             {/* aqui van las cuentas */}
@@ -90,14 +92,14 @@ export const GrupossEEFF = ({ codigo, nombre, valor, children }) => {
               {children}
             </Grid>
             {/* inicia otra fila  */}
-            <Grid item xs={2}></Grid>
-            <Grid item xs={6}>
-              <Typography align="left" variant="h7">
+            <Grid item xs={1}></Grid>
+            <Grid item xs={5}>
+              <Typography align="left" variant="eeff">
                 <strong>TOTAL {nombre.toUpperCase()}</strong>
               </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography align="right" variant="h6">
+            <Grid item xs={3}>
+              <Typography align="right" variant="eeff">
                 <strong>{valor}</strong>
               </Typography>
             </Grid>
@@ -112,9 +114,9 @@ export const CuentasEEFF = ({ codigo, nombre, valor }) => {
     <>
       <Box
         sx={{
-          width: "59vw",
+          width: "55vw",
           border: 0,
-          background: "#f5f5f5",
+          background: "#FFFFFF",
           // "&:hover": {
           //   backgroundColor: "#C3F9FF",
           //   opacity: [0.9, 0.8, 0.7],
@@ -122,19 +124,19 @@ export const CuentasEEFF = ({ codigo, nombre, valor }) => {
         }} //p: 2, border: "1px dashed grey",
       >
         <>
-          <Grid container spacing={1}>
-            <Grid item xs={2}>
-              <Typography align="left" variant="h7">
+          <Grid container spacing={0}>
+            <Grid item xs={1}>
+              <Typography align="left" variant="eeff">
                 {codigo}
               </Typography>
             </Grid>
-            <Grid item xs={6}>
-              <Typography align="left" variant="h7">
+            <Grid item xs={5}>
+              <Typography align="left" variant="eeff">
                 {nombre.toUpperCase()}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography align="right" variant="h6">
+            <Grid item xs={3}>
+              <Typography align="right" variant="eeff">
                 {valor}
               </Typography>
             </Grid>
@@ -144,28 +146,28 @@ export const CuentasEEFF = ({ codigo, nombre, valor }) => {
     </>
   );
 };
-
-export const Aux = ({ nombre, valor }) => {
+export const Aux = ({ codigo, nombre, valor, children }) => {
   return (
     <>
       <Box
         sx={{
-          width: "59vw",
-          background: "#f5f5f5",
+          width: "55vw",
+          background: "#FFFFFF",
           margin: "none",
           border: "0px",
+          paddingLeft: "1rem",
         }} //p: 2, border: "1px dashed grey",
       >
         <>
-          <Grid container spacing={1}>
-            <Grid item xs={2}></Grid>
-            <Grid item xs={6}>
-              <Typography align="left" variant="h7">
+          <Grid container spacing={0}>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={5}>
+              <Typography align="left" variant="eeff">
                 <strong>{nombre?.toUpperCase()}</strong>
               </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography align="right" variant="h6">
+            <Grid item xs={3}>
+              <Typography align="right" variant="eeff">
                 <strong>{valor}</strong>
               </Typography>
             </Grid>
@@ -236,33 +238,29 @@ const id = () => {
 
   }, []);
 
+  const generePdf = () => {
+    var doc = new jsPDF("p", "pt", "a4");
+    doc.html(document.querySelector("#pdf"), {
+      callback: function (pdf) {
+        pdf.save("estado_financiero.pdf");
+      },
+    });
+  };
+
   return (
     <LayoutPrivate nav={<Nav_Estados_Financieros />}>
       <div>
-        <div>
+      <button onClick={generePdf}>Abrir</button>
+        <Box id="pdf" sx={{ paddingLeft: 2 }}>
 
           {verPDF == false && (
             <>
-              <button onClick={() => setVerPDF(true)}>Abrir</button>
               <Box
                 sx={{ width: "59vw" }} //p: 2, border: "1px dashed grey",
+                id="element-to-print"
               >
                 <>
-                  <Grid container spacing={2}>
-                    <Grid item xs={3}>
-                      <Typography align="left" variant="h6"></Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Typography align="center" variant="h6">
-                        <CabeceraEstadosFinancieros
-                          name={"ESTADO DE SITUACION FINANCIERA"}
-                        />
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <Typography align="rigth" variant="h6"></Typography>
-                    </Grid>
-                  </Grid>
+                  <CabeceraEstadosFinancieros name={"ESTADO DE RESULTADO"} />
                 </>
               </Box>
               <>
@@ -356,7 +354,7 @@ const id = () => {
               </>
             </>
           )}
-        </div>
+        </Box>
       </div>
     </LayoutPrivate>
   );
