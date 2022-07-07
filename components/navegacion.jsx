@@ -9,12 +9,15 @@ import InfoIcon from "@mui/icons-material/Info";
 import { useAuth } from "../libs/auth";
 import Grid from "@mui/material/Grid";
 import Link from "next/link";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import Image from 'next/image'
 
 const useStyles = makeStyles((theme) => ({
   link: {
     display: "flex",
-    height: "5vh",
-    color: "white",
+
+    color: "blck",
   },
   icon: {
     marginRight: theme.spacing(0.5),
@@ -34,9 +37,25 @@ const Navegacion = () => {
 
   return (
     <div>
-      <AppBar sx={{ height: 20 }} position="static">
+      <AppBar sx={{ bg: "#FFFFFF" }} position="static">
         <Grid container component="main">
-          <Grid item xs={0} sm={3} md={3}></Grid>
+          <Grid item xs={0} sm={3} md={3}>
+          
+            <ImageList
+              sx={{paddingLeft: 10, width: 500, height: 60 }}
+            >
+                <ImageListItem >
+                  <Image
+                  //src="https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c"
+                    src={"/logo.png"}
+                    alt={"item.title"}
+                    width="500" height="64"
+                  />
+                </ImageListItem>
+            </ImageList>
+
+
+          </Grid>
           <Grid item xs={12} sm={6} md={6} sx={{ alignContent: "center" }}>
             <Breadcrumbs aria-label="breadcrumb">
               <Link href={"/"}>

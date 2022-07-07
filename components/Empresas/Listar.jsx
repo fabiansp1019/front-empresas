@@ -80,6 +80,8 @@ const Listar_Empresas = () => {
     return <NoAutorizado />;
   }
 
+  if(data) console.log(data)
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
 

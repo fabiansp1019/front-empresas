@@ -176,7 +176,7 @@ export const InformacionGeneral = ({ data }) => {
                     <Input
                       id="nit"
                       aria-describedby="my-helper-text"
-                      value={data.empresa.nit}
+                      value={data?.empresa.nit}
                       onChange={(e) => setNit(e.target.value)}
                     />
                   </FormControl>
@@ -185,7 +185,7 @@ export const InformacionGeneral = ({ data }) => {
                     <Input
                       id="razonSocial"
                       aria-describedby="my-helper-text"
-                      value={data.empresa.razonSocial}
+                      value={data?.empresa.razonSocial}
                       onChange={(e) => setRazonSocial(e.target.value)}
                     />
                   </FormControl>
