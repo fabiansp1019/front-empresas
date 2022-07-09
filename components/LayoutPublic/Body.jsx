@@ -4,7 +4,7 @@ import { Grid } from '@mui/material'
 
 const Body = ({children}) => {
   return (
-    <Box sx={{backgroundColor:"#DBDBDB"}}>
+    <Box sx={{backgroundColor:"#F7F7F7"}}>
       <Grid container>
         <Grid item xs={12} md={2}></Grid>
         <Grid item xs={12} md={8}>{children}</Grid>

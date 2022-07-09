@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "nombre": "Brayan Vallejos",
+        "profesion": "Contaduria Publica",
+        "foto": "/images/brayan.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Maricela Tabla",
+        "profesion": "Contaduria Publica",
+        "foto": "/images/maricela.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "James Tabla",
+        "profesion": "Derecho",
+        "foto": "/images/maricela.jpg"
+    }
+]

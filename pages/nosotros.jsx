@@ -8,14 +8,35 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@material-ui/core";
 import Image from "next/image";
 import Layout from "../components/LayoutPublic";
+import Avatar from "@mui/material/Avatar";
+import data from "../data.json";
 
 const nosotros = () => {
+  console.log(data);
+
   return (
     <Layout>
       <Box sx={{ padding: 4 }}>
         <Grid container>
+        <Grid item xs={12}>
+            <Box sx={{ color: "black" }}>
+              <Typography>
+                <h1>Nuestra Ubicacion</h1>
+              </Typography>
+            </Box>
+          </Grid>
           <Grid item xs={12} md={6}>
-            <Image src={'/images/ubicacion.jpg'} width='400px' height='400px' />
+            <div>
+            <div class="mapouter"><div class="gmap_canvas">
+              <iframe width="400" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=cl%2057%2028%2020&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+              </iframe>
+              <a href="https://fmovies-online.net">
+              </a>
+              <br/>
+              </div>
+              </div>
+            </div>
+            {/* <Image src={"/images/ubicacion.jpg"} width="400px" height="400px" /> */}
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography>
@@ -25,37 +46,57 @@ const nosotros = () => {
               servicios especializados en materia tributaria, contable y
               juridica.
             </Typography>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
           </Grid>
-          
+
+          <Grid item xs={12}>
+            <Box sx={{ color: "black" }}>
+              <Typography>
+                <h1>Nuestros Colaboradores</h1>
+              </Typography>
+            </Box>
+          </Grid>
           <Grid item xs={12} md={12}>
-            <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-                <Typography
-                  sx={{ fontSize: 14 }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  Word of the Day
-                </Typography>
-                <Typography variant="h5" component="div">
-                  heloo
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  adjective
-                </Typography>
-                <Typography variant="body2">
-                  well meaning and kindly.
+            {data?.map((persona) => {
+              return (
+                <>
+                  <Card sx={{ minWidth: 275 }} key={persona.id}>
+                    <Grid container>
+                      <Grid item xs={12} md={6}>
+                        <CardContent>
+                          <Typography
+                            sx={{ fontSize: 14 }}
+                            color="text.secondary"
+                            gutterBottom
+                          >
+                            {persona.nombre}
+                          </Typography>
+                          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            Profesional en:
+                          </Typography>
+                          <Typography variant="h5" component="div">
+                            {persona.profesion}
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button size="small">Learn More</Button>
+                        </CardActions>
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <Avatar
+                          alt="Remy Sharp"
+                          src={persona.foto}
+                          sx={{ width: 200, height: 200 }}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Card>
                   <br />
-                  {'"a benevolent smile"'}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
+                </>
+              );
+            })}
           </Grid>
         </Grid>
       </Box>
