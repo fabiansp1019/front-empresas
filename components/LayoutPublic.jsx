@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import Navegacion from "./navegacion";
+import Paperbase from "./LayoutPublic/Paperbase";
+import Navegacion from "./LayoutPublic/navegacion";
 import { CssBaseline } from "@material-ui/core";
 
 const LayoutPublic = ({ children }) => {
@@ -9,11 +10,10 @@ const LayoutPublic = ({ children }) => {
       <Head>
         <title>Machine</title>
       </Head>
-      <Navegacion />
       <CssBaseline />
-      <>{children}</>
-
-
+      <Paperbase>
+        {children}
+      </Paperbase>
     </>
   );
 };
