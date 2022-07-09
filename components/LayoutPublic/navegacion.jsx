@@ -52,9 +52,9 @@ const Navegacion = () => {
    >
       <Box  sx={{
       backgroundImage:'url(/images/teamwork.jpg)',
-      height: principal=='/'? '100vh' : '50vh',
+      height: principal=='/'? '100vh' : '30vh',
       opacity:0.6,
-      backgroundPosition: '0px 70%',
+      backgroundPosition: principal=='/'? '0px 70%': '0px 45%',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
      }}>
@@ -99,6 +99,17 @@ const Navegacion = () => {
             <Link href={"/public/login"}>
             <ExitToAppIcon className={classes.icon} />
             </Link>
+          </Grid>
+
+          <Grid item xs={12} sm={12} md={12} sx={{display: principal !== '/' && 'none', textAlign:'center', paddingTop:20}}>
+            <br/>
+            <h1>CIT CONSULTORES</h1>
+            <br/>
+            <br/>
+            <br/>
+            <h1>
+              Cuando todo parece un poco difícil, nosotros podemos ayudarte.
+            </h1>
           </Grid>
         </Grid>
       </Box>
