@@ -54,7 +54,7 @@ export default function SignInSide() {
       }, 3000);
     }
 
-    if (res.pass) router.push('/');
+    if (res.pass) router.push('/dashboard');
 
 
     });

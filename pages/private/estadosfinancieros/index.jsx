@@ -13,7 +13,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 
-import {getEmpresasParaEstadosFinancieros} from '../../../services/fetch'
 import libs from '../../../libs/util'
 import { useAuth } from "../../../libs/auth";
 

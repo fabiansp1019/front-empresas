@@ -35,7 +35,7 @@ const itemCategory = {
 export const dataNav = [
   {
     nombre: "Inicio",
-    url: "/",
+    url: "/dashboard",
     icon: <HomeIcon sx={{ fontSize: 23 }} />,
   },
   {

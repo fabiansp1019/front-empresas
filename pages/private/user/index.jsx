@@ -121,7 +121,7 @@ const id = () => {
           storageRef.snapshot.ref
             .getDownloadURL()
             .then(async function (downloadURL) {
-              console.log("File available at", downloadURL);
+              // console.log("File available at", downloadURL);
               setUrl(downloadURL);
             });
         }

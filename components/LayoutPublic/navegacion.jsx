@@ -14,15 +14,24 @@ import { Box } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   link: {
     display: "flex",
-    color: "white",
+    color: "white",'&:hover': {
+      backgroundColor: 'black',
+      color:'white'
+    },
     fontFamily: "DM Sans",
-    fontSize: 26
+    fontSize: 26,
+   
   },
   icon: {
     marginRight: theme.spacing(0.5),
     width: 40,
     height: 30,
+    color: "white",'&:hover': {
+      backgroundColor: 'black',
+      color:'white'
+    },
   },
+  
  
 }));
 
@@ -61,18 +70,18 @@ const Navegacion = () => {
         <Grid
           container
           component="main"
-          sx={{ color: "white" }} //C1D6FD
+          sx={{ color: "white", }} //C1D6FD
         >
           <Hidden smDown>
           <Grid item   md={5} sx={{ paddingTop: 1, paddingLeft: 10, height: 80 }}>
-          <Link href={"/"}>
-            <Image src={'/images/logo-blanco.png'} alt="item.title" width="400" height="70" />
+          <Link href={"/"} >
+            <Image src={'/images/logo-blanco.png'} alt="item.title" width="400" height="70" className={classes.link}/>
             </Link>
           </Grid>
           </Hidden>
           
           <Grid item xs={3} sm={3} md={2} sx={{ paddingTop: 5 }}>
-            <Link href={"/nosotros"}>
+            <Link href={"/nosotros"} >
               <Typography color="textPrimary" className={classes.link}>
                 <strong>Nosotros</strong>
               </Typography>
@@ -102,14 +111,19 @@ const Navegacion = () => {
           </Grid>
 
           <Grid item xs={12} sm={12} md={12} sx={{display: principal !== '/' && 'none', textAlign:'center', paddingTop:20}}>
+           
             <br/>
+            <Typography className={'.MuiTypography-alignCenter'}>
             <h1>CIT CONSULTORES</h1>
+            </Typography>
             <br/>
             <br/>
             <br/>
+            <Typography className={classes.link}>
             <h1>
               Cuando todo parece un poco difícil, nosotros podemos ayudarte.
             </h1>
+            </Typography>
           </Grid>
         </Grid>
       </Box>

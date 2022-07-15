@@ -13,6 +13,12 @@ const ayudas = {
     //console.log(formato1);
     return formato1;
   },
+  splitFecha(hoy) {
+    // formatea fechas que viene un string
+    let dia = hoy?.split("T")[0]
+
+    return dia;
+  },
   location (){
     return 'http://localhost:4000/'
   }
