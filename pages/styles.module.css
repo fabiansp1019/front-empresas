@@ -1,0 +1,14 @@
+.test {
+  /* background-image: url('/static/images/teamwork.jpg'); */
+  background-color: #0e8a00;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 400px;
+  height: 300px;
+  
+  
+}
+.test :hover {
+  box-shadow: 0 0 5px #000;
+  background-color: rgb(199, 16, 16);
+}

@@ -26,7 +26,7 @@ const Footer = () => {
         <Grid item xs={12} md={4} sx={{ paddingLeft: "5%" }}>
           <Box sx={{ textAlign: "left" }}>
             <Image
-              src={"/images/logo-blanco.png"}
+              src={"/static/images/logo-blanco.png"}
               alt="item.title"
               width="300"
               height="70"
@@ -89,7 +89,7 @@ const Footer = () => {
           xs={12}
           md={12}
           sx={{
-            backgroundImage: "url(/images/footer.png)",
+            backgroundImage: "url(/static/images/footer.png)",
             height: "100vh",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
