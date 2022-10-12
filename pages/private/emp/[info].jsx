@@ -38,6 +38,7 @@ import Alert from '@mui/material/Alert';
 import libs from '../../../libs/util';
 import { useAuth } from "../../../libs/auth";
 import { fbStorage } from "../../../services/firebase";
+import cookie from "js-cookie";
 
 export const useStylesModal = makeStyles((theme) => ({
   modal: {
@@ -109,10 +110,13 @@ export const InformacionGeneral = ({ data }) => {
   };
 
   const EnvioApiImg = async () => {
+    const token = cookie.get("__session");
     await axios({
       method: "post",
       url: libs.location() + "api/buscarempresaupdate",
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
       data: {
         logo: url,
         id: router.query.info

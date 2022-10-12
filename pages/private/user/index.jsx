@@ -18,7 +18,7 @@ import LayoutP from "../../../components/Layoutprivate";
 import Alert from '@mui/material/Alert';
 import { useAuth } from "../../../libs/auth";
 import libs from "../../../libs/util";
-
+import cookie from "js-cookie";
 import { fbStorage } from "../../../services/firebase";
 
 export const useStylesAvatar = makeStyles((theme) => ({
@@ -57,10 +57,13 @@ const id = () => {
 
 
   React.useEffect(async() => {
+    const token = cookie.get("__session");
     const result = await axios({
       method: 'get',
       url: libs.location() + 'api/user',
-      headers: getAuthHeaders()
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     });
     setInformacion(result.data);
   }, []);
@@ -88,10 +91,13 @@ const id = () => {
   };
 
   const EnvioApiImg = async () => {
+    const token = cookie.get("__session");
     await axios({
       method: "put",
       url: libs.location() + "api/actualizarusuario/" + router.query.id,
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
       data: {
         foto: url,
       },

@@ -1,4 +1,6 @@
 const ayudas = {
+
+
   formatNumber(number) {
     return new Intl.NumberFormat().format(number);
   },
@@ -7,11 +9,14 @@ const ayudas = {
     let dia = hoy.getDay();
     let mes = hoy.getMonth() + 1;
     let agnio = hoy.getFullYear();
-
     // AAAA-MM-DD:
     let formato1 = `${agnio}-${mes}-${dia}`;
-    //console.log(formato1);
     return formato1;
+  },
+  capitalizarText(str){
+    return str.replace(/\w\S*/g, function(txt){
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
   },
   splitFecha(hoy) {
     // formatea fechas que viene un string

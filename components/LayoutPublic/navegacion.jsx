@@ -117,7 +117,7 @@ const Navegacion = () => {
           </Hidden>
 
           <Grid item xs={3} sm={3} md={2} sx={{ paddingTop: 5 }}>
-            <Link href={"/nosotros"}>
+            <Link href={"/"}>
               <Typography className={classes.link} style={styleLink.link}>
                 <strong>Nosotros</strong>
               </Typography>

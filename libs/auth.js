@@ -1,6 +1,7 @@
 import React, { useState, useContext, createContext } from 'react'
 import axios  from 'axios'
 import libs from '../libs/util'
+import cookie from "js-cookie";
 
 import {
   ApolloProvider,
@@ -32,18 +33,13 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [authToken, setAuthToken] = useState(null);
 
-  const getAuthHeaders = () => {
-    if (!authToken) return null
-
-    return {
-      authorization: `Bearer ${authToken}`,
-    }
-  }
-
   function createApolloClient() {
+    const token = cookie.get("__session");
     const link = new HttpLink({
       uri: libs.location() + 'graphql',
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     })
 
     return new ApolloClient({
@@ -54,6 +50,7 @@ function useProvideAuth() {
 
   const signOut = () => {
     setAuthToken(null)
+    cookie.set("__session", "");
   }
 
   const signIn = async ({ email, password }) => {
@@ -66,12 +63,10 @@ function useProvideAuth() {
         password
       }
     });
-     
-    // console.log(result?.data)
-  
+
     if (result?.data !== 'Invalid' ) {
       try{
-        setAuthToken(result.data);
+        cookie.set("__session", result.data);
       }catch(err){
         console.log(err)
       }
@@ -92,7 +87,8 @@ function useProvideAuth() {
   }
 
   const isSignedIn = () => {
-    if (authToken) {
+     const token = cookie.get("__session");
+    if (token) {
       return true
     } else {
       return false
@@ -103,7 +99,6 @@ function useProvideAuth() {
     createApolloClient,
     signIn,
     signOut,
-    isSignedIn,
-    getAuthHeaders
+    isSignedIn
   }
 }

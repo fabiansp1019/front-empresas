@@ -78,7 +78,7 @@ export default function Navigator(props) {
             <List>
               {dataNav.map((elemento, key) => {
                 return (
-                  <>
+                  // <li >
                     <ListItem disablePadding key={key + 1}>
                       <Typography>
                         <ListItemButton sx={{ padding: "0px" }}>
@@ -93,7 +93,7 @@ export default function Navigator(props) {
                         </ListItemButton>
                       </Typography>
                     </ListItem>
-                  </>
+                  // </li>
                 );
               })}
             </List>

@@ -119,7 +119,7 @@ const plandecuentas = () => {
     setEstadosFinancieros(req.data.lista);
     // setTimeout(() => {
       // console.log(req.data.lista.length)
-      if(req.data?.lista.length > 0){
+      if(req.data?.lista?.length > 0){
         setStatusPage(true);
       }
     // },[1000]);

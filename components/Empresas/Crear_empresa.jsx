@@ -21,13 +21,15 @@ const [direccion, setDireccion] = React.useState('');
 const [ciudad, setCiudad] = React.useState('');
 const [comentario, setComentario] = React.useState('');
 
-const { getAuthHeaders } = useAuth();
 
 
 
 
 const registrarEmpresa = async () => {
   //console.log(razonSocial + " " + nitEmpresa + " " + digitoVerificacion + " " + direccion + " " + ciudad + " " + comentario);
+
+  const token = cookie.get("__session");
+
 
   const variables = {
     nit: nitEmpresa,
@@ -38,29 +40,39 @@ const registrarEmpresa = async () => {
     body: comentario
   }
 
-  const req = await axios({
-    method: "post",
-    url: libs.location() + "api/crearempresa",
-    headers: getAuthHeaders(),
-    data: variables
-  });
+  if(
+    razonSocial !== '' &&
+    nitEmpresa !== '' &&
+    digitoVerificacion !== '' &&
+    direccion !== '' &&
+    ciudad !== '' &&
+    comentario
+  ){
 
+      const req = await axios({
+        method: "post",
+        url: libs.location() + "api/crearempresa",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        data: variables
+      });
 
+      setRazonSocial('');
+      setNitEmpresa('');
+      setDigitoVerificacion('');
+      setDireccion('');
+      setCiudad('');
+      setComentario('');
 
+      document.getElementById("RazonSocial").value = "";
+      document.getElementById("NitEmpresa").value = "";
+      document.getElementById("DigitoVerificacion").value = "";
+      document.getElementById("Direccion").value = "";
+      document.getElementById("Ciudad").value = "";
+      document.getElementById("Comentario").value = "";
 
-  setRazonSocial('');
-  setNitEmpresa('');
-  setDigitoVerificacion('');
-  setDireccion('');
-  setCiudad('');
-  setComentario('');
-
-  document.getElementById("RazonSocial").value = "";
-  document.getElementById("NitEmpresa").value = "";
-  document.getElementById("DigitoVerificacion").value = "";
-  document.getElementById("Direccion").value = "";
-  document.getElementById("Ciudad").value = "";
-  document.getElementById("Comentario").value = "";
+}
 };
 
 

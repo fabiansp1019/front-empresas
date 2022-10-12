@@ -12,6 +12,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { fbStorage } from "../../../services/firebase";
+import cookie from "js-cookie";
 
 const hvform = () => {
   const [dense, setDense] = React.useState(false);
@@ -47,10 +48,13 @@ const hvform = () => {
   
 
   useEffect(async () => {
+    const token = cookie.get("__session");
     const result = await axios({
       method: "get",
       url: libs.location() + "api/hojavida",
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     });
     // console.log(result.data[0]);
     // setDatares(result.data[0]);

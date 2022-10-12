@@ -16,13 +16,13 @@ import Tooltip from "@mui/material/Tooltip";
 import { useAuth } from "../../libs/auth";
 import libs from "../../libs/util";
 import axios from "axios";
+import cookie from "js-cookie";
 
- 
 
-export default function Header(props) {
+ const Header = (props) => {
   const { onDrawerToggle } = props;
   const router = useRouter();
-  const { signOut, isSignedIn, getAuthHeaders } = useAuth();
+  const { signOut, isSignedIn } = useAuth();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [imgUrl, setImgUrl] = React.useState("");
 
@@ -65,10 +65,13 @@ export default function Header(props) {
   ];
 
   React.useEffect(async () => {
+    const token = cookie.get("__session");
     const result = await axios({
       method: 'get',
       url: libs.location() + 'api/user',
-      headers: getAuthHeaders()
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     });
     setImgUrl(result.data.foto);
     // console.log(result);
@@ -135,3 +138,25 @@ export default function Header(props) {
     </React.Fragment>
   );
 }
+
+// export async function getServerSideProps(ctx) {
+//   // const json = await myGet("api/listarclases", ctx);
+//   const token = ctx?.req?.cookies?.__session;
+
+//   console.log(token)
+//   const result = await axios({
+//     method: 'get',
+//     url: libs.location() + 'api/user',
+//     headers: {
+//       authorization: `Bearer ${token}`,
+//     },
+//   });
+
+
+//   console.log(result?.data?.foto )
+//   console.log(result)
+//   return { props: { data: result?.data?.foto } };
+// }
+
+
+export default Header

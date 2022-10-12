@@ -4,7 +4,7 @@ import LayoutP from "../../../components/Layoutprivate";
 import axios from "axios";
 import libs from "../../../libs/util";
 import { useAuth } from "../../../libs/auth";
-
+import cookie from "js-cookie";
 
 // import data from '../../../data.json'
 
@@ -14,10 +14,13 @@ const hojadevida = () => {
   const [datosHojaVida, setDatosHojaVida] = useState([])
 
   useEffect(async ()=>{
+    const token = cookie.get("__session");
     const result = await axios({
       method: "get",
       url: libs.location() + "api/hojavida",
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     });
     // console.log(result.data)
     setDatosHojaVida(result.data)

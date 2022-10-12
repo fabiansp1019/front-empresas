@@ -11,11 +11,8 @@ const Nav_Estados_Financieros = () => {
   return (
     <Box sx={{ with: "100vw" }}>
     <ButtonGroup variant="text" aria-label="text button group">
-      <Link href={"/private/estadosfinancieros/estadodesituacionfinanciera/"+id}>
-        <Button>BALANCE</Button>
-      </Link>
-      <Link href={"/private/estadosfinancieros/estadoderesultadointegral/"+id}>
-        <Button>RESULTADO</Button>
+      <Link href={"/private/estadosfinancieros/informe-financiero/"+id}>
+        <Button>INFORME</Button>
       </Link>
       <Link href={"/private/estadosfinancieros/agregargrupos/"+id}>
         <Button>AGREGAR CUENTAS</Button>
