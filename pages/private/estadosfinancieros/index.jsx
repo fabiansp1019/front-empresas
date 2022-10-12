@@ -12,7 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
-
+import cookie from "js-cookie";
 import libs from '../../../libs/util'
 import { useAuth } from "../../../libs/auth";
 
@@ -25,10 +25,13 @@ const index = () => {
   // console.log(getAuthHeaders());
   // console.log(info);
   const getdata = async () => {
+    const token = cookie.get("__session");
     const req = await axios({
       method: "post",
       url: libs.location() + "api/buscarEmpresas",
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
       data: {
         search,
       },
