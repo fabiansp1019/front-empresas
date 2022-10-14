@@ -38,7 +38,11 @@ const resultadoIntegral = (doc, startY, data) => {
        * cree una nueva
       */
 
-      startY = newPage(doc, startY, 40, header);
+      startY = newPage(doc, startY, 40, header, data);
+      if(startY == 55){
+        console.log('los 55 aqui estan')
+        header(doc, data)
+      }
 
         /* busca saldo por cada grupo para preparar condicional que impedira imprimir
           los grupos de las cuentas que no tengan saldo

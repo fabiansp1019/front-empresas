@@ -80,7 +80,7 @@ const Listar_Empresas = () => {
     return <NoAutorizado />;
   }
 
-  if(data) console.log(data)
+  // if(data) console.log(data)
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
@@ -95,13 +95,13 @@ const Listar_Empresas = () => {
         claves = empresa.claves;
 
         return (
-          <Link href={`/private/emp/[info]`} as={`/private/emp/${empresa.id}`} >
-            <Typography key={keyMayor}>
-              <>
+          <Link href={`/private/emp/[info]`} as={`/private/emp/${empresa.id}`} key={keyMayor}>
+            <div>
                 <nav aria-label="main mailbox folders">
                   <List sx={{
                     width: "100vw",
                   }} >
+                    <ul>
                     <ListItem disablePadding >
                       <ListItemButton id={empresa.id} >
                         <ListItemIcon>
@@ -113,15 +113,17 @@ const Listar_Empresas = () => {
                             />
                           </Stack>
                         </ListItemIcon>
+                        <Typography >
                         {empresa.razonSocial}
                         {empresa.nit}
+                        </Typography>
                       </ListItemButton>
                     </ListItem>
+                    </ul>
                   </List>
                 </nav>
                 <Divider />
-              </>
-            </Typography>
+                </div>
           </Link>
         );
       })}

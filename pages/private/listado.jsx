@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import Layout from '../../components/Layoutprivate'
-import {useAuth} from '../../libs/auth'
-import libs from '../../libs/util'
+
 
 const listado = ({users}) => {
 

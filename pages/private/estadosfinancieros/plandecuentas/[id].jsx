@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import {useAuth} from '../../../../libs/auth'
-
+import cookie from "js-cookie";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -52,7 +52,6 @@ const plandecuentas = () => {
   const [estadosFinancieros, setEstadosFinancieros] = useState([]);
   const [statusPage, setStatusPage] = useState(false);
   const router = useRouter();
-  const { getAuthHeaders } = useAuth();
 
   //CLASES INICIALES
   const claseInicial = [
@@ -94,11 +93,14 @@ const plandecuentas = () => {
   ];
 
   const crearClases = async () => {
+    const token = cookie.get("__session");
     claseInicial.map(async (clase) => {
       await axios({
         method: "post",
         url: libs.location() + "api/crearclases",
-        headers: getAuthHeaders(),
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
         data: clase,
       });
     });
@@ -107,10 +109,13 @@ const plandecuentas = () => {
   };
 
   const getdata = async () => {
+    const token = cookie.get("__session");
     const req = await axios({
       method: "post",
       url: libs.location() + "api/listarclases",
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
       data: {
         dataId: router.query.id,
       },
@@ -126,10 +131,13 @@ const plandecuentas = () => {
   };
 
   const eliminarTodoPuc = async () => {
+    const token = cookie.get("__session");
     const req = await axios({
       method: "delete",
       url: libs.location() + "api/borrarclases",
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
       data: {
         empresaId: router.query.id,
       },
@@ -137,10 +145,13 @@ const plandecuentas = () => {
     router.push(`/private/estadosfinancieros/estadodesituacionfinanciera/${router.query.id}`);
   }
   const eliminarCuentasAuxiliares = async () => {
+    const token = cookie.get("__session");
     const req = await axios({
       method: "delete",
       url: libs.location() + "api/borrarauxiliares",
-      headers: getAuthHeaders(),
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
       data: {
         empresaId: router.query.id,
       },
@@ -152,7 +163,7 @@ const plandecuentas = () => {
     getdata();
   }, []);
 
-  return (
+  return ( 
     <LayoutPrivate nav={<Nav_Estados_Financieros />}>
       <div>
         {statusPage == false ? (

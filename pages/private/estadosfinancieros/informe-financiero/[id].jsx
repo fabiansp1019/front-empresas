@@ -10,10 +10,6 @@ import Nav_Estados_Financieros from "../../../../components/Empresas/estadosFina
 
 const id = ({data}) => {
 
-
-  console.log(data)
-
-
   return (
     <LayoutPrivate nav={<Nav_Estados_Financieros />}>
 

@@ -12,7 +12,6 @@ export default function Content({children}) {
         elevation={0}
         sx={{ borderBottom: '1px solid secondary' }}
       >
-        
         <Toolbar>
           {children}
         </Toolbar>

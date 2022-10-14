@@ -18,13 +18,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import cookie from "js-cookie";
 
 export const AgregarGrupos = ({ empresaId }) => {
   const router = useRouter();
   const [datasend, setDatasend] = React.useState(false);
   const [grupos, setGrupos] = React.useState([]);
-  const { getAuthHeaders } = useAuth();
-  // console.log(emp)
+
+
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
       var reader = new FileReader();
@@ -56,10 +57,13 @@ export const AgregarGrupos = ({ empresaId }) => {
       grupos[0]?.clase?.toString().length == 1 &&
       grupos[0]?.grupo?.toString().length == 2
     ) {
+      const token = cookie.get("__session");
       await axios({
         method: "post",
         url: libs.location() + "api/crearmasivogrupos",
-        headers: getAuthHeaders(),
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
         data: {
           grupos,
           empresaId,
@@ -165,7 +169,6 @@ export const AgregarGrupos = ({ empresaId }) => {
 
 export const AgregarCuentas = ({ empresaId }) => {
   const [cuentass, setCuentass] = React.useState([]);
-  const { getAuthHeaders } = useAuth();
   const [datasend, setDatasend] = React.useState(false);
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
@@ -205,10 +208,13 @@ export const AgregarCuentas = ({ empresaId }) => {
       cuentass[0]?.cuentas?.toString().length == 4 &&
       cuentass[0]?.grupo?.toString().length == 2
     ) {
+      const token = cookie.get("__session");
       const res = await axios({
         method: "post",
         url: libs.location() + "api/crearcuentamasivo",
-        headers: getAuthHeaders(),
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
         data: {
           cuentass,
           empresaId,
@@ -309,7 +315,7 @@ export const AgregarCuentas = ({ empresaId }) => {
 export const AgregarSubCuentas = ({ empresaId }) => {
   const [subCuentas, setSubCuentas] = React.useState([]);
   const [datasend, setDatasend] = React.useState(false);
-  const { getAuthHeaders } = useAuth();
+
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
       var reader = new FileReader();
@@ -348,10 +354,13 @@ export const AgregarSubCuentas = ({ empresaId }) => {
       subCuentas[0]?.cuenta?.toString().length == 4 &&
       subCuentas[0]?.subcuenta?.toString().length == 6
     ) {
+      const token = cookie.get("__session");
       const res = await axios({
         method: "post",
         url: libs.location() + "api/crearsubcuentamasivo",
-        headers: getAuthHeaders(),
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
         data: {
           subCuentas,
           empresaId,
@@ -450,7 +459,7 @@ export const AgregarSubCuentas = ({ empresaId }) => {
 export const AgregarAuxiliares = ({ empresaId }) => {
   const [auxiliar, setAuxiliar] = React.useState([]);
   const [datasend, setDatasend] = React.useState(false);
-  const { getAuthHeaders } = useAuth();
+
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
       var reader = new FileReader();
@@ -471,7 +480,7 @@ export const AgregarAuxiliares = ({ empresaId }) => {
 
     promise.then((x) => {
       setAuxiliar(x);
-      console.log(x);
+      // console.log(x);
     });
   };
 
@@ -491,10 +500,13 @@ export const AgregarAuxiliares = ({ empresaId }) => {
       auxiliar[0]?.clase?.toString().length == 1 &&
       auxiliar[0]?.grupo?.toString().length == 2
     ) {
+      const token = cookie.get("__session");
       const res = await axios({
         method: "post",
         url: libs.location() + "api/crearauxiliarmasivo",
-        headers: getAuthHeaders(),
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
         data: {
           auxiliar,
           empresaId,

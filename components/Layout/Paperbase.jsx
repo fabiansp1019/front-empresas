@@ -175,7 +175,7 @@ export default function Paperbase({children, nav}) {
   };
 
   return (
-    
+
       <Box sx={{ display: 'flex', minHeight: '100vh' }} color='primary'>
         <CssBaseline />
         <Box
@@ -189,7 +189,7 @@ export default function Paperbase({children, nav}) {
               open={mobileOpen}
               onClose={handleDrawerToggle}
             />
-          )} 
+          )}
 
           <Navigator
             PaperProps={{ style: { width: drawerWidth } }}

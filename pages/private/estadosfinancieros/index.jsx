@@ -13,17 +13,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import cookie from "js-cookie";
-import libs from '../../../libs/util'
-import { useAuth } from "../../../libs/auth";
+import libs from '../../../libs/util';
 
 const index = () => {
   const [search, setSearch] = React.useState("");
   const [data, setData] = React.useState([]);
 
-  const { getAuthHeaders } = useAuth();
- 
-  // console.log(getAuthHeaders());
-  // console.log(info);
   const getdata = async () => {
     const token = cookie.get("__session");
     const req = await axios({
@@ -50,14 +45,13 @@ const index = () => {
       {data && (
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
-            
             <Grid item xs={7} sm={8}>
               <nav aria-label="main mailbox folders">
                 <List>
                   {data?.map((item, key) => (
                     <Link
                       href={
-                        "/private/estadosfinancieros/estadodesituacionfinanciera/" +
+                        "/private/estadosfinancieros/informe-financiero/" +
                         item?._id
                       }
                     >

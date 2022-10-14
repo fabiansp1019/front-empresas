@@ -2,7 +2,7 @@
 const header = (doc, data) => {
     let startY = 5;
   //configuracion de letra e imagen
-    const url = "https://res.cloudinary.com/dz7jl3nbg/image/upload/v1659536608/ayc_ve1zdz.jpg";
+    const url = data?.empresa?.logo || "https://res.cloudinary.com/dz7jl3nbg/image/upload/v1665623717/imgs/mb_lnizzo.jpg";
     doc.setFont('courier','normal');
     doc.setFontSize(11);
 

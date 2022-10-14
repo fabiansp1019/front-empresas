@@ -38,6 +38,11 @@ const situacionFinanciera = (doc, startY, data) => {
 
       startY = newPage(doc, startY, 40, header);
 
+      if(startY == 55){
+        console.log('los 55 aqui estan')
+        header(doc, data)
+      }
+
         /* busca saldo por cada grupo para preparar condicional que impedira imprimir
           los grupos de las cuentas que no tengan saldo
         */

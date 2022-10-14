@@ -1,26 +1,23 @@
 import React from "react";
 import { useAuth } from "../libs/auth";
 import LayoutPrivate from "../components/Layoutprivate";
-import Link from "next/link";
+import { useRouter } from 'next/router'
+
 
 const dashboard = () => {
-  const { signOut, isSignedIn, user } = useAuth();
+  const router = useRouter()
+  const { isSignedIn } = useAuth();
+
+  const redirigir = () =>{
+    router.push('/')
+  }
   return (
     <>
-      {isSignedIn() && (
+      {isSignedIn() ? (
         <LayoutPrivate>
           Bienvenido
-          <br />
-          <Link href={"/private/user/hv"}>
-            <a>link</a>
-          </Link>
-          hola
-          <br />
-          <Link href={"/private/user/hvform"}>
-            <a>fomulario</a>
-          </Link>
         </LayoutPrivate>
-      )}
+      ): redirigir()}
     </>
   );
 };
