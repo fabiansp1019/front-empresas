@@ -37,6 +37,9 @@ const pdf = ({ data, nombre }) => {
     window.open(doc.output("bloburl"), "_blank");
   };
 
+
+
+
   return (
     <div>
       <button className="btn-personalizado" onClick={onClic}>

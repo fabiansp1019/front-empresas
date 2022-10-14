@@ -8,9 +8,13 @@ const dashboard = () => {
   const router = useRouter()
   const { isSignedIn } = useAuth();
 
-  if(!isSignedIn){
-    router.push('/')
-  }
+  React.useEffect(()=>{
+    if(isSignedIn == ''){
+      router.push('/')
+    }
+  },[])
+
+
 
   return (
     <>

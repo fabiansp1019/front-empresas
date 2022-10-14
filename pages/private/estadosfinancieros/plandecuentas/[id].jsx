@@ -53,6 +53,8 @@ const plandecuentas = () => {
   const [statusPage, setStatusPage] = useState(false);
   const router = useRouter();
 
+
+
   //CLASES INICIALES
   const claseInicial = [
     {
@@ -94,18 +96,17 @@ const plandecuentas = () => {
 
   const crearClases = async () => {
     const token = cookie.get("__session");
-    claseInicial.map(async (clase) => {
-      await axios({
+    // claseInicial.map(async (clase) => {
+      const resp = await axios({
         method: "post",
         url: libs.location() + "api/crearclases",
         headers: {
           authorization: `Bearer ${token}`,
         },
-        data: clase,
+        data: claseInicial,
       });
-    });
 
-    router.reload(`/private/estadosfinancieros/agregargrupos/${router.query.id}`);
+    router.replace(`/private/estadosfinancieros/informe-financiero/${router.query.id}`);
   };
 
   const getdata = async () => {
@@ -142,7 +143,7 @@ const plandecuentas = () => {
         empresaId: router.query.id,
       },
     });
-    router.push(`/private/estadosfinancieros/estadodesituacionfinanciera/${router.query.id}`);
+    router.push(`/private/estadosfinancieros/informe-financiero/${router.query.id}`);
   }
   const eliminarCuentasAuxiliares = async () => {
     const token = cookie.get("__session");
@@ -156,7 +157,7 @@ const plandecuentas = () => {
         empresaId: router.query.id,
       },
     });
-    router.push(`/private/estadosfinancieros/estadodesituacionfinanciera/${router.query.id}`);
+    router.push(`/private/estadosfinancieros/informe-financiero/${router.query.id}`);
   }
 
   useEffect(async() => {
@@ -178,21 +179,19 @@ const plandecuentas = () => {
                 <Button onClick={eliminarTodoPuc}>Eiminar todo</Button>
                 <Button onClick={eliminarCuentasAuxiliares}>Eliminar Auxiliares</Button>
               </ButtonGroup>
-              <ul>
-                {estadosFinancieros.map((estado, key) => {
+              <div>
+                {estadosFinancieros?.map((estado, key) => {
                   return (
-                    <>
+                    <div key={key}>
                       <ClasePucStyle
-                      key={key}
                         codigo={estado.clase}
                         nombre={estado.nombre}
                       />
                       <>
                         {estado.grupos.map((grup, key1) => {
                           return (
-                            <>
+                            <div key={key1}>
                               <ClasePucStyle
-                              key={key1}
                                 codigo={grup.grupo}
                                 nombre={grup.nombre}
                               />
@@ -200,38 +199,36 @@ const plandecuentas = () => {
                               <>
                                 {grup.cuentas.map((cuenta, key2) => {
                                   return (
-                                    <>
+                                    <div key={key2}>
                                       <ClasePucStyle
-                                      key={key2}
                                         codigo={cuenta.cuentas}
                                         nombre={cuenta.nombre}
                                       />
                                       <>
                                         {cuenta.subcuentas.map((subcuenta, key3) => {
                                           return (
-                                            <>
+                                            <div key={key3}>
                                               <ClasePucStyle
-                                              key={key3}
                                                 codigo={subcuenta.subcuentas}
                                                 nombre={subcuenta.nombre}
                                               />
-                                            </>
+                                            </div>
                                           );
                                         })}
                                       </>
-                                    </>
+                                    </div>
                                     // aquii
                                   );
                                 })}
                               </>
-                            </>
+                            </div>
                           );
                         })}
                       </>
-                    </>
+                    </div>
                   );
                 })}
-              </ul>
+              </div>
             </Box>
           </>
         )}

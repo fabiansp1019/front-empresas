@@ -3,14 +3,12 @@ import HojaVida from '../../../components/HojaVida'
 import LayoutP from "../../../components/Layoutprivate";
 import axios from "axios";
 import libs from "../../../libs/util";
-import { useAuth } from "../../../libs/auth";
 import cookie from "js-cookie";
 
 // import data from '../../../data.json'
 
 const hojadevida = () => {
 
-  const { getAuthHeaders } = useAuth();
   const [datosHojaVida, setDatosHojaVida] = useState([])
 
   useEffect(async ()=>{
@@ -25,7 +23,7 @@ const hojadevida = () => {
     // console.log(result.data)
     setDatosHojaVida(result.data)
   },[])
-  
+
 
 
   const style = {

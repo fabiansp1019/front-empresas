@@ -49,11 +49,7 @@ const id = () => {
   const [alert, setAlert] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
 
-  const { data, loading, error } = useQuery(GET_USUARIO, {
-    variables: {
-      id: router.query.id,
-    },
-  });
+
 
 
   React.useEffect(async() => {

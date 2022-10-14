@@ -225,7 +225,7 @@ export const AgregarCuentas = ({ empresaId }) => {
         "Los datos no son validos, verifique que los datos sean correctos";
       setTimeout(() => {
         document.getElementById("addCuentas").innerText = "";
-      }, 3000);
+      }, 2000);
     }
 
     setDatasend(true);
