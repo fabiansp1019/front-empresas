@@ -8,16 +8,17 @@ const dashboard = () => {
   const router = useRouter()
   const { isSignedIn } = useAuth();
 
-  const redirigir = () =>{
+  if(!isSignedIn){
     router.push('/')
   }
+
   return (
     <>
-      {isSignedIn() ? (
+      {isSignedIn() && (
         <LayoutPrivate>
           Bienvenido
         </LayoutPrivate>
-      ): redirigir()}
+      )}
     </>
   );
 };
