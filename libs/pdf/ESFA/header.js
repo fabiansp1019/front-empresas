@@ -40,16 +40,6 @@ const header = (doc, empresa) => {
     doc.text(empresa?.estadosFinancieros?.mes3f?.toUpperCase(), fila3, startY+15, {align: "center"}); // 41
 
     startY += 10;
-    // data?.lista.map(clase => {
-    //   startY += 5;
-    //   doc.text(clase?.nombre, 10, startY);
-    // })
-
-
-
-
-
-
 
     return startY;
   };
