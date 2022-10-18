@@ -28,8 +28,19 @@ const bull = (
 const id = ({ data, empresa }) => {
 
 const router = useRouter()
-// console.log(empresa)
 
+useEffect(()=>{
+  setAniio1(empresa?.estadosFinancieros?.aniio1)
+  setAniio2(empresa?.estadosFinancieros?.aniio2)
+  setAniio3(empresa?.estadosFinancieros?.aniio3)
+
+  setMes1i(empresa?.estadosFinancieros?.mes1i)
+  setMes1f(empresa?.estadosFinancieros?.mes1f)
+  setMes2i(empresa?.estadosFinancieros?.mes2i)
+  setMes2f(empresa?.estadosFinancieros?.mes2f)
+  setMes3i(empresa?.estadosFinancieros?.mes3i)
+  setMes3f(empresa?.estadosFinancieros?.mes3f)
+},[])
 
 
 const [aniio1, setAniio1] = useState('');
@@ -56,11 +67,10 @@ const estadosFinancieros = {
 }
 
 const onClickEnviar = async()=>{
-  console.log(estadosFinancieros)
   const token = cookie.get("__session");
 
   const req = await axios({
-    method: "post",
+    method: "put",
     url: libs.location() + "api/buscarempresaupdate/" + router.query.id,
     headers: {
       authorization: `Bearer ${token}`,
@@ -69,6 +79,8 @@ const onClickEnviar = async()=>{
       estadosFinancieros
     },
   });
+
+  router.reload()
 }
 
 
@@ -147,25 +159,22 @@ export async function getServerSideProps(ctx) {
   const id = ctx?.params?.id
 
   const req = await axios({
-    method: "post",
-    url: libs.location() + "api/listarclases",
+    method: "get",
+    url: libs.location() + "api/listarclases/"+id,
     headers: {
       authorization: `Bearer ${token}`,
-    },
-    data: {
-      dataId: id,
     },
   });
 
   const reqEmp = await axios({
-    method: "post",
+    method: "get",
     url: libs.location() + "api/buscarempresa/"+id,
     headers: {
       authorization: `Bearer ${token}`,
-    }
+    },
   });
 
-  // console.log(reqEmp.data)
+  // console.log(req.data)
   return { props: { data: req.data, empresa: reqEmp.data } };
 }
 

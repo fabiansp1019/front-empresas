@@ -45,7 +45,7 @@ export const dataNav = [
   },
   {
     nombre: "Usuarios",
-    url: "/private/listado",
+    url: "/private/usuarios",
     icon: <PeopleIcon sx={{ fontSize: 23 }} />,
   },
   {

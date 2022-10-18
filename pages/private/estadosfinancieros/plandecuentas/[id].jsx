@@ -112,23 +112,16 @@ const plandecuentas = () => {
   const getdata = async () => {
     const token = cookie.get("__session");
     const req = await axios({
-      method: "post",
-      url: libs.location() + "api/listarclases",
+      method: "get",
+      url: libs.location() + "api/listarclases/" + router.query.id,
       headers: {
         authorization: `Bearer ${token}`,
       },
-      data: {
-        dataId: router.query.id,
-      },
     });
-    // console.log(req.data.lista);
-    setEstadosFinancieros(req.data.lista);
-    // setTimeout(() => {
-      // console.log(req.data.lista.length)
-      if(req.data?.lista?.length > 0){
+    setEstadosFinancieros(req.data);
+      if(req.data?.length > 0){
         setStatusPage(true);
       }
-    // },[1000]);
   };
 
   const eliminarTodoPuc = async () => {
@@ -201,7 +194,7 @@ const plandecuentas = () => {
                                   return (
                                     <div key={key2}>
                                       <ClasePucStyle
-                                        codigo={cuenta.cuentas}
+                                        codigo={cuenta.cuenta}
                                         nombre={cuenta.nombre}
                                       />
                                       <>
@@ -209,7 +202,7 @@ const plandecuentas = () => {
                                           return (
                                             <div key={key3}>
                                               <ClasePucStyle
-                                                codigo={subcuenta.subcuentas}
+                                                codigo={subcuenta.subcuenta}
                                                 nombre={subcuenta.nombre}
                                               />
                                             </div>
