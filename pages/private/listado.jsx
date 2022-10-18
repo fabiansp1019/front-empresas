@@ -4,11 +4,8 @@ import Layout from '../../components/Layoutprivate'
 
 const listado = ({users}) => {
 
- 
+  console.log(users)
 
-  useEffect(()=>{
-    console.log(users)
-  },[])
 
   return (
     <Layout>

@@ -108,14 +108,14 @@ const Listar_Empresas = () => {
                           <Stack direction="row" spacing={3}>
                             <Avatar
                               alt="Remy Sharp"
-                              src="https://png.pngtree.com/template/20191014/ourlarge/pngtree-real-estate-business-logo-template-building-property-development-and-construction-logo-image_317796.jpg"
-                              sx={{ width: 56, height: 56 }}
+                              src={empresa?.logo || "https://png.pngtree.com/template/20191014/ourlarge/pngtree-real-estate-business-logo-template-building-property-development-and-construction-logo-image_317796.jpg"}
+                              sx={{ width: 86, height: 56 }}
                             />
                           </Stack>
                         </ListItemIcon>
                         <Typography >
-                        {empresa.razonSocial}
-                        {empresa.nit}
+                          <div>{empresa?.razonSocial.toUpperCase()}</div>
+                          <div> {empresa?.nit}</div>
                         </Typography>
                       </ListItemButton>
                     </ListItem>

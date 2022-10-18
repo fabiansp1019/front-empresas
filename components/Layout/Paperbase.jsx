@@ -189,7 +189,7 @@ export default function Paperbase({children, nav}) {
               open={mobileOpen}
               onClose={handleDrawerToggle}
             />
-          )}
+           )}
 
           <Navigator
             PaperProps={{ style: { width: drawerWidth } }}
@@ -199,14 +199,14 @@ export default function Paperbase({children, nav}) {
         <Box sx={{flex: 1, display: 'flex', flexDirection: 'column' }}>
           <Header  onDrawerToggle={handleDrawerToggle} />
           {nav}
-          <Box component="main" sx={{ flex: 1, py: 2, px: 4, bgcolor: 'primary' }}>
+          <Box component="main" sx={{  bgcolor: 'primary' }}>
             <Content>
               {children}
             </Content>
           </Box>
-          <Box component="footer" >
+          {/* <Box component="footer" >
             <Copyright />
-          </Box>
+          </Box> */}
         </Box>
       </Box>
   );

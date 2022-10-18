@@ -7,7 +7,7 @@ import situacionFinanciera from "./ESFA/situacionFinanciera";
 import headerResultadoIntegral from "./ERI/header"
 import resultadoIntegral from "./ERI/resultadoIntegral";
 
-const pdf = ({ data, nombre }) => {
+const pdf = ({ data, empresa, nombre }) => {
 
   const onClic = () => {
     var doc = new jsPDF();
@@ -16,9 +16,9 @@ const pdf = ({ data, nombre }) => {
      * aqui se muestra la cabecera del balance general
      * y el estado de situacion financiera
     */
-    startY = headerSituacionFinanciera(doc, data);
+    startY = headerSituacionFinanciera(doc, empresa);
     startY += 10;
-    startY = situacionFinanciera(doc, startY, data);
+    startY = situacionFinanciera(doc, startY, data, empresa);
     startY += 10;
 
     /**
@@ -29,9 +29,10 @@ const pdf = ({ data, nombre }) => {
      * aqui se muestra la cabecera del balance estado re resultados
      * y el estado de resultado integral
     */
-     startY = headerResultadoIntegral(doc, data);
+
+     startY = headerResultadoIntegral(doc, empresa);
      startY += 10;
-     startY = resultadoIntegral(doc, startY, data);
+     startY = resultadoIntegral(doc, startY, data, empresa);
      startY += 10;
 
     window.open(doc.output("bloburl"), "_blank");
