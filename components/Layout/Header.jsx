@@ -19,8 +19,8 @@ import axios from "axios";
 import cookie from "js-cookie";
 
 
- const Header = (props) => {
-  const { onDrawerToggle } = props;
+ const Header = () => {
+  // const { onDrawerToggle } = props;
   const router = useRouter();
   const { signOut, isSignedIn } = useAuth();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -86,7 +86,7 @@ import cookie from "js-cookie";
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                onClick={onDrawerToggle}
+                // onClick={onDrawerToggle}
                 edge="start"
               >
                 <MenuIcon />
