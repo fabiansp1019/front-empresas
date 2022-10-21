@@ -1,5 +1,4 @@
 import React from "react";
-import LayoutPrivate from "../../../components/Layoutprivate";
 import axios from "axios";
 import Link from "next/link";
 import Box from "@mui/material/Box";
@@ -40,7 +39,7 @@ const index = () => {
   };
 
   return (
-    <LayoutPrivate>
+
       <>
       {data && (
         <Box sx={{ flexGrow: 1 }}>
@@ -89,7 +88,7 @@ const index = () => {
         </Box>
         )}
       </>
-    </LayoutPrivate>
+   
   );
 };
 

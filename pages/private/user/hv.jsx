@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import HojaVida from '../../../components/HojaVida'
-import LayoutP from "../../../components/Layoutprivate";
 import axios from "axios";
 import libs from "../../../libs/util";
 import cookie from "js-cookie";
@@ -32,9 +31,9 @@ const hojadevida = () => {
     row2:10
   }
   return (
-    <LayoutP>
+    <>
         <HojaVida data={datosHojaVida[0]}  style={style} />
-    </LayoutP>
+    </>
   )
 }
 

@@ -5,7 +5,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ListItem from "@mui/material/ListItem";
 
 import Listar from "../../components/Empresas/Listar";
-import Layout from "../../components/Layoutprivate";
+
 
 export const Nav = () => {
   return (
@@ -22,9 +22,10 @@ export const Nav = () => {
 const Empresas = () => {
   return (
     <>
-      <Layout nav={<Nav />}>
+      <div >
+      <Nav />
         <Listar />
-      </Layout>
+      </div>
     </>
   );
 };

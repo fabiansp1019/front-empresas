@@ -14,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_USUARIO } from "../../../graphql/queries";
 import { useRouter } from "next/router";
-import LayoutP from "../../../components/Layoutprivate";
 import Alert from '@mui/material/Alert';
 import { useAuth } from "../../../libs/auth";
 import libs from "../../../libs/util";
@@ -156,7 +155,7 @@ const id = () => {
   // console.log(router.query.id);
 
   return (
-    <LayoutP>
+    <>
       <Box sx={{ m: 2 }}>
         <Typography variant="h6">Usuario</Typography>
         <List
@@ -232,7 +231,7 @@ const id = () => {
           </>)
         }
       </Box>
-    </LayoutP>
+    </>
   );
 };
 

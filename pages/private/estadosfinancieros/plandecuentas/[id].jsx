@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import LayoutPrivate from "../../../../components/Layoutprivate";
 import Nav_Estados_Financieros from "../../../../components/Empresas/estadosFinancieros/Nav_Estados_Financieros";
 import libs from '../../../../libs/util'
 import Box from "@mui/material/Box";
@@ -157,9 +156,10 @@ const plandecuentas = () => {
     getdata();
   }, []);
 
-  return ( 
-    <LayoutPrivate nav={<Nav_Estados_Financieros />}>
+  return (
+    <div >
       <div>
+      <Nav_Estados_Financieros />
         {statusPage == false ? (
           <>
             <div>No tienes cargado ningun plan de cuentas.</div>
@@ -226,7 +226,7 @@ const plandecuentas = () => {
           </>
         )}
       </div>
-    </LayoutPrivate>
+    </div>
   );
 };
 

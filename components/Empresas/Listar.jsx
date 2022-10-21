@@ -22,8 +22,6 @@ import {
   MODIFICAR_CONTRASENIAS,
 } from "../../graphql/queries";
 
-import NoAutorizado from "../../components/NoAutorizado";
-
 
 
 function TransitionComponent(props) {
@@ -76,9 +74,7 @@ const Listar_Empresas = () => {
   if (loading) {
     return "loading";
   }
-  if (error) {
-    return <NoAutorizado />;
-  }
+
 
   // if(data) console.log(data)
 

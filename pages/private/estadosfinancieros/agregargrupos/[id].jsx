@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import * as XLSX from "xlsx";
-import LayoutPrivate from "../../../../components/Layoutprivate";
 import Radio from "@material-ui/core/Radio";
 import Alert from "@mui/material/Alert";
 import SendIcon from "@mui/icons-material/Send";
@@ -484,11 +483,11 @@ export const AgregarAuxiliares = ({ empresaId }) => {
     });
   };
 
-  function createData(clase, grupo, cuenta, subcuenta, auxiliares, tercero, nombre, saldo) {
-    return { clase, grupo, cuenta, subcuenta, auxiliares, tercero, nombre, saldo };
+  function createData(clase, grupo, cuenta, subcuenta, auxiliares, tercero, nombre, saldo1, saldo2, saldo3) {
+    return { clase, grupo, cuenta, subcuenta, auxiliares, tercero, nombre, saldo1, saldo2, saldo3 };
   }
 
-  const rows = auxiliar.map((d) => createData(d.clase, d.grupo, d.cuenta, d.subcuenta, d.auxiliares, d.tercero, d.nombre, d.saldo));
+  const rows = auxiliar.map((d) => createData(d?.clase, d?.grupo, d?.cuenta, d?.subcuenta, d?.auxiliares, d.tercero, d?.nombre, d?.saldo1, d?.saldo2, d?.saldo3));
 
   const sendData = async (e) => {
     e.preventDefault();
@@ -563,14 +562,16 @@ export const AgregarAuxiliares = ({ empresaId }) => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="center">CLASE</TableCell>
+                      {/* <TableCell align="center">CLASE</TableCell> */}
                       <TableCell align="center">GRUPO</TableCell>
-                      <TableCell align="center">CUENTA</TableCell>
-                      <TableCell align="center">SUBCUENTA</TableCell>
+                      {/* <TableCell align="center">CUENTA</TableCell> */}
+                      {/* <TableCell align="center">SUBCUENTA</TableCell> */}
                       <TableCell align="center">AUXILIARES</TableCell>
                       <TableCell align="center">TERCERO</TableCell>
                       <TableCell align="center">NOMBRE</TableCell>
-                      <TableCell align="center">SALDO</TableCell>
+                      <TableCell align="center">SALDO 1</TableCell>
+                      <TableCell align="center">SALDO 2</TableCell>
+                      <TableCell align="center">SALDO 3</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -581,14 +582,16 @@ export const AgregarAuxiliares = ({ empresaId }) => {
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <TableCell align="center">{row.clase}</TableCell>
+                        {/* <TableCell align="center">{row.clase}</TableCell> */}
                         <TableCell align="center">{row.grupo}</TableCell>
-                        <TableCell align="lefth">{row.cuenta}</TableCell>
-                        <TableCell align="lefth">{row.subcuenta}</TableCell>
+                        {/* <TableCell align="lefth">{row.cuenta}</TableCell> */}
+                        {/* <TableCell align="lefth">{row.subcuenta}</TableCell> */}
                         <TableCell align="lefth">{row.auxiliares}</TableCell>
                         <TableCell align="lefth">{row.tercero}</TableCell>
                         <TableCell align="lefth">{row.nombre}</TableCell>
-                        <TableCell align="right">{row.saldo}</TableCell>
+                        <TableCell align="right">{row.saldo1}</TableCell>
+                        <TableCell align="right">{row.saldo2}</TableCell>
+                        <TableCell align="right">{row.saldo3}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -620,8 +623,9 @@ const agregar = () => {
   };
 
   return (
-    <LayoutPrivate nav={<Nav_Estados_Financieros />}>
+    <div>
       <div>
+      <Nav_Estados_Financieros />
         <div>
           <Radio
             checked={selectedValue === "a"}
@@ -653,7 +657,7 @@ const agregar = () => {
           {selectedValue === "d" && <AgregarAuxiliares empresaId={query.id} />}
         </div>
       </div>
-    </LayoutPrivate>
+    </div>
   );
 };
 

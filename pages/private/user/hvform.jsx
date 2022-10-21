@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import libs from "../../../libs/util";
 import { useAuth } from "../../../libs/auth";
-import LayoutP from "../../../components/Layoutprivate";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -204,7 +203,7 @@ const hvform = () => {
   };
 
   return (
-    <LayoutP>
+    <>
       <Box
         component="form"
         sx={{
@@ -442,7 +441,7 @@ const hvform = () => {
 
         <Button onClick={imprimirJSON}>testearJSON</Button>
       </Box>
-    </LayoutP>
+    </>
   );
 };
 

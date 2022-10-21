@@ -29,7 +29,6 @@ import Fade from "@material-ui/core/Fade";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { Card, CardContent, FormControl, Input } from "@material-ui/core";
 import { useRouter } from "next/router";
-import LayoutP from "../../../components/Layoutprivate";
 import Agregar_Claves from "../../../components/Empresas/responsabilidades/Agregar_Claves";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_EMPRESA, MODIFICAR_CONTRASENIAS } from "../../../graphql/queries";
@@ -602,7 +601,7 @@ const info = () => {
     setSelector(selectEstatus);
   };
   return (
-    <LayoutP>
+    <>
       <Box color="text.primary">
         <Stack spacing={1}>
           <h1>{data?.empresa?.razonSocial}</h1>
@@ -632,7 +631,7 @@ const info = () => {
           </Paper>
         </Box>
       </Box>
-    </LayoutP>
+    </>
   );
 };
 

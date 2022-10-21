@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from "../../components/Layoutprivate";
+
 
 const index = () => {
-  return <Layout>private index</Layout>;
+  return <div>private index</div>;
 };
 
 export default index;

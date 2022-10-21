@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import axios from "axios";
 import libs from "../../libs/util";
-import Layout from '../../components/Layoutprivate'
+
 
 
 const usuarios = ({users}) => {
 
   return (
-    <Layout>
+    <>
       <ul>
         {users?.map(u=>(
           <li key={u._id}>{u?.username + " ----- " + u?.email + " ---- " + u?.createdAt}</li>
         ))}
       </ul>
-    </Layout>
+    </>
   )
 }
 
