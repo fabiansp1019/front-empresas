@@ -49,6 +49,21 @@ const id = () => {
   const [alert, setAlert] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
 
+  const [comentarioMessageBool, setComentarioMessageBool] = React.useState(false)
+  const [comentarioMessage, setComentarioMessage] = React.useState('')
+  const [tipoMensaje, setTipoMensaje] = React.useState('')
+
+  const alerta = (estado, mensaje, tipoDeMensaje) => {
+    setComentarioMessageBool(estado)
+    setComentarioMessage(mensaje)
+    setTipoMensaje(tipoDeMensaje)
+    setTimeout(() => {
+      setComentarioMessageBool(false)
+      setComentarioMessage('')
+      setTipoMensaje('')
+    }, 3000)
+  }
+
 
 
 
@@ -88,17 +103,24 @@ const id = () => {
 
   const EnvioApiImg = async () => {
     const token = cookie.get("__session");
-    await axios({
+    const req = await axios({
       method: "put",
-      url: libs.location() + "api/actualizarusuario/" + router.query.id,
+      url: libs.location() + "api/actualizarusuario/" + informacion._id,
       headers: {
         authorization: `Bearer ${token}`,
       },
       data: {
         foto: url,
       },
-    });
+    }); 
 
+    if(req.status == 200){
+      alerta(true, String(req.data), 'success')
+      router.reload()
+    }
+    else{
+      alerta(true, String(req.data), 'error')
+    }
     setUrl("");
   };
 
@@ -170,7 +192,7 @@ const id = () => {
           </Grid>
         </List>
 
-        <Card>
+        <Card> 
           <CardContent>
             <Typography>
               {progrbar !== 0 && (
@@ -200,10 +222,15 @@ const id = () => {
                   </Button>
                 </>
               )}
-              {alert && (<Alert id="notificaciones" severity="error">Error, solo se recibo formatos imagen</Alert>)}
             </Typography>
           </CardContent>
         </Card>
+
+        {
+          comentarioMessageBool && (<>
+            <Alert severity={tipoMensaje}>{comentarioMessage}</Alert>
+          </>)
+        }
       </Box>
     </LayoutP>
   );

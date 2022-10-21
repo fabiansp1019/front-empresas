@@ -30,7 +30,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { Card, CardContent, FormControl, Input } from "@material-ui/core";
 import { useRouter } from "next/router";
 import LayoutP from "../../../components/Layoutprivate";
-import Agregar_Claves from "../../../components/Empresas/Agregar_Claves";
+import Agregar_Claves from "../../../components/Empresas/responsabilidades/Agregar_Claves";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_EMPRESA, MODIFICAR_CONTRASENIAS } from "../../../graphql/queries";
 import NoAutorizado from "../../../components/NoAutorizado";
@@ -76,11 +76,25 @@ export const InformacionGeneral = ({ data }) => {
   const classesAvatar = useStylesAvatar();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-  const { getAuthHeaders } = useAuth();
   const [url, setUrl] = useState("");
   const [file, setFile] = useState();
   const [progrbar, setProgrbar] = useState(0);
   const [alert, setAlert] = useState(false);
+
+  const [comentarioMessageBool, setComentarioMessageBool] = React.useState(false)
+  const [comentarioMessage, setComentarioMessage] = React.useState('')
+  const [tipoMensaje, setTipoMensaje] = React.useState('')
+
+  const alerta = (estado, mensaje, tipoDeMensaje) => {
+    setComentarioMessageBool(estado)
+    setComentarioMessage(mensaje)
+    setTipoMensaje(tipoDeMensaje)
+    setTimeout(() => {
+      setComentarioMessageBool(false)
+      setComentarioMessage('')
+      setTipoMensaje('')
+    }, 3000)
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -111,20 +125,26 @@ export const InformacionGeneral = ({ data }) => {
 
   const EnvioApiImg = async () => {
     const token = cookie.get("__session");
-    await axios({
-      method: "post",
-      url: libs.location() + "api/buscarempresaupdate",
+    const req = await axios({
+      method: "put",
+      url: libs.location() + "api/buscarempresaupdate/" + router.query.info,
       headers: {
         authorization: `Bearer ${token}`,
       },
       data: {
-        logo: url,
-        id: router.query.info
+        logo: url
       },
     });
 
+    if (req.status == 200) {
+      alerta(true, String(req.data), 'success')
+    }
+    else {
+      alerta(true, String(req.data), 'error')
+    }
+
     setUrl("");
-    router.push('/private/empresas');
+    router.reload()
   };
 
   const onSendImage = async (e) => {
@@ -143,12 +163,12 @@ export const InformacionGeneral = ({ data }) => {
           setProgrbar(progress);
           //console.log("Upload is " + progress + "% done");
         },
-        function (error) {},
+        function (error) { },
         function () {
           storageRef.snapshot.ref
             .getDownloadURL()
             .then(async function (downloadURL) {
-              console.log("File available at", downloadURL);
+              // console.log("File available at", downloadURL);
               setUrl(downloadURL);
             });
         }
@@ -180,8 +200,8 @@ export const InformacionGeneral = ({ data }) => {
                     <Input
                       id="nit"
                       aria-describedby="my-helper-text"
-                      value={data?.empresa.nit}
-                      onChange={(e) => setNit(e.target.value)}
+                      value={data?.empresa?.nit}
+                    // onChange={(e) => setNit(e.target.value)}
                     />
                   </FormControl>
 
@@ -189,8 +209,8 @@ export const InformacionGeneral = ({ data }) => {
                     <Input
                       id="razonSocial"
                       aria-describedby="my-helper-text"
-                      value={data?.empresa.razonSocial}
-                      onChange={(e) => setRazonSocial(e.target.value)}
+                      value={data?.empresa?.razonSocial}
+                    // onChange={(e) => setRazonSocial(e.target.value)}
                     />
                   </FormControl>
 
@@ -198,8 +218,8 @@ export const InformacionGeneral = ({ data }) => {
                     <Input
                       id="ciudad"
                       aria-describedby="my-helper-text"
-                      value={data.empresa.ciudad}
-                      onChange={(e) => setCiudad(e.target.value)}
+                      value={data?.empresa?.ciudad}
+                    // onChange={(e) => setCiudad(e.target.value)}
                     />
                   </FormControl>
 
@@ -222,57 +242,57 @@ export const InformacionGeneral = ({ data }) => {
           }}
         >
           <ListItemAvatar>
-          {data?.empresa?.logo ? (
-            <Avatar className={classesAvatar.large} src={data?.empresa?.logo}>
-            </Avatar>
-            ): (
+            {data?.empresa?.logo ? (
+              <Avatar className={classesAvatar.large} src={data?.empresa?.logo}>
+              </Avatar>
+            ) : (
               <Card>
-          <CardContent>
-            <Typography>
-              {progrbar !== 0 && (
-                <>
-                  <div>progreso.... {progrbar}</div>
-                </>
-              )}
-              {!url ? (
-                <>
-                  <form onSubmit={onSendImage}>
-                    <input
-                      className="form-control"
-                      type="file"
-                      onChange={onChangeFile}
-                      accept=".jpg, .jpeg, .png"
-                    />
-                    <Button color="secondary" type="submit">
-                      Cargar
-                    </Button>
-                  </form>
-                </>
-              ) : (
-                <>
-                  {/* {setProgrbar(0)} */}
-                  <Button color="secondary" onClick={EnvioApiImg}>
-                    Guardar Archivo
-                  </Button>
-                </>
-              )}
-              {alert && (<Alert id="notificaciones" severity="error">Error, solo se recibo formatos imagen</Alert>)}
-            </Typography>
-          </CardContent>
-        </Card>
+                <CardContent>
+                  <Typography>
+                    {progrbar !== 0 && (
+                      <>
+                        <div>progreso.... {progrbar}</div>
+                      </>
+                    )}
+                    {!url ? (
+                      <>
+                        <form onSubmit={onSendImage}>
+                          <input
+                            className="form-control"
+                            type="file"
+                            onChange={onChangeFile}
+                            accept=".jpg, .jpeg, .png"
+                          />
+                          <Button color="secondary" type="submit">
+                            Cargar
+                          </Button>
+                        </form>
+                      </>
+                    ) : (
+                      <>
+                        {/* {setProgrbar(0)} */}
+                        <Button color="secondary" onClick={EnvioApiImg}>
+                          Guardar Archivo
+                        </Button>
+                      </>
+                    )}
+                    {alert && (<Alert id="notificaciones" severity="error">Error, solo se recibo formatos imagen</Alert>)}
+                  </Typography>
+                </CardContent>
+              </Card>
             )}
           </ListItemAvatar>
           <ListItem>
-            <ListItemText primary={data.empresa.nit} secondary="NIT" />
+            <ListItemText primary={data?.empresa?.nit} secondary="NIT" />
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={data.empresa.razonSocial}
+              primary={data?.empresa?.razonSocial}
               secondary="RAZON SOCIAL"
             />
           </ListItem>
           <ListItem>
-            <ListItemText primary={data.empresa.ciudad} secondary="CIUDAD" />
+            <ListItemText primary={data?.empresa?.ciudad} secondary="CIUDAD" />
           </ListItem>
         </List>
 
@@ -280,6 +300,12 @@ export const InformacionGeneral = ({ data }) => {
           <CreateIcon />
         </Button>
       </Box>
+
+      {
+        comentarioMessageBool && (<>
+          <Alert severity={tipoMensaje}>{comentarioMessage}</Alert>
+        </>)
+      }
     </div>
   );
 };
@@ -316,7 +342,8 @@ export const Claves = ({ data }) => {
         comentario: comentario,
       },
     });
-    router.push(`/private/emp/${router.query.info}`);
+    // router.push(`/private/emp/${router.query.info}`);
+    router.reload();
 
     if (loadingModificarClaves) {
       return "loading";
@@ -568,12 +595,8 @@ const info = () => {
     },
   });
 
-  if (loading) {
-    return "loading";
-  }
-  if (error) {
-    return <NoAutorizado />;
-  }
+
+
 
   const testingPropHijo = (selectEstatus) => {
     setSelector(selectEstatus);

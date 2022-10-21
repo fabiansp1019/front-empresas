@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-
+import Alert from '@mui/material/Alert';
 import LockIcon from "@mui/icons-material/Lock";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import ToggleButton from "@material-ui/lab/ToggleButton";
@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@material-ui/core/Button";
 
 import { useMutation } from "@apollo/client";
-import { CREAR_CLAVE, CREAR_IMPUESTO } from "../../graphql/queries";
+import { CREAR_CLAVE, CREAR_IMPUESTO } from "../../../graphql/queries";
 
 export const Claves = ({ id }) => {
   const [nombreEntidad, setNombreEntidad] = React.useState("");
@@ -21,6 +21,24 @@ export const Claves = ({ id }) => {
 
   const [crearClave, { loading, error }] = useMutation(CREAR_CLAVE);
   const router = useRouter();
+
+  // variables para los mensajes de los estados de las peticiones
+  const [comentarioMessageBool, setComentarioMessageBool] = React.useState(false)
+  const [comentarioMessage, setComentarioMessage] = React.useState('')
+  const [tipoMensaje, setTipoMensaje] = React.useState('')
+  // funcion para reutilizar en los mensajes de estados
+  const alerta = (estado, mensaje, tipoDeMensaje) => {
+    setComentarioMessageBool(estado)
+    setComentarioMessage(mensaje)
+    setTipoMensaje(tipoDeMensaje)
+    setTimeout(() => {
+      setComentarioMessageBool(false)
+      setComentarioMessage('')
+      setTipoMensaje('')
+    }, 3000)
+  }
+
+
   const guardarClave = () => {
     // console.log(id, nombreEntidad, usuario, contrasenna, comentario)
     if (
@@ -41,13 +59,15 @@ export const Claves = ({ id }) => {
           comentario: comentario,
         },
       });
-      router.push("/");
+      // router.push("/");
       if (loading) {
         return "loading";
       }
       if (error) {
         return <NoAutorizado />;
       }
+
+        alerta(true, 'Los datos fueron guardados exitosamente', 'success')
 
       setNombreEntidad("");
       setUsuario("");
@@ -96,6 +116,12 @@ export const Claves = ({ id }) => {
           </div>
           </form>
         </Paper>
+
+        {
+          comentarioMessageBool && (<>
+            <Alert severity={tipoMensaje}>{comentarioMessage}</Alert>
+          </>)
+        }
       </Box>
     </>
   );
@@ -105,6 +131,22 @@ export const Impuestos = ({ id }) => {
   const [comentario, setComentario] = React.useState("");
   const router = useRouter();
   const [crearImpuesto, { loading, error }] = useMutation(CREAR_IMPUESTO);
+
+  // variables para los mensajes de los estados de las peticiones
+  const [comentarioMessageBool, setComentarioMessageBool] = React.useState(false)
+  const [comentarioMessage, setComentarioMessage] = React.useState('')
+  const [tipoMensaje, setTipoMensaje] = React.useState('')
+  // funcion para reutilizar en los mensajes de estados
+  const alerta = (estado, mensaje, tipoDeMensaje) => {
+    setComentarioMessageBool(estado)
+    setComentarioMessage(mensaje)
+    setTipoMensaje(tipoDeMensaje)
+    setTimeout(() => {
+      setComentarioMessageBool(false)
+      setComentarioMessage('')
+      setTipoMensaje('')
+    }, 3000)
+  }
 
   const guardarImpuesto = () => {
     if (id === "" || nombreImpuesto === "" || comentario === "") {
@@ -117,7 +159,11 @@ export const Impuestos = ({ id }) => {
           comentario: comentario,
         },
       });
-      router.push("/");
+      // router.reload()
+
+      alerta(true, 'Los datos fueron guardados exitosamente', 'success')
+
+
       document.getElementById("impuesto").value = "";
       document.getElementById("comentario").value = "";
     }
@@ -147,6 +193,12 @@ export const Impuestos = ({ id }) => {
             Guardar
           </Button>
         </Paper>
+
+        {
+          comentarioMessageBool && (<>
+            <Alert severity={tipoMensaje}>{comentarioMessage}</Alert>
+          </>)
+        }
       </Box>
     </>
   );
@@ -159,6 +211,8 @@ const Agregar_Claves = () => {
   const id = query.info;
 
   const [alignment, setAlignment] = React.useState("left");
+
+
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -191,6 +245,8 @@ const Agregar_Claves = () => {
       </ToggleButtonGroup>
 
       {cambiar === "clave" ? <Claves id={id} /> : <Impuestos id={id} />}
+
+     
     </>
   );
 };

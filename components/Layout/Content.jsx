@@ -5,16 +5,16 @@ import Paper from '@mui/material/Paper';
 
 export default function Content({children}) {
   return (
-    <Paper sx={{ minHeight:'100vh', maxWidth: 936, paddingTop:0, margin: 'auto', overflow: 'hidden' }}>
+    <Paper sx={{ minHeight: '110vh', maxWidth: 936, paddingTop:0, margin: 'auto'}}>
       <AppBar
         position="static"
         color="default"
         elevation={0}
         sx={{ borderBottom: '1px solid secondary' }}
       >
-        <Toolbar>
+        {/* <Toolbar> */}
           {children}
-        </Toolbar>
+        {/* </Toolbar> */}
       </AppBar>
     </Paper>
   );
