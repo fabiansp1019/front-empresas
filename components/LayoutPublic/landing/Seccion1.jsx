@@ -2,8 +2,8 @@ import React from 'react'
 import Image from "next/image"
 
 const Seccion1 = () => {
-    const nombrePrincipal = 'Welcome to your ButterCMS Proof of Concept'
-    const nombreSecundario = 'Use this app as your own proof of concept to explore Butters capabilities for yourself. When youre ready, host this app and invite your team to try it out all well!'
+    const nombrePrincipal = 'Bienvenidos a IMPUESTI tu asesor de impuestos'
+    const nombreSecundario = 'Usa esta herramienta para elaborar todos tus impuestos de forma oportuna, en Impuesti te acompañamos!'
     const image = 'https://firebasestorage.googleapis.com/v0/b/proyecto1-8c4a6.appspot.com/o/Imagen1.png?alt=media&token=5183094f-ac3b-44fd-afb7-45d7b5a2eee5'   
     const urlLogin = '/login'
     const urlCrearCuenta = 'buttonUrl'

@@ -27,17 +27,17 @@ const header = (doc, empresa) => {
     doc.text("cifras expresadas en pesos COP", 70, startY, {align: "center"}); // 41
     startY += 5;
     doc.setFont("courier", "bold");
-    doc.text(String(empresa?.estadosFinancieros?.aniio1), fila1, startY+5, {align: "center"}); // 41
-    doc.text(String(empresa?.estadosFinancieros?.aniio2), fila2, startY+5, {align: "center"}); // 41
-    doc.text(String(empresa?.estadosFinancieros?.aniio3), fila3, startY+5, {align: "center"}); // 41
+    doc.text(empresa?.estadosFinancieros?.aniio1, fila1, startY + 20, { align: "center" }); // 41
+    doc.text(empresa?.estadosFinancieros?.aniio2, fila2, startY + 20, { align: "center" }); // 41
+    doc.text(empresa?.estadosFinancieros?.aniio3, fila3, startY + 20, { align: "center" }); // 41
     doc.setFont("courier", "normal");
-    doc.text(empresa?.estadosFinancieros?.mes1i?.toUpperCase(), fila1, startY+10, {align: "center"}); // 41
-    doc.text(empresa?.estadosFinancieros?.mes2i?.toUpperCase(), fila2, startY+10, {align: "center"}); // 41
-    doc.text(empresa?.estadosFinancieros?.mes3i?.toUpperCase(), fila3, startY+10, {align: "center"}); // 41
-
-    doc.text(empresa?.estadosFinancieros?.mes1f?.toUpperCase(), fila1, startY+15, {align: "center"}); // 41
-    doc.text(empresa?.estadosFinancieros?.mes2f?.toUpperCase(), fila2, startY+15, {align: "center"}); // 41
-    doc.text(empresa?.estadosFinancieros?.mes3f?.toUpperCase(), fila3, startY+15, {align: "center"}); // 41
+    doc.text(empresa?.estadosFinancieros?.mes1i?.toUpperCase(), fila1, startY + 25, { align: "center" }); // 41
+    doc.text(empresa?.estadosFinancieros?.mes2i?.toUpperCase(), fila2, startY + 25, { align: "center" }); // 41
+    doc.text(empresa?.estadosFinancieros?.mes3i?.toUpperCase(), fila3, startY + 25, { align: "center" }); // 41
+  
+    doc.text(empresa?.estadosFinancieros?.mes1f?.toUpperCase(), fila1, startY + 30, { align: "center" }); // 41
+    doc.text(empresa?.estadosFinancieros?.mes2f?.toUpperCase(), fila2, startY + 30, { align: "center" }); // 41
+    doc.text(empresa?.estadosFinancieros?.mes3f?.toUpperCase(), fila3, startY + 30, { align: "center" }); // 41
 
     startY += 10;
 

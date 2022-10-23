@@ -2,27 +2,27 @@ import Feature from "./feature";
 
 //{ headline, subheadline, features, scrollAnchorId }
 export default function Features({ headline, subheadline, features, scrollAnchorId }) {
-  const textoPrincipal = 'This page is built using ButterCMS Components'
-  const textoSecundario = 'This page is an example of utilizing Butter Components which allow you to build dynamic landing pages by choosing Components from a Component Library. Reuse and reorder Components in any way you want!'
+  const textoPrincipal = 'Nuestros servicios'
+  const textoSecundario = 'A continuacion podras ver nuestro portafolio de servicios, podras tomar los que adapten a tus necesidades.'
   const categorias = [
     {
-      titulo: 'Components on this page',
-      description: 'This sample page has four component types: hero, two column with image, features, and testimonials.',
+      titulo: 'Impuesto de Renta Personas Naturales',
+      description: 'Nosotros te asesoramos al momento de presentar el impuesto de renta y complementarios',
       icono: ''
     },
     {
-      titulo: 'Build your own',
-      description: 'This page is just an example set of Components. You can build your own custom Component library!',
+      titulo: 'Impuesto de Renta Personas Juridicas',
+      description: 'Nosotros te asesoramos si lo que nececitas es presentar unicamente este impuesto',
       icono: ''
     },
     {
-      titulo: 'Infinite possibilities',
-      description: 'Build carousels, call to actions, testimonials, and much more. Theres infinite flexbility.',
+      titulo: 'Informacion Exogena',
+      description: 'Nosotros presentamos la informacion exogena por ti, dejalo en nuestras manos.',
       icono: ''
     },
     {
-      titulo: 'Reorder them',
-      description: 'Components are great because you can reorder them from your Butter dashboard',
+      titulo: 'Regimen simple de tributacion',
+      description: 'si perteneces a este regimen y lo unico que nececitas es presentar el anticipo bimestral, nosotros lo haremos por ti.',
       icono: ''
     },
 

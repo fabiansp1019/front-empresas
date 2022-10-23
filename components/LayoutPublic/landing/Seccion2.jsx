@@ -3,14 +3,10 @@ import React from 'react'
 const Seccion2 = () => {
     const image = 'https://img.freepik.com/vector-gratis/concepto-deuda-vector-doodle-auditoria-fiscal_53876-126426.jpg?w=740&t=st=1666498570~exp=1666499170~hmac=39ae4f6bc9e0a1086af958ff96745e1a379c3a5cbcde436d0b9585dc6242ceb5'
     const imagePosition = 'left'
-    const textoPrincipal = 'ButterCMS is your content backend'
-    const textoSecundario = 'Butter has three core content solutions: Pages, Posts, and Collections. Combine this with advanced capabilities like localization, Write API, multi-site + multi-env and Butter is your centralized content backend no matter how much content youre managing.'
+    const textoPrincipal = 'Anticipate a los hechos'
+    const textoSecundario = 'Con impuesti podras proyectar tus impuestos antes que estos se hayan materializado brindando asi la oportunidad de tomar desiciones'
     return (
-        // <div>
-        //     <div className='cta-section'>
-        //         <button>seccion de la cuenta</button>
-        //     </div>
-        // </div>
+
         <section id={'scrollAnchorId'} className="cta-section">
 			<div className="container">
 				<div className="row">

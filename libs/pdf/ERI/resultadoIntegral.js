@@ -73,7 +73,7 @@ const resultadoIntegral = (doc, startY, data, empresa) => {
        * cree una nueva
       */
       startY = newPage(doc, startY, 40, header);
-      if(startY == 55){
+      if(startY == 75){
         header(doc, empresa)
       }
 
