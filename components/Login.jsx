@@ -54,7 +54,7 @@ export default function SignInSide() {
       }, 3000);
     }
 
-    if (res.pass) router.push('/dashboard');
+    if (res.pass) router.push('/');
 
 
     });
@@ -63,7 +63,7 @@ export default function SignInSide() {
 
   return (
     // <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '93vh' }}>
+      <Grid container component="main" sx={{ height: '63vh', marginTop:15, marginBottom:25 }}>
         <Grid
           item
           xs={false}

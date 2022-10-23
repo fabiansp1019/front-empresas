@@ -35,7 +35,7 @@ const itemCategory = {
 export const dataNav = [
   {
     nombre: "Inicio",
-    url: "/dashboard",
+    url: "/",
     icon: <HomeIcon sx={{ fontSize: 23 }} />,
   },
   {
@@ -63,7 +63,7 @@ export default function Navigator(props) {
       <Drawer variant="permanent" {...other}>
         <List disablePadding>
           <ListItem sx={{ ...item, ...itemCategory }} key={"1ax"}>
-            <h1>System</h1>
+            <h3>Impuesti</h3>
           </ListItem>
           <Divider sx={{ mt: 7 }} />
           <ListItem sx={{ ...item, ...itemCategory }} key={"2ax"}>

@@ -2,7 +2,7 @@ import { AuthProvider } from "../libs/auth.js";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from '../libs/theme'
 import Private from '../components/Layoutprivate'
-import Public from '../components/LayoutPublic'
+import Public from '../components/LayoutPublic/LayoutPub'
 import Preload from '../components/Preload'
 import { useEffect, useState } from 'react'
 
@@ -11,6 +11,13 @@ import App from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Cookies from "js-cookie";
+
+import 'bootstrap/dist/css/bootstrap.css'
+// import 'css/lineicons.css'
+import '../css/lineicons.css'
+
+import '../css/tiny-slider.min.css'
+import '../css/main.css'
 
 function MyApp({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -73,7 +80,7 @@ function MyApp({ Component, pageProps }) {
         <link
           rel="shortcut icon"
           type="image/x-icon"
-          href="https://buttercms.com/static/v2/images/favicon.png"
+          href="https://firebasestorage.googleapis.com/v0/b/proyecto1-8c4a6.appspot.com/o/impuesto%20logooo.png?alt=media&token=ba2a9d61-adb2-4964-9f08-c343e2ae2786"
         />
       </Head>
 
